@@ -12,30 +12,32 @@
 홍길동 100 90 80 270 90.0 
 >
 */
-package step02.assignment;
+package step02.assignment; // directory path -> .을 사용한다
 
-public class Test01 {
-    public static void main(String[] args) {
+public class Test01 {  // jvm이 클래스를 실행하려면 메인 메소드가 있어야 한다.
+    public static void main(String[] args) { 
         java.io.InputStream keyboard = System.in;
         java.util.Scanner keyScan = new java.util.Scanner(keyboard);
 
         
         System.out.print("이름? ");
-        String s = keyScan.nextLine();
+        String name = keyScan.nextLine();
         System.out.print("국어? ");
-        int i1 = keyScan.nextInt();
+        int kor = keyScan.nextInt();
         System.out.print("영어? ");
-        int i2 = keyScan.nextInt();
+        // 이전에 국어 점수를 입력받을 때 들어온 줄바꿈 코드는 
+        // nextInt() 메서드에서 버린다.
+        int eng = keyScan.nextInt();
         System.out.print("수학? ");
-        int i3 = keyScan.nextInt();
+        int math = keyScan.nextInt();
         
         
-        int sum = i1 + i2 + i3;
+        int sum = kor + eng + math;
         float average = (float)(sum / 3);
 
-        System.out.println("---------------");
-        System.out.println(s + " " + i1 + " " + i2 + " " 
-                            + i3 + " " + sum + " " + average);
+        System.out.println("---------------------");
+        System.out.println(name + " " + kor + " " + eng + " " 
+                            + math + " " + sum + " " + average);
 
     }
 }

@@ -21,21 +21,27 @@ public class App {
         java.util.Scanner keyScan = new java.util.Scanner(keyboard);
 
         System.out.print("팀명? ");
-        String team = keyScan.nextLine();
+        String teamName = keyScan.nextLine();
         System.out.print("설명? ");
-        String explan = keyScan.nextLine();
+        String description = keyScan.nextLine();
         System.out.print("최대인원? ");
-        int mem = keyScan.nextInt();
+        int maxQty = keyScan.nextInt();
+        keyScan.nextLine(); // 숫자 뒤에 줄바꿈 코드르르 읽는다.
+                            // 일고 난 뒤에 아무것도 안하기 때문에
+                            // 일종의 줄바꿈 코드를 제거하는 효과가 있다.
         System.out.print("시작일? ");
-        String start = keyScan.next();
+        String startDate = keyScan.nextLine();
         System.out.print("종료일? ");
-        String end = keyScan.next();
+        String endDate = keyScan.nextLine();
 
         System.out.println("-------------------------");
-        System.out.println("팀명: " + team + "\n설명:\n" + explan 
-             + "\n최대인원: " + mem + "명\n" + "일자: " + start + " ~ " + end);
-
+        System.out.println("팀명 : " + teamName);
+        System.out.println("설명 : \n" + description);
+        System.out.println("최대인원 : " + maxQty);
+        System.out.println("일자 : " + startDate + " ~ " + endDate);
 
 
     }
 }
+
+//  
