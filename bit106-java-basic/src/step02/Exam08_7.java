@@ -15,15 +15,15 @@ public class Exam08_7 {
 
         // 그 외에는 형변환 불가!
         // => 정수나 부동소수점을 boolean 값으로 변환할 수 없다.
-        boolean bool;
-        bool = (boolean)1; // 컴파일 오류!
+        // boolean bool;
+        // bool = (boolean)1; // 컴파일 오류!
 
-        // => 문자열을 정수나 부동소수점, 문자, 
-        //    boolean 값으로 변환할 수 없다.
-        boolean v1 = (boolean) "true"; // 컴파일 오류!
+        // // => 문자열을 정수나 부동소수점, 문자, 
+        // //    boolean 값으로 변환할 수 없다.
+        // boolean v1 = (boolean) "true"; // 컴파일 오류!
         ch v2 = (char) '가'; // 컴파일 오류!
-        int v3 = (int) "123"; //컴파일 오류!
-        float v4 = (int) "3.14"; // 컴파일 오류!
+        // int v3 = (int) "123"; //컴파일 오류!
+        // float v4 = (int) "3.14"; // 컴파일 오류!
     
 
     }

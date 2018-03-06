@@ -20,6 +20,9 @@ public class Exam08_6 {
         b2 = (byte)l; // 명시적 형변환
         System.out.println(b2);
 
+        int i5 = (int)l;
+        System.out.println(i5);
+
         // => 작은 메모리에 들어갈 값 보다 큰 값을 
         //    명시적 형변환을 수행하여 값을 넣으려 하면
         //    원래의 값이 잘려서 들어간다.
@@ -29,7 +32,7 @@ public class Exam08_6 {
         System.out.println(b2); // 0b0001_1100
         b2 = (byte)i3;
         System.out.println(b2); // 앞의 3byte는 날아가고 뒤의 1byte만 출력된다.
-        // 특별한 경우 큰 값을 작은 메모리에 넣는 것은 아무런 의미가 없다.
+        // 특별한 경우가 아니면 큰 값을 작은 메모리에 넣는 것은 아무런 의미가 없다.
         // 해서는 안된다.
         // 다만, 
         // 큰 메모리의 값을 바이트 단위로 쪼개고 싶을 때

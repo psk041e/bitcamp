@@ -39,5 +39,12 @@ public class Test01 {  // jvm이 클래스를 실행하려면 메인 메소드�
         System.out.println(name + " " + kor + " " + eng + " " 
                             + math + " " + sum + " " + average);
 
+        // System.out.println("나이? ");
+        // System.out.println(keyScan.nextInt());
+        // System.out.println("이름? ");
+        // System.out.println(keyScan.nextLine());
+
+
+
     }
 }
