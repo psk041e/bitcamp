@@ -26,7 +26,6 @@ public class Exam02_1 {
         //   nextLine()은 비로서 사용자가 입력한 값을 리턴한다.
         // - 그 리턴값을 println() 명령을 사용하여 콘솔로 출력한다. 
         System.out.println(keyScan.nextLine());
-        
     }
 }
 

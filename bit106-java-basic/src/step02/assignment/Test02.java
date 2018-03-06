@@ -2,8 +2,9 @@ package step02.assignment;
 // 1단계: 1명의 성적 데이터 입력 받아서 처리하기
 // 2단계: 여러 명의 성적 정보를 받아서 처리하기
 // 3단계: 변수 선언을 모아서 일괄적으로 처리하기
-// 4단계: 배열을 사용하여 같은 종류의 
-// 5단계: 
+// 4단계: 배열을 사용하여 같은 종류의 메모리를 쉽게 만들기 
+// 5단계: 반복문을 사용하여 입력과 출력 코드를 간단히 하라!
+// 6단계: 형식을 갖춘 문자열 출력하기
 public class Test02 {
     public static void main(String[] args) {
         
@@ -30,12 +31,14 @@ public class Test02 {
             math[i] = keyScan.nextInt();
 
             sum[i] = kor[i] + eng[i] + math[i];
-            aver[i] = (float)(sum[i] / 3);
+            aver[i] = sum[i] / 3;
         }
 
         System.out.println("-------------");
 
         for (int i = 0; i < 5; i++) {
+            System.out.printf("%s %d %d %d %d %f\n",
+                name[i], kor[i], eng[i], math[i], sum[i], aver[i]);
             System.out.println(name[i] + " " + kor[i] + " " + eng[i] + " "
                          + math[i] + " " + sum[i] + " " + aver[i]);
         }
