@@ -53,6 +53,7 @@ public class App {
             String endDate;
         }
 
+
         Source[] s = new Source[5];
 
         int su = 1;
@@ -75,7 +76,10 @@ public class App {
             System.out.print("계속 입력 하시겠습니까?(y/n) ");
             String answer = keyScan.nextLine();
 
-            if (!answer.equalsIgnoreCase("y")) {
+            if (!answer.equalsIgnoreCase("y") && !answer.equalsIgnoreCase("n")) {
+                System.out.println("알맞은 값이 아닙니다. 프로그램을 종료합니다! ");
+                break;
+            } else if (!answer.equalsIgnoreCase("y")) {
                 break;
             }
             su++;

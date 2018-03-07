@@ -32,9 +32,6 @@ public class Exam01_2 {
         s = new Score(); // Score 설계도에 따라 메모리를 확보하고,
                          // 그 메모리의 주소를 s에 저장한다.
 
-        // primitive타입-> 일반적인 자바에서 제공해주는 
-        // 메모리를 사용할 때는 이름을 붙인다.
-
         // 클래스 설계도에 따라 만든 메모리에 값을 집어 넣기
         // => 주소를 이용하여 메모리에 접근한다.
         s.name = "홍길동"; // s에 저장된 주소로 찾아가서 name 항목에 값 저장
@@ -70,7 +67,7 @@ public class Exam01_2 {
 // - 단일한 타입의 메모리를 묶는 문법이다.
 //
 // primitive 변수와 레퍼런스
-// - primitice type(byte, short, int long, float, double, boolean, char)의
+// - primitive type(byte, short, int, long, float, double, boolean, char)의
 //   메모리를 만들 때 변수 선언 만으로 완료된다.
 //   변수 이름이 곧 메모리를 가리키는 이름이 된다.
 //   예) int age;
