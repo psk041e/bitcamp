@@ -16,23 +16,18 @@ package step03.assignment;
 
 public class Test01 {
     public static void main(String[] args) {
-
         java.util.Scanner keyScan = new java.util.Scanner(System.in);
         // 키보드에서 Scanner를 읽어들인다.
-        
-        class Score {
-            String name;
-            int kor;
-            int eng;
-            int math;
-            int sum;
-            float aver;
-        }
 
-        Score[] s = new Score[3];
+        // Score 메모리(인스턴스)의 주소를 저장할 변수: 레퍼런스 준비
+        step03.Score[] s = new step03.Score[3]; 
+        // 입력 값을 저장할 Score 메모리를 준비한다.
+        // 사용하려는 클래스가 다른 패키지에 있으면 
+        // 무조건 그 패키지, 클래스 명을 명시해야 한다.
+        // 메모리에 접근을 하려면 주소가 어딘가에 있어야 한다.
 
         for (int i = 0; i < s.length; i++) {
-            s[i] = new Score();
+            s[i] = new step03.Score();
             System.out.print("입력? ");
             s[i].name = keyScan.next();
             s[i].kor = keyScan.nextInt();

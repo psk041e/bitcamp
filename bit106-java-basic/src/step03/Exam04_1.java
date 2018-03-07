@@ -1,4 +1,4 @@
-// 클래스 선언 - 패키지 클래스 사용
+// 클래스 사용 - 패키지 클래스 사용
 package step03;
 
 public class Exam04_1 {
@@ -28,9 +28,11 @@ public class Exam04_1 {
 //   컴파일러에게 Score 클래스에 대한 정보를 알려줘라!
 // 방법1) Source.class 파일을 갖고 있다면 그 파일이 있는 위치를 알려줘라.
 // > javac -encoding utf8 -d bin -cp bin src/step03/Exam04_1.java
+//                          (Source를 컴파일해야 가능하다.)
 //
 // 방법2) Score 클래스의 소스 파일을 갖고 있다면 소스 파일의 위치를 알려줘라.
-//  > javac -encoding utf8 -d bin -sourcepath  src src/step03/Exam04_1.java
+//  > javac -encoding utf8 -d bin -sourcepath src src/step03/Exam04_1.java
+//    (Source를 컴파일해주지 않아도 알아서 해준다. 경로는 패키지 이전의 폴더)
 //
 // 언제 이렇게 해야 하는가?
 // - 자바에서 기본으로 제공하는 클래스가 아닌 다른 클래스를 사용할 때!

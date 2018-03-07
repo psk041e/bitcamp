@@ -39,6 +39,10 @@ public class Test01 {  // jvm이 클래스를 실행하려면 메인 메소드�
         System.out.println(name + " " + kor + " " + eng + " " 
                             + math + " " + sum + " " + average);
 
+
+        // println();
+        // 숫자 뒤에 줄바꿈 코드를 읽는다.
+        // 일고 난 뒤에 아무것도 안하기 때문에
         // System.out.println("나이? ");
         // System.out.println(keyScan.nextInt());
         // System.out.println("이름? ");
