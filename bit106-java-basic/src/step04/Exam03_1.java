@@ -25,7 +25,8 @@ public class Exam03_1 {
         System.out.println(!false);
 
         System.out.println("--------------");
-        // exclusive-OR 연산자
+        // exclusive-OR(XOR) 연산자 
+        // (영어에서는 EX와 X의 발음이 비슷하다고해서 약자로 X를쓴다.)
         // - 베타적 비교 연산자라 부른다.
         // - 두 개의 값이 다를 때 true이다.
         System.out.println(true ^ true);

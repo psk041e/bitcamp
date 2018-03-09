@@ -30,7 +30,7 @@ public class Exam01_4 {
         long r2 = x + y; //=> 0x7FFFFFFF + 0x7FFFFFFF = 0xFFFFFFFE = -2
         // int와 int 연산결과는 long이 될수 없다
         // 의도치 않은 연산으로 음수가 될수도 있다.
-        // 음수가 된 상태에서 넣어봐야 똑같다.
+        // 음수가 된 상태에서 넣어봐야 똑같다.ㅡ
         System.out.println(r1); // -94967296 연산시 이미 음수
                                 // int(4byte) + int(4byte) = int(4byte)
         System.out.println(r2); // int(4byte) + int(4byte) = int(4byte)
@@ -44,7 +44,7 @@ public class Exam01_4 {
         float f1 = 987.6543f;
         float f2 = 1.111111f;
         float r3 = f1 + f2; 
-        double r4 = f1 + f2;
+        double r4 = f1 + f2; // 988.765411
         System.out.println(r3); // 988.7654
         // 출력 이유?
         // 987.6543 + 1.111111 = 988.7654(11)
@@ -71,6 +71,18 @@ public class Exam01_4 {
 
 // int 타입의 메모리끼리 연산을 수행하면 그 결과도 int 타입이 된다.
 // 즉, 연산 결과는 피연산자의 타입과 같다.
+
+// 정리!
+// - int와 int의 연산 결과는 int 이다.
+// - float과 float의 연산 결과는 float이다.
+// - 즉 연산 결과는 피연산자가 
+// - 그래서 두 값을 계산했을 때 결과 메모리를 초과할 경우
+// - 값이 짤릴수 있다.
+// - 주의하라
+//- 코드를 작성할 때 피연산자의 계산 결과가 피연산자의 메모리 크기를
+// 벗어날 가능성이 있다면,
+// 처음부터 피연산자의 값을 더 큰 메모리에 담아서 연산을 수행하라!
+
 //
 // 형변환(type conversion = type casting)?
 // - 변수나 리터럴을 다른 타입의 값으로 바꾸는 것이다.
