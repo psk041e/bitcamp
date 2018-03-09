@@ -1,19 +1,22 @@
-// 증감 연산자 : 후위(post-fix) 감소 연산자
+// 증감 연산자 : 후위(post-fix) 증감 연산자 응용 I
 package step04;
 
-public class Exam06_2 {
+public class Exam06_3 {
     public static void main(String[] args) {
         int i = 7;
+        i = i++;
+        // 1) i 값을 그자리에 놓는다.
+        //    => i = 7;    
+        //    => 7 값을 i에 저장할 수 없다. 
+        //    => 왜? 아직 = 연산자 오른쪽의 모든 식이 수행되지 않는다.
+        // 2) ++ 연산 실행 
+        //    => 즉 i = i + 1 실행
+        //    => i = 8 이 되었다.
+        // 3) 할당 연산자 실행
+        //    => i = 7 실행
+        //    => 다시 i는 8에서 7로 바뀌었다.
 
-        i--;
-        // 현재 위치에 i 메모리에 들어 있는 값을 꺼내 놓는다.
-        // i 메모리의 값을 1 감소시킨다. 
-
-        i--;
-
-        System.out.println(i--);
-        // System.out.println(5);
-        // i = i + 1;
         System.out.println(i);
+
     }
 }

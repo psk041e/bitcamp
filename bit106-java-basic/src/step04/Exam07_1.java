@@ -1,25 +1,16 @@
-// 증감 연산자 : 전위(pre-fix) 증감 연산자 응용 I
+// 할당 연산자  : +=  -=  *=  /=  %=  &=  |=  ^=  <<=  >>=  >>>=
 package step04;
 
-public class Exam06_7 {
+public class Exam07_1 {
     public static void main(String[] args) {
-       int i = 2;
-       int result = ++i + ++i * ++i;
-        // 1) int result = 3 + 4 * 5;
-        // 2) int result = 3 + 20;
-        // 3) int result = 23
+        int i = 2;
+        
+        //i = i + 20;
+        i += 20; // += 연산자를 사용하면 위의 코드를 축약할 수 있다.
+        System.out.println(i);
 
-       System.out.println(result); 
-
-       // 주의!
-       // 1) pre-fix 연산자나 post-fix 연산자를 리터럴에 적용할 수 없다.
-    //    int x = ++100; // 컴파일 오류!
-    //    x = 100++; // 컴파일 오류!
-
-       // 2) 변수에 동시에 적용할 수 없다.
-       int y = 100;
-    //    ++y++;
-
-
+        i = 2;
+        i *= 5;
+        System.out.println(i);
     }
 }
