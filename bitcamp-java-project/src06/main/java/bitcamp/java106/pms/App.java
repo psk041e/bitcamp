@@ -4,17 +4,14 @@ import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.domain.Member;
 import java.util.Scanner;
 
-// ver 0.1 - 팀 변경, 회원 변경 기능 추가
-// ver 0.2 - 팀 삭제, 회원 삭제 기능 추가
-
-public class App_v02 {
+public class App {
     static Scanner keyScan = new Scanner(System.in);
     
     static Team[] teams = new Team[1000]; 
     static int teamIndex = 0;
     static Member[] members = new Member[1000];
     static int memberIndex = 0;
-    static String option = null; 
+    static String option = null; // 문자열 없음!
     
     static String[] prompt() {
         System.out.print("명령> ");
@@ -61,7 +58,6 @@ public class App_v02 {
     static void onTeamList() {
         System.out.println("[팀 목록]");
         for (int i = 0; i < teamIndex; i++) {
-            if (teams[i] == null) continue; 
             System.out.printf("%s, %d, %s ~ %s\n", 
             teams[i].name, teams[i].maxQty,
             teams[i].startDate, teams[i].endDate );
@@ -70,94 +66,26 @@ public class App_v02 {
 
     static void onTeamView() {
         System.out.println("[팀 정보 조회]");
-        if (option == null) {
-            System.out.println("팀명을 입력하시기 바랍니다.");
-            return; 
-        }
-        Team team = null;
-        for (int i = 0; i < teamIndex; i++) {
-            if (teams[i] == null) continue; 
-            if (option.equals(teams[i].name.toLowerCase())) {
-                team = teams[i];
-                break;
-            }
-        }
-        if (team == null) {
-            System.out.println("해당 이름의 팀이 없습니다.");
-        } else {
-            System.out.printf("팀명 : %s\n", team.name);
-            System.out.printf("설명 : %s\n", team.description);
-            System.out.printf("최대인원 : %d\n", team.maxQty);
-            System.out.printf("기간 : %s ~ %s\n",
-                team.startDate, team.endDate);
-        }
-    }
-
-    static void onTeamUpdate() {
-        System.out.println("[팀 정보 변경]");
-        if (option == null) {
-            System.out.println("팀명을 입력하시기 바랍니다.");
-            return; 
-        }
-
-        Team team = null;
-        int i;  // i : 현재 업데이트 할 팀 주소가 들어있다.
-        for (i = 0; i < teamIndex; i++) {
-            if (teams[i] == null) continue; 
-            if (option.equals(teams[i].name.toLowerCase())) {
-                team = teams[i];
-                break;
-            }
-        }
-
-        if (team == null) {
-            System.out.println("해당 이름의 팀이 없습니다.");
-        } else {
-            Team updateTeam = new Team(); 
-            // 유지보수를 하기위해 새로 객체를 만들어 주어야 한다.
-            System.out.printf("팀명(%s)? ", team.name);
-            updateTeam.name = keyScan.nextLine();
-            System.out.printf("설명(%s)? ", team.description);
-            updateTeam.description = keyScan.nextLine();
-            System.out.printf("최대인원? ", team.maxQty);
-            updateTeam.maxQty = keyScan.nextInt();
-            keyScan.nextLine();
-            System.out.printf("시작일(%s)? ", team.startDate);
-            updateTeam.startDate = keyScan.nextLine();
-            System.out.printf("종료일(%s)? ", team.endDate);
-            updateTeam.endDate = keyScan.nextLine();
-            teams[i] = updateTeam;
-            System.out.println("변경하였습니다.");
-
-        }
-    }
-
-    static void onTeamDelete() {
-        System.out.println("[팀 정보 삭제]");
-        if (option == null) {
-            System.out.println("팀명을 입력하시기 바랍니다.");
-            return; 
-        }
-        Team team = null;
-        int i;
-        for (i = 0; i < teamIndex; i++) {
-            if (teams[i] == null) continue; // 밑으로 가지 말고 for문으로 
-            if (option.equals(teams[i].name.toLowerCase())) {
-                team = teams[i];
-                break;
-            }
-        }
-        if (team == null) {
-            System.out.println("해당 이름의 팀이 없습니다.");
-        } else {
-            System.out.print("정말 삭제하시겠습니까?(y/N) ");
-            // 만약 입력하지 않고 그냥 enter를 치면 yes를 입력한것과 똑같다.
-            String input = keyScan.nextLine().toLowerCase();
-            if (input.equals("y")) {
-                teams[i] = null;
-                System.out.println("삭제하였습니다.");
-            }
-        }
+                if (option == null) {
+                    System.out.println("팀명을 입력해 주시기 바랍니다.");
+                    return;        
+                }
+                Team team = null;
+                for (int i = 0; i < teamIndex; i++) {
+                    if (option.equals(teams[i].name.toLowerCase())) {
+                        team = teams[i];
+                        break;
+                    }
+                }
+                if (team == null) {
+                    System.out.println("해당 이름의 팀이 없습니다.");
+                } else {
+                    System.out.printf("팀명 : %s\n", team.name);
+                    System.out.printf("설명 : %s\n", team.description);
+                    System.out.printf("최대인원 : %d\n", team.maxQty);
+                    System.out.printf("기간 : %s ~ %s\n",
+                        team.startDate, team.endDate);
+                }
     }
 
     static void onMemberAdd() {
@@ -178,7 +106,6 @@ public class App_v02 {
     static void onMemberList() {
         System.out.println("[회원 목록]");
         for (int i = 0; i < memberIndex; i++) {
-            if (members[i] == null) continue;
             System.out.printf("%s, %s, %s\n", 
             members[i].id, members[i].email, members[i].password);
         }
@@ -192,7 +119,6 @@ public class App_v02 {
         }
         Member member = null;
         for (int i = 0; i < memberIndex; i++) {
-            if (members[i] == null) continue;
             if (option.equals(members[i].id.toLowerCase())) {
                 member = members[i];
                 break;
@@ -207,32 +133,115 @@ public class App_v02 {
         }
     }
 
-    static void onMemberUpdate() {
-        System.out.println("[회원 정보 조회]");
+    static void onTeamUpdate() {
+        System.out.println("[팀 정보 업데이트]");
         if (option == null) {
-            System.out.println("회원 아이디를 입력하시기 바랍니다.");
-            return; 
+            System.out.println("팀명을 입력해 주시기 바랍니다.");
+            return;
+        }
+        Team team = null;
+        int up = 0;
+        for (int i = 0; i < teamIndex; i++) {
+            if (option.equals(teams[i].name.toLowerCase())) {
+                team = teams[i];
+                up = i;
+                break;
+            }
+        }
+        if (team == null) {
+            System.out.println("해당 이름의 팀이 없습니다.");
+        } else {
+
+            System.out.printf("팀명(%s)? ", team.name);
+            team.name = keyScan.nextLine();
+        
+            System.out.printf("설명(%s)? ", team.description);
+            team.description = keyScan.nextLine();
+        
+            System.out.printf("최대인원(%d)? ", team.maxQty);
+            team.maxQty = keyScan.nextInt();
+            keyScan.nextLine(); 
+        
+            System.out.printf("시작일(%s)? ", team.startDate);
+            team.startDate = keyScan.nextLine();
+        
+            System.out.printf("종료일(%s)? ", team.endDate);
+            team.endDate = keyScan.nextLine();
+        
+            teams[up] = team;
+
+            System.out.println("변경하였습니다.");
+        }
+    }
+
+    static void onTeamDelete() {
+        System.out.println("[팀 정보 삭제]");
+        if (option == null) {
+        System.out.println("팀명을 입력해 주시기 바랍니다.");
+        return;
+        }
+        Team team = null;
+        int del = 0;
+        for (int i = 0; i < teamIndex; i++) {
+            if (option.equals(teams[i].name.toLowerCase())) {
+                team = teams[i];
+                del = i;
+                break;
+            }
+        }
+        if (team == null) {
+            System.out.println("해당 이름의 팀이 없습니다.");
+        } else {
+
+            System.out.print("정말 삭제하시겠습니까?(Y/n) ");
+            String str = keyScan.nextLine();
+            if (str.toLowerCase().equals("n")) {
+                return;
+            }
+
+            teams[del] = null;
+            for (int i = 0; i < teamIndex; i++) {
+                if (teams[i] == null) {
+                    for (int k = i; k < teamIndex - 1; k++) {
+                        teams[k] = teams[k+1];
+                    }
+                    teamIndex--;
+                    break;
+                }
+            }
+            System.out.println("삭제하였습니다.");
+            }
+    }
+
+    static void onMemberUpdate() {
+        System.out.println("[회원 정보 업데이트]");
+        if (option == null) {
+            System.out.println("아이디를 입력해 주시기 바랍니다.");
+            return;
         }
         Member member = null;
-        int i;
-        for (i = 0; i < memberIndex; i++) {
-            if (members[i] == null) continue;
+        int up = 0;
+        for (int i = 0; i < memberIndex; i++) {
             if (option.equals(members[i].id.toLowerCase())) {
                 member = members[i];
+                up = i;
                 break;
             }
         }
         if (member == null) {
             System.out.println("해당 아이디의 회원이 없습니다.");
         } else {
-            Member updateMember = new Member();
             System.out.printf("아이디(%s)? ", member.id);
-            updateMember.id = keyScan.nextLine();
+            member.id = keyScan.nextLine();
+        
             System.out.printf("이메일(%s)? ", member.email);
-            updateMember.email = keyScan.nextLine();
-            System.out.printf("암호? ", member.password);
-            updateMember.password = keyScan.nextLine();
-            members[i] = updateMember;
+            member.email = keyScan.nextLine();
+        
+            System.out.printf("암호(%s)? ", member.password);
+            member.password = keyScan.nextLine();
+        
+            members[up] = member;
+
             System.out.println("변경하였습니다.");
         }
     }
@@ -240,31 +249,42 @@ public class App_v02 {
     static void onMemberDelete() {
         System.out.println("[회원 정보 삭제]");
         if (option == null) {
-            System.out.println("회원 아이디를 입력하시기 바랍니다.");
-            return; 
+        System.out.println("아이디를 입력해 주시기 바랍니다.");
+        return;
         }
         Member member = null;
-        int i;
-        for (i = 0; i < memberIndex; i++) {
-            if (members[i] == null) continue;
+        int del = 0;
+        for (int i = 0; i < memberIndex; i++) {
             if (option.equals(members[i].id.toLowerCase())) {
                 member = members[i];
+                del = i;
                 break;
             }
         }
         if (member == null) {
             System.out.println("해당 아이디의 회원이 없습니다.");
         } else {
-            System.out.print("정말 삭제하시겠습니까?(y/N) ");
-            // 만약 입력하지 않고 그냥 enter를 치면 yes를 입력한것과 똑같다.
-            String input = keyScan.nextLine().toLowerCase();
-            if (input.equals("y")) {
-                members[i] = null;
-                System.out.println("삭제하였습니다.");
+
+            System.out.print("정말 삭제하시겠습니까?(Y/n) ");
+            String str = keyScan.nextLine();
+            if (str.toLowerCase().equals("n")) {
+                return;
             }
-        }
+
+            members[del] = null;
+            for (int i = 0; i < memberIndex; i++) {
+                if (members[i] == null) {
+                    for (int k = i; k < memberIndex - 1; k++) {
+                        members[k] = members[k+1];
+                    }
+                    memberIndex--;
+                    break;
+                }
+            }
+            System.out.println("삭제하였습니다.");
+            }
     }
- 
+
     public static void main(String[] args) {
         while(true) {   
             String[] arr = prompt();
@@ -285,16 +305,16 @@ public class App_v02 {
                 onTeamList();                
             } else if (menu.equals("team/view")) {
                 onTeamView();
-            } else if (menu.equals("team/update")) {
-                onTeamUpdate();
-            } else if (menu.equals("team/delete")) {
-                onTeamDelete();
             } else if (menu.equals("member/add")) {
                 onMemberAdd();
             } else if (menu.equals("member/list")) {
                onMemberList();
             } else if (menu.equals("member/view")) {
                 onMemberView();
+            } else if (menu.equals("team/update")) {
+                onTeamUpdate();
+            } else if (menu.equals("team/delete")) {
+                onTeamDelete();
             } else if (menu.equals("member/update")) {
                 onMemberUpdate();
             } else if (menu.equals("member/delete")) {
