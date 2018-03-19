@@ -22,7 +22,7 @@ public class Exam05_3 {
         // 8바이이트 정수 최대값 및 최소값
         // => 자바에서는 각 데이터 유형에 따라 최대, 최속 값을 받아볼수 있도록
         //    특별한 명령을 제공한다       
-        systemp.oiut.pinfln(Integer.MAX_VALUE); // 4자리트로 표현할수 있는 정수 최대
+        System.out.println(Integer.MAX_VALUE); // 4자리트로 표현할수 있는 정수 최대
  
 
 

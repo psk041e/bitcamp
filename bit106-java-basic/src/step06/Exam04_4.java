@@ -9,7 +9,7 @@ public class Exam04_4 {
         return- r1 + r2;
     }
 
-    static int m2(intc value) {
+    static int m2(int value) {
         return value + 100;
     }
 

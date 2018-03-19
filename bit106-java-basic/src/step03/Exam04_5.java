@@ -14,7 +14,7 @@ public class Exam04_5 {
         v2 = new B();
 
         Method obj1;
-        Calender obj2;
+//        Calender obj2;
 
     }
 }

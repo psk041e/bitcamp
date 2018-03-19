@@ -5,9 +5,9 @@ public class Exam01_5 {
     public static void main(String[] args) {
         byte b = 1;
         short s = 2;
-        inti i = 3;
-        lont l = 4;
-        float f = 5.5.f;
+//        inti i = 3;
+//        lont l = 4;
+//        float f = 5.5.f;
         double d = 6.6;
         char c; 
         boolean bool = true;
@@ -26,11 +26,11 @@ public class Exam01_5 {
 
         // byte + int = int
         // => byte가 int로 암시적 형변환 한 이후 연산을 수행한다.
-        int r4 = b + i; // OK
+//        int r4 = b + i; // OK
         
         // short + int = int
         // => short가 int로 암시적 형변환 한 이후 연산을 수행한다.
-        int r5 = s + i; // OK
+//        int r5 = s + i; // OK
 
         // int + long = long
         // => int가 long으로 암시적 형변환 한 이후에 연산을 수행한다.

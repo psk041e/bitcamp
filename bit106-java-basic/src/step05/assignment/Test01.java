@@ -11,10 +11,10 @@ public class Test01 {
         while (count <= len) {
             int spaceCnt = 1;
             int spaceLen = len - count;
-            while (starCnt <= count) {
-                System.out.print("*");
-                starCnt++;
-            }
+//            while (starCnt <= count) {
+//                System.out.print("*");
+//                starCnt++;
+//            }
             System.out.println();
             count++;
 

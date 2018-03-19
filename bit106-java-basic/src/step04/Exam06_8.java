@@ -1,7 +1,7 @@
 // 증감 연산자 : 전위(pre-fix) 증감 연산자 응용 I
 package step04;
 
-public class Exam06_7 {
+public class Exam06_8 {
     public static void main(String[] args) {
        int i = 2;
        int result = ++i + ++i * ++i;

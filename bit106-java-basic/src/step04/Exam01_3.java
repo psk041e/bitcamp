@@ -13,7 +13,7 @@ public class Exam01_3 {
         byte b = 5 + 6;
 
         byte x = 5, y = 6, z;
-        z = x + y; // 컴파일 오류!
+//        z = x + y; // 컴파일 오류!
         // 이유!
         // - 자바가 정수 변수에 대해 산술 연산을 수행할 때 
         //   그 변수의 값이 4바이트 보다 작다면, 
@@ -29,7 +29,7 @@ public class Exam01_3 {
         // short도 마찬가지이다.
         short s1 = 5;
         short s2 = 6;
-        short s3 = s1 + s2; // 컴파일 오류!
+//        short s3 = s1 + s2; // 컴파일 오류!
         int s3 = s1 + s2;
         System.out.println(s3);
         // 이유?

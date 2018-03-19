@@ -21,7 +21,7 @@ public class Exam11_3 {
         int b;
 
         // 마찬가지로 이 블록 안에서는 같은 이름의 변수를 만들 수 없다.
-        String a; // 컴파일 오류! 데이터 타입에 상관없이 이름 중복 불가!
+//        String a; // 컴파일 오류! 데이터 타입에 상관없이 이름 중복 불가!
     }
 
     public static void m5() {

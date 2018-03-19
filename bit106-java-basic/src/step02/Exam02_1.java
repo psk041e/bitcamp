@@ -7,7 +7,7 @@ public class Exam02_1 {
     public static void main(String[] args) {
         // 키보드 정보를 가져온다.
         java.io.InputStream keyborad = System.in;
-        Scanner sc = new Scanner(System.in);
+        java.util.Scanner sc = new java.util.Scanner(System.in);
 
         // 키보드에서 값을 꺼내주는 도구를 연결한다.
         java.util.Scanner keyScan = new java.util.Scanner(keyborad);

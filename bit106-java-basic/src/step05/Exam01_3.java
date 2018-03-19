@@ -21,7 +21,7 @@ public class Exam01_3 {
 
         // 다음은 a 변수에 100을 넣는다.
         // 그런데 a가 boolean이 아니기 때문에 컴파일 오류가 발생한다.
-        if (a = 100) System.out.println("6666");
+//        if (a = 100) System.out.println("6666");
         
             
     }

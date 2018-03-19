@@ -1,13 +1,13 @@
 // 메서드 : 인스턴스와 Heap 메모리 영역
 package step06;
 
-class MyObject { // -sourcepath 로 지정할 때는 단독으로 있어야 한다. 
+//class MyObject { // -sourcepath 로 지정할 때는 단독으로 있어야 한다. 
     // -> MyObject.java 를 찾기 때문이다. 
     //    (컴파일러는 다른 클래스와 같이 있으면 모른다.)
     // -> -cp bin을 명시해준다.
-    int a;
-    int b;
-}
+//    int a;
+//    int b;
+//}
 
 public class Exam04_3 {
 

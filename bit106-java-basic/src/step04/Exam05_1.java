@@ -17,8 +17,8 @@ public class Exam05_1 {
          //위의 System.out.println(...) 문장은 결과를 리턴히지 않는다.
          // 그래서 컴파일 오류이다.
 
-         String message (age > 18)< "성년" : "미성년";
-         System.out.printf("나이 %d는(은) %s이다.", age, message);
+//         String message (age > 18)< "성년" : "미성년";
+//         System.out.printf("나이 %d는(은) %s이다.", age, message);
 
 
 

@@ -51,11 +51,11 @@ public class Exam02_1 {
         // 그 다음 명령을 실행한다.
         System.out.println("hello() 메소드 실행 완료!");
 
-        hello(100); // 컴파일 오류!!
+//        hello(100); // 컴파일 오류!!
         // hello 메서드는 파라미터가 없다 -> 호출할 때 값을 넣으면 컴파일 오류!!
         // hello 메서드는 값을 리턴하지 않기 때문에 변수로 값을 받으려 하면 
         int i;
-        i = hello(); // 컴파일 오류!!
+//        i = hello(); // 컴파일 오류!!
                      // void cannot be converted to int
                      // -> void는 int로 변환될 수 없다.
 
