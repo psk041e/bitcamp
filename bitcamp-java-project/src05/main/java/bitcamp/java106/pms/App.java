@@ -14,7 +14,7 @@ public class App {
     static String option = null; // 문자열 없음!
     
     static String[] prompt() {
-        System.out.print("명령> ");
+        System.out.print("명령05> ");
         return keyScan.nextLine().toLowerCase().split(" ");
     }
 
@@ -160,50 +160,6 @@ public class App {
                onMemberList();
             } else if (menu.equals("member/view")) {
                 onMemberView();
-            } else if (menu.equals("team/update")) {
-                System.out.println("[팀 정보 업데이트]");
-                if (option == null) {
-                    System.out.println("팀명을 입력해 주시기 바랍니다.");
-                    System.out.println();
-                    return; 
-                }
-                Team team = null;
-                int up = 0;
-                for (int i = 0; i < teamIndex; i++) {
-                    if (option.equals(teams[i].name.toLowerCase())) {
-                        team = teams[i];
-                        up = i;
-                        break;
-                    }
-                }
-                if (team == null) {
-                    System.out.println("해당 이름의 팀이 없습니다.");
-                } else {
-
-                    System.out.printf("팀명(%s)? ", team.name);
-                    team.name = keyScan.nextLine();
-                
-                    System.out.printf("설명(%s)? ", team.description);
-                    team.description = keyScan.nextLine();
-                
-                    System.out.printf("최대인원(%d)? ", team.maxQty);
-                    team.maxQty = keyScan.nextInt();
-                    keyScan.nextLine(); 
-                
-                    System.out.printf("시작일(%s)? ", team.startDate);
-                    team.startDate = keyScan.nextLine();
-                
-                    System.out.printf("종료일(%s)? "team.endDate);
-                    team.endDate = keyScan.nextLine();
-                
-                    teams[up] = team;
-
-
-
-                }
-            
-
-
             } else {
                 System.out.println("명령어가 올바르지 않습니다.");
             }

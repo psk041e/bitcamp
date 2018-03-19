@@ -1,1 +1,12 @@
+*.project
+*.classpath
 *.class
+*.log
+**/.gradle/
+**/.settings/
+**/bin
+**/build
+**/temp/
+**/.vscode
+
+!build.gradle

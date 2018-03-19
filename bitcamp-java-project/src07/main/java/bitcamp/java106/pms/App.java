@@ -15,6 +15,34 @@ public class App {
     static int memberIndex = 0;
     static String option = null;
 
+    static int getTeamIndex(String name) {
+        for (int i = 0; i < teamIndex; i++) {
+            if (teams[i] == null) continue;
+            if (name.equals(teams[i].name.toLowerCase())) {
+                return i;
+            }
+        }
+        return -1;    
+    }
+    static int getMemberIndex(String id) {
+        for (int i = 0; i < memberIndex; i++) {
+            if (members[i] == null) continue;
+            if (id.equals(members[i].id.toLowerCase())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    static boolean confirm(String message) {
+        System.out.printf("%s ", message);
+        String input = keyScan.nextLine();
+        if (input.toLowerCase().equals("y")) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
     static String[] prompt() {
         System.out.print("명령> ");
         return keyScan.nextLine().toLowerCase().split(" ");
@@ -71,18 +99,15 @@ public class App {
             // 사용할 수 있겠지만 중간에 있으므로 return으로 이전 위치로 돌아간다.
         }
 
-        Team team = null;
-        for (int i = 0; i < teamIndex; i++) {
-            if (teams[i] == null) continue;
-            if (option.equals(teams[i].name.toLowerCase())) {
-                team = teams[i];
-                break;
-            }
-        }
-
-        if (team == null) {
+        int i = getTeamIndex(option);
+        // getTeamIndex 메소드에서 리턴된 i값을 새로운 i에 집어넣는다. 
+    
+        if (i == -1) {
             System.out.println("해당 이름의 팀이 없습니다.");
         } else {
+            Team team = teams[i];
+            // teams[i] 를 바로 출력해주어도 되지만
+            // 새로 선언주는 것이 작성하기에 편하다.
             System.out.printf("팀명: %s\n", team.name);
             System.out.printf("설명: %s\n", team.description);
             System.out.printf("최대인원: %d\n", team.maxQty);
@@ -102,19 +127,12 @@ public class App {
             // 사용할 수 있겠지만 중간에 있으므로 return으로 이전 위치로 돌아간다.
         }
 
-        Team team = null;
-        int i;
-        for (i = 0; i < teamIndex; i++) {
-            if (teams[i] == null) continue;
-            if (option.equals(teams[i].name.toLowerCase())) {
-                team = teams[i];
-                break;
-            }
-        }
-
-        if (team == null) {
+        int i = getTeamIndex(option);
+        
+        if (i == -1) {
             System.out.println("해당 이름의 팀이 없습니다.");
         } else {
+            Team team = teams[i];
             Team updateTeam = new Team();
             System.out.printf("팀명(%s)? ", team.name);
             updateTeam.name = keyScan.nextLine();
@@ -143,27 +161,14 @@ public class App {
             // 사용할 수 있겠지만 중간에 있으므로 return으로 이전 위치로 돌아간다.
         }
 
-        Team team = null;
-        int i;
-        for (i = 0; i < teamIndex; i++) {
-            if (teams[i] == null) continue;
-            if (option.equals(teams[i].name.toLowerCase())) {
-                team = teams[i];
-                break;
-            }
-        }
-
-        if (team == null) {
+        int i = getTeamIndex(option);
+        
+        if (i == -1) {
             System.out.println("해당 이름의 팀이 없습니다.");
         } else {
-            System.out.print("정말 삭제하시겠습니까?(y/N) ");
-            String del = keyScan.nextLine().toLowerCase();
-            // N가 대문자로 쓰이는 경우 보통 아무 값도 입력하지
-            // 않았을때 N으로 인식하고 삭제 명령을 실행하지 않는다.
-            if (del.equals("y")) {
+            if (confirm("정말 삭제하시겠습니까?")) {
                 teams[i] = null;
                 System.out.println("삭제하였습니다.");
-
             }
         }
     }
@@ -191,17 +196,13 @@ public class App {
             System.out.println("아이디를 입력하시기 바랍니다.");
             return;
         }
-        Member member = null;
-        for (int i = 0; i < memberIndex; i++) {
-            if (members[i] == null) continue;
-            if (option.equals(members[i].id.toLowerCase())) {
-                member = members[i];
-                break;
-            }
-        }
-        if (member == null) {
+       
+        int i = getMemberIndex(option);
+        
+        if (i == -1) {
             System.out.println("해당 아이디의 회원이 없습니다.");
         } else {
+            Member member = members[i];
             System.out.printf("아이디 : %s\n", member.id);
             System.out.printf("이메일 : %s\n", member.email);
             System.out.printf("암호 : %s\n", member.password);
@@ -213,18 +214,13 @@ public class App {
             System.out.println("아이디를 입력하시기 바랍니다.");
             return;
         }
-        Member member = null;
-        int i;
-        for (i = 0; i < memberIndex; i++) {
-            if (members[i] == null) continue;
-            if (option.equals(members[i].id.toLowerCase())) {
-                member = members[i];
-                break;
-            }
-        }
-        if (member == null) {
+        
+        int i = getMemberIndex(option);
+
+        if (i == -1) {
             System.out.println("해당 아이디의 회원이 없습니다.");
         } else {
+            Member member = members[i];
             Member updateMember = new Member();
             System.out.printf("아이디(%s)? ", member.id);
             updateMember.id = keyScan.nextLine();
@@ -242,21 +238,13 @@ public class App {
             System.out.println("아이디를 입력하시기 바랍니다.");
             return;
         }
-        Member member = null;
-        int i;
-        for (i = 0; i < memberIndex; i++) {
-            if (members[i] == null) continue;
-            if (option.equals(members[i].id.toLowerCase())) {
-                member = members[i];
-                break;
-            }
-        }
-        if (member == null) {
+
+        int i = getMemberIndex(option);
+        
+        if (i == -1) {
             System.out.println("해당 아이디의 회원이 없습니다.");
         } else {
-            System.out.print("정말 삭제하시겠습니까(y/N)? ");
-            String del = keyScan.nextLine().toLowerCase();
-            if (del.equals("y")) {
+            if(confirm("정말 삭제하시겠습니까?")) {
                 teams[i] = null;
                 System.out.println("삭제하였습니다.");
             }
