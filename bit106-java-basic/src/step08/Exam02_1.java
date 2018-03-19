@@ -11,12 +11,13 @@ public class Exam02_1 {
             System.out.println("m1()");
         }
   
-        
         // 2) 인스턴스 메서드
         //    => static 이 붙지 않은 메서드
         //    => 인스턴스 주소가 있어야만 호출할 수 있다.
         void m2() {
             System.out.println("m2()");
+            // 인스턴스 주소를 줬는데(this에) 사용하지 않는 변수는 인스턴스 주 소를 줄 필요가 없다 -> 그 메소드는static메서드로 만들엊버려야한다.
+            // 인스턴스 주소는 메모리를 할당하는데 그것을 사용하지 않고 아무것도 하지않으면 static으로 선언해야 한다.
         }
     }
     public static void main(String[] args) {
@@ -40,6 +41,7 @@ public class Exam02_1 {
         A obj2 = null;
         obj2.m2(); // 컴파일은 OK! 실행은 오류!
                    // 왜? obj2 변수에 들어 있는 인스턴스 주소가 무효하기 때문이다.
+                   // 인스턴스 주소가 존재하지 않는다. -> 유효하지 않은 주소를 넘겨주면 실행할때 에러가 난다.
         
        
     }

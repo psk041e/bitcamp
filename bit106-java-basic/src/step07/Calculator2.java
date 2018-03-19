@@ -17,7 +17,7 @@ public class Calculator2 {
     
     // 작업 결과를 리턴하지 않고 내부변수(클래스 변수)에 보관한다. => 바깥에서 따로 결과를 다룰 필요가 없다.
     // 다음 메소드는 작업 결과를 클래스 변수에 보관한다.
-    public static void plus(int value) {
+    public static void plus(int value) { // 인스턴스의 주소를 사용하지 않기 때문에 static을 뗄 필요가 없다.
         result += value; // result = result + value;
     }
     public static void minus(int value) {
