@@ -14,16 +14,24 @@ public class ExamY_3 {
         
         // Calculator2에서는 계산 결과를 저장하는 변수가 한개여서
         // 식1과 식2를 개별적으로 동시에 계산할 수 없다.
-        Calculator2.plus(2); // + 2
-        Calculator2.plus(3); // + 3
-        Calculator2.minus(1); // + 2 + 3
-        Calculator2.multiple(1);
-        Calculator2.divide(3);
+        Calculator2.plus(2);        // + 2
+        Calculator2.plus(3);        // + 3
         
+        Calculator2.plus(3);        // + 2 + 3
+        Calculator2.multiple(2);    // + 3 * 2
+        
+        Calculator2.minus(1);       // + 2 + 3 - 1
+        Calculator2.plus(7);        // + 3 * 2 + 7
+        
+        Calculator2.multiple(7);    // + 2 + 3 - 1 * 7
+        Calculator2.divide(4);       // + 3 * 2 + 7 / 4 
+        
+        Calculator2.divide(3);      // + 2 + 3 - 1 * 7 / 3 = ?
+        Calculator2.minus(5);       // + 3 * 2 + 7 / 4 - 5 = ?
+
         // Calculator2의 result 변수는 한 개이기 때문에
         // 결과를 출력하면 식1과 식2가 모두 계산된 결과가 출력될 것이다.
-        System.out.printf("result = %d\n", Calculator2.result);
-    
+        System.out.printf("result = %d\n", Calculator2.result);  
     }
 }
 

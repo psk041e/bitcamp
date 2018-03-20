@@ -8,7 +8,7 @@ public class Calculator3 {
     // => 인스턴스 변수는 클래스가 로딩 될 때 만들어지지 않는다.
     // => new 명령을 사용해서 만들어야 한다.
     // => 변수 선언 앞에 static이 붙지 않는다.
-    int result = 0;
+    int result = 0; // 계산을 동시에할수 있다. -> 계산 결과를 따로따로 관리할 수 있다.
     
     // 인스턴스 변수를 다루는 메서드는 작업을 수행할 때 그 인스턴스 주소를 받아야 한다.
     public static void plus(Calculator3 calc, int value) { // 인스턴스 주소를 사용하지 않기 때문에 static을 뗄 필요가 없다.
