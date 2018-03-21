@@ -3,11 +3,13 @@ package bitcamp.java106.pms;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.controller.BoardController;
+import bitcamp.java106.pms.controller.MemberController;
+import bitcamp.java106.pms.controller.TeamController;
 import bitcamp.java106.pms.util.Console;
 
 public class App {
     static Scanner keyScan = new Scanner(System.in);
-    public static String index = null; 
+    public static String option = null; 
     
     static void onQuit() {
         System.out.println("안녕히 가세요!");
@@ -15,17 +17,22 @@ public class App {
 
     static void onHelp() {
         System.out.println("[도움말]");
-        System.out.println("게시글 등록 명령 : board/add");
-        System.out.println("게시글 조회 명령 : board/list");
-        System.out.println("게시글 상세조회 명령 : board/view 인덱스값");
-        System.out.println("게시글 변경 명령 : board/update 인덱스값");
-        System.out.println("게시글 삭제 명령 : board/delete 인덱스값");
+        System.out.println("팀 등록 명령 : team/add");
+        System.out.println("팀 조회 명령 : team/list");
+        System.out.println("팀 상세조회 명령 : team/view 팀명");
+        System.out.println("회원 등록 명령 : member/add");
+        System.out.println("회원 조회 명령 : member/list");
+        System.out.println("회원 상세조회 명령 : member/view 아이디");
         System.out.println("종료 : quit");
     }
 
     public static void main(String[] args) {
         // 클래스를 사용하기 전에 필수 값을 설정한다.
-        BoardController.keyScan = keyScan;
+        
+        TeamController teamController = new TeamController(keyScan);
+        MemberController memberController = new MemberController(keyScan);
+        BoardController boardController = new BoardController(keyScan);
+
         Console.keyScan = keyScan;
 
         while (true) {
@@ -33,9 +40,9 @@ public class App {
 
             String menu = arr[0];
             if (arr.length == 2) {
-                index = arr[1];
+                option = arr[1];
             } else {
-                index = null;
+                option = null;
             }
 
             if (menu.equals("quit")) {
@@ -43,13 +50,17 @@ public class App {
                 break;
             } else if (menu.equals("help")) {
                 onHelp();
+            } else if (menu.startsWith("team/")) {
+                teamController.service(menu, option);
+            } else if (menu.startsWith("member/")) {
+                memberController.service(menu, option);
             } else if (menu.startsWith("board/")) {
-                BoardController.service(menu, index);
-            } else {
+                boardController.service(menu, option);
+            }else {
                 System.out.println("명령어가 올바르지 않습니다.");
             }
 
-            System.out.println();
+            System.out.println(); 
         }
     }
 }

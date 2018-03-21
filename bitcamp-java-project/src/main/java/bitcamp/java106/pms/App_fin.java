@@ -15,6 +15,10 @@ public class App_fin {
     static Member[] members = new Member[1000];
     static int memberIndex = 0;
     static String option = null; 
+
+    static boolean confirm(String mesage) {
+        
+    }
     
     static int getTeamIndex(String name) {
         for (int i = 0; i < teamIndex; i++) {
