@@ -1,12 +1,12 @@
-// Wrapper ?´?ž˜?Š¤
+// Wrapper í´ëž˜ìŠ¤
 package step10;
 
 public class Exam02_1 {
     public static void main(String[] args) {
-        // ?žë°”ëŠ” primitive data type?˜ ê°’ì„ ?‹¤ë£? ?•Œ ê¸°ë³¸ ?—°?‚°?ž ?™¸?— 
-        // ì¢? ?” ?‹¤?–‘?•œ ë°©ë²•?œ¼ë¡? ?‹¤ë£¨ê¸° ?œ„?•´ 
-        // primitive data type?— ???‘?•˜?Š” ?´?ž˜?Š¤ë¥? ? œê³µí•œ?‹¤.
-        // ?˜ˆ)
+        // ìžë°”ëŠ” primitive data typeì˜ ê°’ì„ ë‹¤ë£° ë•Œ ê¸°ë³¸ ì—°ì‚°ìž ì™¸ì— 
+        // ì¢€ ë” ë‹¤ì–‘í•œ ë°©ë²•ìœ¼ë¡œ ë‹¤ë£¨ê¸° ìœ„í•´ 
+        // primitive data typeì— ëŒ€ì‘í•˜ëŠ” í´ëž˜ìŠ¤ë¥¼ ì œê³µí•œë‹¤.
+        // ì˜ˆ)
         Byte b = new Byte((byte)100);               // ==> byte
         Short s = new Short((short)20000);          // ==> short
         Integer i = new Integer(3000000);           // ==> int
@@ -16,11 +16,11 @@ public class Exam02_1 {
         Boolean bool = new Boolean(true);           // ==> boolean
         Character c = new Character((char)0x41);    // ==> char
         
-        // ?´? ‡ê²? primitive data type?— ???‘?•˜?—¬ ë§Œë“  ?´?ž˜?Š¤ë¥? 
-        // primitive dataë¥? ?¬?ž¥?•˜?Š” ê°ì²´?¼ê³? ?•´?„œ
-        // "?ž©?¼(wrapper)" ?´?ž˜?Š¤?¼ê³? ë¶?ë¥¸ë‹¤. => ì´? 8ê°?
+        // ì´ë ‡ê²Œ primitive data typeì— ëŒ€ì‘í•˜ì—¬ ë§Œë“  í´ëž˜ìŠ¤ë¥¼ 
+        // primitive dataë¥¼ í¬ìž¥í•˜ëŠ” ê°ì²´ë¼ê³  í•´ì„œ
+        // "ëž©í¼(wrapper)" í´ëž˜ìŠ¤ë¼ê³  ë¶€ë¥¸ë‹¤. => ì´ 8ê°œ
         
-        // primitive data type?˜ ê°’ì„ ê°ì²´?— ?‹´?•„ ? „?‹¬?•˜ê³? ?‹¶?‹¤ë©?
-        // ?–¸? œ?“  wrapper ?´?ž˜?Š¤?˜ ?¸?Š¤?„´?Š¤ë¥? ë§Œë“¤ë©? ?œ?‹¤.
+        // primitive data typeì˜ ê°’ì„ ê°ì²´ì— ë‹´ì•„ ì „ë‹¬í•˜ê³  ì‹¶ë‹¤ë©´
+        // ì–¸ì œë“  wrapper í´ëž˜ìŠ¤ì˜ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ë§Œë“¤ë©´ ëœë‹¤.
     }
 }

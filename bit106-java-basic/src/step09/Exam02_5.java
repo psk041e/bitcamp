@@ -1,4 +1,4 @@
-// ?¸?Š¤?„´?Š¤ ë©”ì„œ?“œ?? ?´?˜?Š¤ ë©”ì„œ?“œ?˜ ?™œ?š© - Calendar ?´?˜?Š¤
+// ì¸ìŠ¤í„´ìŠ¤ ë©”ì„œë“œì™€ í´ë˜ìŠ¤ ë©”ì„œë“œì˜ í™œìš© - Calendar í´ë˜ìŠ¤
 package step09;
 
 import java.util.Calendar;
@@ -6,36 +6,36 @@ import java.util.Date;
 
 public class Exam02_5 {
     public static void main(String[] args) throws Exception {
-        // Calendar ?´?˜?Š¤?˜ ?ƒ?„±??Š” protectedë¡? ? ‘ê·¼ì´ ? œ?•œ?˜?–´ ?ˆê¸? ?•Œë¬¸ì—
-        // ?‹¤ë¥? ?Œ¨?‚¤ì§??—?„œ ì§ì ‘ ?ƒ?„±?ë¥? ?˜¸ì¶œí•  ?ˆ˜ ?—†?‹¤. -> Car2?´?˜?Š¤ ì°¸ê³ 
-        // Calendar c = new Calendar(); //ì»´íŒŒ?¼ ?˜¤ë¥?!
+        // Calendar í´ë˜ìŠ¤ì˜ ìƒì„±ìëŠ” protectedë¡œ ì ‘ê·¼ì´ ì œí•œë˜ì–´ ìˆê¸° ë•Œë¬¸ì—
+        // ë‹¤ë¥¸ íŒ¨í‚¤ì§€ì—ì„œ ì§ì ‘ ìƒì„±ìë¥¼ í˜¸ì¶œí•  ìˆ˜ ì—†ë‹¤. -> Car2í´ë˜ìŠ¤ ì°¸ê³ 
+        // Calendar c = new Calendar(); //ì»´íŒŒì¼ ì˜¤ë¥˜!
         
-        // ?˜¤?Š˜ ?‚ ì§? ë°? ?‹œê°? ? •ë³´ë?? ???¥?•œ ê°ì²´ë¥? ë§Œë“¤?–´ ë¦¬í„´?•œ?‹¤.
-        // ?‹¬? ¥?? ê·¸ë ˆê³ ë¦¬?•ˆ ?‹¬? ¥?„ ?‚¬?š©?•œ?‹¤.(GMT)
+        // ì˜¤ëŠ˜ ë‚ ì§œ ë° ì‹œê°„ ì •ë³´ë¥¼ ì €ì¥í•œ ê°ì²´ë¥¼ ë§Œë“¤ì–´ ë¦¬í„´í•œë‹¤.
+        // ë‹¬ë ¥ì€ ê·¸ë ˆê³ ë¦¬ì•ˆ ë‹¬ë ¥ì„ ì‚¬ìš©í•œë‹¤.(GMT)
         Calendar c = Calendar.getInstance();
         
-        // ?¸?Š¤?„´?Š¤ ë©”ì„œ?“œ ?™œ?š© (ctrl?ˆ„ë¥? ?›„ Calendar ?´ë¦??•˜ë©? ?…„?„,?›”,?¼,?š”?¼ ?“±?„ ì¶œë ¥?•´ì£¼ëŠ” ?ˆ«?ë¥? ë³¼ìˆ˜?ˆ?‹¤.)
-        System.out.println(c.get(1)); // ?…„?„ë¥? ë½‘ì•„ì£¼ê²Œ?” get?´?¼?Š” ë©”ì„œ?“œê°? ?‚´?¥?˜?–´?ˆ?‹¤.
-        System.out.println(c.get(2) + 1); // ?›”(0 ~ 11)
-        System.out.println(c.get(5)); // ?¼
-        System.out.println(c.get(7)); // ?š”?¼(1 ~ 7) ?† ?š”?¼: ì£¼ë§(ì£¼ì˜ ë§ˆì?ë§‰ë‚ ), ?¼?š”?¼: ì£¼ì˜ ì²«ì§¸?‚ 
-        System.out.println(c.get(4)); // ê·? ?‹¬?˜ ëª‡ë²ˆì§? ì£?
-        System.out.println(c.get(10)); // ?‹œ(0 ~ 11)
-        System.out.println(c.get(11)); // ?‹œ(24?‹œ ê¸°ì?)
-        System.out.println(c.get(12)); // ë¶?
-        System.out.println(c.get(13)); // ì´?
+        // ì¸ìŠ¤í„´ìŠ¤ ë©”ì„œë“œ í™œìš© (ctrlëˆ„ë¥¸ í›„ Calendar í´ë¦­í•˜ë©´ ë…„ë„,ì›”,ì¼,ìš”ì¼ ë“±ì„ ì¶œë ¥í•´ì£¼ëŠ” ìˆ«ìë¥¼ ë³¼ìˆ˜ìˆë‹¤.)
+        System.out.println(c.get(1)); // ë…„ë„ë¥¼ ë½‘ì•„ì£¼ê²Œë” getì´ë¼ëŠ” ë©”ì„œë“œê°€ ë‚´ì¥ë˜ì–´ìˆë‹¤.
+        System.out.println(c.get(2) + 1); // ì›”(0 ~ 11)
+        System.out.println(c.get(5)); // ì¼
+        System.out.println(c.get(7)); // ìš”ì¼(1 ~ 7) í† ìš”ì¼: ì£¼ë§(ì£¼ì˜ ë§ˆì§€ë§‰ë‚ ), ì¼ìš”ì¼: ì£¼ì˜ ì²«ì§¸ë‚ 
+        System.out.println(c.get(4)); // ê·¸ ë‹¬ì˜ ëª‡ë²ˆì§¸ ì£¼
+        System.out.println(c.get(10)); // ì‹œ(0 ~ 11)
+        System.out.println(c.get(11)); // ì‹œ(24ì‹œ ê¸°ì¤€)
+        System.out.println(c.get(12)); // ë¶„
+        System.out.println(c.get(13)); // ì´ˆ
         
-        // ?ƒ?ˆ˜?˜ ?™œ?š© -> step08?˜ Exam01_6ì°¸ê³ 
-        // ?ˆ«?ë¥? ?•”ê¸°í•˜ê¸? ?˜?“¤?‹¤ -> ?‚´ë¶?? ?œ¼ë¡? ?ƒ?ˆ˜ê°? ? •?˜?˜?–´?ˆ?‹¤.
-        System.out.println(c.get(Calendar.YEAR)); // ?…„?„ë¥? ë½‘ì•„ì£¼ê²Œ?” get?´?¼?Š” ë©”ì„œ?“œê°? ?‚´?¥?˜?–´?ˆ?‹¤.
-        System.out.println(c.get(Calendar.MONTH) + 1); // ?›”(0 ~ 11)
-        System.out.println(c.get(Calendar.DATE)); // ?¼
-        System.out.println(c.get(Calendar.DAY_OF_WEEK)); // ?š”?¼(1 ~ 7) ?† ?š”?¼: ì£¼ë§(ì£¼ì˜ ë§ˆì?ë§‰ë‚ ), ?¼?š”?¼: ì£¼ì˜ ì²«ì§¸?‚ 
-        System.out.println(c.get(Calendar.WEEK_OF_MONTH)); // ê·? ?‹¬?˜ ëª‡ë²ˆì§? ì£?
-        System.out.println(c.get(Calendar.HOUR)); // ?‹œ(0 ~ 11)
-        System.out.println(c.get(Calendar.HOUR_OF_DAY)); // ?‹œ(24?‹œ ê¸°ì?)
-        System.out.println(c.get(Calendar.MINUTE)); // ë¶?
-        System.out.println(c.get(Calendar.SECOND)); // ì´?
+        // ìƒìˆ˜ì˜ í™œìš© -> step08ì˜ Exam01_6ì°¸ê³ 
+        // ìˆ«ìë¥¼ ì•”ê¸°í•˜ê¸° í˜ë“¤ë‹¤ -> ë‚´ë¶€ì ìœ¼ë¡œ ìƒìˆ˜ê°€ ì •ì˜ë˜ì–´ìˆë‹¤.
+        System.out.println(c.get(Calendar.YEAR)); // ë…„ë„ë¥¼ ë½‘ì•„ì£¼ê²Œë” getì´ë¼ëŠ” ë©”ì„œë“œê°€ ë‚´ì¥ë˜ì–´ìˆë‹¤.
+        System.out.println(c.get(Calendar.MONTH) + 1); // ì›”(0 ~ 11)
+        System.out.println(c.get(Calendar.DATE)); // ì¼
+        System.out.println(c.get(Calendar.DAY_OF_WEEK)); // ìš”ì¼(1 ~ 7) í† ìš”ì¼: ì£¼ë§(ì£¼ì˜ ë§ˆì§€ë§‰ë‚ ), ì¼ìš”ì¼: ì£¼ì˜ ì²«ì§¸ë‚ 
+        System.out.println(c.get(Calendar.WEEK_OF_MONTH)); // ê·¸ ë‹¬ì˜ ëª‡ë²ˆì§¸ ì£¼
+        System.out.println(c.get(Calendar.HOUR)); // ì‹œ(0 ~ 11)
+        System.out.println(c.get(Calendar.HOUR_OF_DAY)); // ì‹œ(24ì‹œ ê¸°ì¤€)
+        System.out.println(c.get(Calendar.MINUTE)); // ë¶„
+        System.out.println(c.get(Calendar.SECOND)); // ì´ˆ
         
         
     }

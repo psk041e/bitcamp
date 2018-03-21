@@ -3,11 +3,11 @@ package step10;
 
 public class Exam01_1 {
     public static void main(String[] args) {
-        // String ?¸?Š¤?„´?Š¤ë¥? ?ƒ?„±?•˜?Š” ë°©ë²•
+        // String ì¸ìŠ¤í„´ìŠ¤ë¥¼ ìƒì„±í•˜ëŠ” ë°©ë²•
         String s1 = new String("Hello");
         String s2 = new String("Hello");
-        // => ?‚´?š©ë¬¼ì˜ ?™?¼?—¬ë¶?ë¥? ê²??‚¬?•˜ì§? ?•Šê³? ë¬´ì¡°ê±? ?¸?Š¤?„´?Š¤ë¥? ?ƒ?„±?•œ?‹¤.
-        // => ê°?ë¹„ì?ê°? ?˜ë©? ê°?ë¹„ì? ì»¬ë ‰?„°?— ?˜?•´ ? œê±°ëœ?‹¤.
+        // => ë‚´ìš©ë¬¼ì˜ ë™ì¼ì—¬ë¶€ë¥¼ ê²€ì‚¬í•˜ì§€ ì•Šê³  ë¬´ì¡°ê±´ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ìƒì„±í•œë‹¤.
+        // => ê°€ë¹„ì§€ê°€ ë˜ë©´ ê°€ë¹„ì§€ ì»¬ë ‰í„°ì— ì˜í•´ ì œê±°ëœë‹¤.
         if (s1 == s2) 
             System.out.println("s1 == s2");
         else
@@ -15,13 +15,13 @@ public class Exam01_1 {
         
         
         
-        // string constant pool (?ƒ?ˆ˜ ???ž¥) ë©”ëª¨ë¦? ?˜?—­?— String ?¸?Š¤?„´?Š¤ë¥? ?ƒ?„±?•˜?Š” ë°©ë²•
+        // string constant pool (ìƒìˆ˜ í’€ìž¥) ë©”ëª¨ë¦¬ ì˜ì—­ì— String ì¸ìŠ¤í„´ìŠ¤ë¥¼ ìƒì„±í•˜ëŠ” ë°©ë²•
         // -> java8 specification > 2.5.2. Java Virtual Machine Stacks ì°¸ê³ 
         String x1 = "Hello";
         String x2 = "Hello";
-        // => ?‚´?š©ë¬¼ì´ ê°™ìœ¼ë©? ê¸°ì¡´ ?¸?Š¤?„´?Š¤?˜ ì£¼ì†Œë¥? ë¦¬í„´?•œ?‹¤.
-        //    ì¦? ë©”ëª¨ë¦? ? ˆ?•½?„ ?œ„?•´ ì¤‘ë³µ ?°?´?„°ë¥? ê°–ëŠ” ?¸?Š¤?„´?Š¤ë¥? ?ƒ?„±?•˜ì§? ?•Š?Š”?‹¤.
-        // => JVM?´ ??‚  ?•Œê¹Œì? ë©”ëª¨ë¦¬ì— ?œ ì§??œ?‹¤. (ê°?ë¹„ì? ì»¬ë ‰?„°?˜ ê´?ë¦¬ë??ƒ?´ ?•„?‹ˆ?‹¤.)
+        // => ë‚´ìš©ë¬¼ì´ ê°™ìœ¼ë©´ ê¸°ì¡´ ì¸ìŠ¤í„´ìŠ¤ì˜ ì£¼ì†Œë¥¼ ë¦¬í„´í•œë‹¤.
+        //    ì¦‰ ë©”ëª¨ë¦¬ ì ˆì•½ì„ ìœ„í•´ ì¤‘ë³µ ë°ì´í„°ë¥¼ ê°–ëŠ” ì¸ìŠ¤í„´ìŠ¤ë¥¼ ìƒì„±í•˜ì§€ ì•ŠëŠ”ë‹¤.
+        // => JVMì´ ëë‚  ë•Œê¹Œì§€ ë©”ëª¨ë¦¬ì— ìœ ì§€ëœë‹¤. (ê°€ë¹„ì§€ ì»¬ë ‰í„°ì˜ ê´€ë¦¬ëŒ€ìƒì´ ì•„ë‹ˆë‹¤.)
         if (x1 == x2) 
             System.out.println("x1 == x2");
         else

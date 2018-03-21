@@ -1,4 +1,4 @@
-// String - 문자?�� 비교
+// String - 문자열 비교
 package step10;
 
 public class Exam01_2 {
@@ -6,19 +6,19 @@ public class Exam01_2 {
         String s1 = new String("Hello");
         String s2 = new String("Hello");
         String s3 = "Hello";
-        // ?��?��?��?��?�� 주소�? ?��?�� ?��?��?��?��?�� ?��?��?���? 같�?�? 비교?�� ?��?��
-        // equals()?��?�� 메서?���? ?��?��?��?��!
+        // 인스턴스의 주소가 아닌 인스턴스의 데이터가 같은지 비교할 때는
+        // equals()라는 메서드를 사용하라!
         if (s1.equals(s2)) 
-            System.out.println("s1�? s2?�� 같다.");
+            System.out.println("s1과 s2는 같다.");
         else
-            System.out.println("s1�? s2?�� ?��르다.");
+            System.out.println("s1과 s2는 다르다.");
         
         if (s1.equals(s3)) 
-            System.out.println("s1�? s3?�� 같다.");
+            System.out.println("s1과 s3는 같다.");
         else
-            System.out.println("s1�? s3?�� ?��르다.");
+            System.out.println("s1과 s3는 다르다.");
         
-        // => 주소값에 ?���??��?�� ?��?��물�? 모두 같다.
+        // => 주소값에 상관없이 내용물은 모두 같다.
         
     }
 }

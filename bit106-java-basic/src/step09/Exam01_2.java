@@ -1,4 +1,4 @@
-// ?ƒ?„±?ž ?™œ?š© ?˜ˆ - java.util.Date ?´?ž˜?Š¤?˜ ?ƒ?„±?ž
+// ìƒì„±ìž í™œìš© ì˜ˆ - java.util.Date í´ëž˜ìŠ¤ì˜ ìƒì„±ìž
 package step09;
 
 import java.util.Date;
@@ -6,19 +6,19 @@ import java.util.Date;
 public class Exam01_2 {
 
     public static void main(String[] args) throws Exception {
-        // java.util.Date ?´?ž˜?Š¤?Š” ?‚ ì§? ?°?´?„°ë¥? ?‹¤ë£¨ëŠ” ?´?ž˜?Š¤?´?‹¤.
-        // => ?´ ?´?ž˜?Š¤?—?Š” ?‚ ì§? ?°?´?„°ë¥? ?‹¤ë£? ?ˆ˜ ?žˆ?Š” ?‹¤?–‘?•œ ë©”ì„œ?“œê°? ?“¤?–´ ?žˆ?‹¤.
+        // java.util.Date í´ëž˜ìŠ¤ëŠ” ë‚ ì§œ ë°ì´í„°ë¥¼ ë‹¤ë£¨ëŠ” í´ëž˜ìŠ¤ì´ë‹¤.
+        // => ì´ í´ëž˜ìŠ¤ì—ëŠ” ë‚ ì§œ ë°ì´í„°ë¥¼ ë‹¤ë£° ìˆ˜ ìžˆëŠ” ë‹¤ì–‘í•œ ë©”ì„œë“œê°€ ë“¤ì–´ ìžˆë‹¤.
         
-        // Date() ê¸°ë³¸ ?ƒ?„±?ž?Š” ë©”ëª¨ë¦¬ë?? ?˜¤?Š˜ ?‚ ì§? ê°’ìœ¼ë¡? ì´ˆê¸°?™”?‹œ?‚¨?‹¤.
+        // Date() ê¸°ë³¸ ìƒì„±ìžëŠ” ë©”ëª¨ë¦¬ë¥¼ ì˜¤ëŠ˜ ë‚ ì§œ ê°’ìœ¼ë¡œ ì´ˆê¸°í™”ì‹œí‚¨ë‹¤.
         Date d1 = new Date();
         System.out.println(d1);
         
-        // ?…„, ?›”, ?¼ ê°’ìœ¼ë¡? ?‚ ì§? ?¸?Š¤?„´?Š¤ë¥? ì´ˆê¸°?™”?‹œ?‚¨?‹¤.
+        // ë…„, ì›”, ì¼ ê°’ìœ¼ë¡œ ë‚ ì§œ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì´ˆê¸°í™”ì‹œí‚¨ë‹¤.
         Date d2 = new Date(118, 2, 20);
         System.out.println(d2);
         
-        // 1970?…„ 1?›” 1?¼ 0?‹œ 0ë¶? 0ì´ˆë??„° ì¸¡ì •?œ ë°?ë¦¬ì´ˆë¥? ê°?ì§?ê³? 
-        // ?‚ ì§? ?¸?Š¤?„´?Š¤(ê°ì²´=ë©”ëª¨ë¦?) ì´ˆê¸°?™”?‹œ?‚¨?‹¤.
+        // 1970ë…„ 1ì›” 1ì¼ 0ì‹œ 0ë¶„ 0ì´ˆë¶€í„° ì¸¡ì •ëœ ë°€ë¦¬ì´ˆë¥¼ ê°€ì§€ê³  
+        // ë‚ ì§œ ì¸ìŠ¤í„´ìŠ¤(ê°ì²´=ë©”ëª¨ë¦¬) ì´ˆê¸°í™”ì‹œí‚¨ë‹¤.
         Date d3 = new Date(1000L * 60 * 60 * 24 * 365 * 50);
         System.out.println(d3);
     }

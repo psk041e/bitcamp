@@ -1,4 +1,4 @@
-// ?ƒ?„±? ?™œ?š© ?˜ˆ - java.util.Calendar ?´?˜?Š¤?˜ ?ƒ?„±?
+// ìƒì„±ì í™œìš© ì˜ˆ - java.util.Calendar í´ë˜ìŠ¤ì˜ ìƒì„±ì
 package step09;
 
 import java.util.Calendar;
@@ -6,10 +6,10 @@ import java.util.Calendar;
 public class Exam01_3 {
 
     public static void main(String[] args) throws Exception {
-        // ?ƒ?„±?ê°? ?ˆ?‹¤?•˜?”?¼?„ ? ‘ê·? ê¶Œí•œ?´ ?—†?‹¤ë©?,
-        // ?ƒ?„±?ë¥? ?˜¸ì¶œí•  ?ˆ˜ ?—†?‹¤.
-        // ?”°?¼?„œ ?¸?Š¤?„´?Š¤ë¥? ?ƒ?„±?•  ?ˆ˜ ?—†?‹¤.
-        //Calendar c = new Calendar(); // ì»´íŒŒ?¼ ?˜¤ë¥?!
+        // ìƒì„±ìê°€ ìˆë‹¤í•˜ë”ë¼ë„ ì ‘ê·¼ ê¶Œí•œì´ ì—†ë‹¤ë©´,
+        // ìƒì„±ìë¥¼ í˜¸ì¶œí•  ìˆ˜ ì—†ë‹¤.
+        // ë”°ë¼ì„œ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ìƒì„±í•  ìˆ˜ ì—†ë‹¤.
+        //Calendar c = new Calendar(); // ì»´íŒŒì¼ ì˜¤ë¥˜!
     }
 }
 

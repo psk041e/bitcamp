@@ -1,4 +1,4 @@
-// Singleton ?Œ¨?„´ ? ?š© ? „
+// Singleton íŒ¨í„´ ì ìš© ì „
 package step09.singleton;
 
 public class Car {

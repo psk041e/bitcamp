@@ -33,7 +33,7 @@ public class BoardDao {
     }
 }
 
-// ver 14 - BoardController로�??�� ?��?��?�� �?�? 기능?�� 분리?��?�� BoardDao ?��?��.
+// ver 14 - BoardController로부터 데이터 관리 기능을 분리하여 BoardDao 생성.
 
 
 
