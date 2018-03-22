@@ -3,7 +3,6 @@
 // => 즉, 생성자란 객체를 사용하기 전에 유효한 값으로 설정하게 만드는 문법이다.
 package bitcamp.java106.pms.controller;
 
-import java.sql.Date;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.domain.Board;

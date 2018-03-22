@@ -121,6 +121,7 @@ public class BoardController {
         int i = Integer.parseInt(option);
         Board board = boardDao.get(i);
         
+        
         if (board == null) {
             System.out.println("유효하지 않은 게시물 번호입니다.");
         } else {

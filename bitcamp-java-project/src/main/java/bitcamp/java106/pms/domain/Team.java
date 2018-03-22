@@ -3,6 +3,7 @@ package bitcamp.java106.pms.domain;
 import java.sql.Date;
 
 public class Team {
+    public int no;
     public String name;
     public String description;
     public int maxQty;

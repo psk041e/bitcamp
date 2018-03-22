@@ -31,8 +31,9 @@ public class App {
 
     public void main(String[] args) {
         // 클래스를 사용하기 전에 필수 값을 설정한다.
+        // 생성자에서 받지 않기 때문에 각각의 클래스의 인스턴스 변수에 따로 넣어주어야 한다.
         TeamController teamController = new TeamController();
-        teamController.keyScan = this.keyScan;
+        teamController.keyScan = this.keyScan; 
         MemberController memberController = new MemberController();
         memberController.keyScan = this.keyScan;
         BoardController boardController = new BoardController();
