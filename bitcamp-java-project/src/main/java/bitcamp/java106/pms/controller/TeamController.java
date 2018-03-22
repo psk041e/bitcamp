@@ -20,7 +20,6 @@ public class TeamController {
         this.keyScan = scanner;
     }
     
-
     public void service(String menu, String option) {
         if (menu.equals("team/add")) {
             this.onTeamAdd();
@@ -79,7 +78,7 @@ public class TeamController {
                     // 의미? 즉시 메서드 실행을 멈추고 이전 위치로 돌아간다.
         }
 
-        Team team = teamDao.get(Integer.parseInt(name));
+        Team team = teamDao.get(name);
 
         if (team == null) {
             System.out.println("해당 이름의 팀이 없습니다.");
@@ -99,14 +98,14 @@ public class TeamController {
             return;
         }
         
-        Team team = teamDao.get(Integer.parseInt(name));
+        Team team = teamDao.get(name);
 
         if (team == null) {
             System.out.println("해당 이름의 팀이 없습니다.");
         } else {
             Team updateTeam = new Team();
-            System.out.printf("팀명(%s)? ", team.name);
-            updateTeam.name = this.keyScan.nextLine();
+            System.out.printf("팀명: %s\n? ", team.name);
+            updateTeam.name = team.name; // 팀명은 바꾸지 말자
             System.out.printf("설명(%s)? ", team.description);
             updateTeam.description = this.keyScan.nextLine();
             System.out.printf("최대인원(%d)? ", team.maxQty);
@@ -116,7 +115,7 @@ public class TeamController {
             updateTeam.startDate = Date.valueOf(this.keyScan.nextLine());
             System.out.printf("종료일(%s)? ", team.endDate);
             updateTeam.endDate = Date.valueOf(this.keyScan.nextLine());
-            updateTeam.no = team.no;
+
             teamDao.update(updateTeam);
             System.out.println("변경하였습니다.");
         }
@@ -129,14 +128,13 @@ public class TeamController {
             return; 
         }
         
-        int i = Integer.parseInt(name);
-        Team team = teamDao.get(i);
+        Team team = teamDao.get(name);
 
         if (team == null) {
             System.out.println("해당 이름의 팀이 없습니다.");
         } else {
             if (Console.confirm("정말 삭제하시겠습니까?")) {
-                teamDao.delete(i);
+                teamDao.delete(team.name);
                 System.out.println("삭제하였습니다.");
             }
         }
