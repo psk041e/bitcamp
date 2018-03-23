@@ -60,10 +60,19 @@ public class TeamMemberController {
         }
             
         // 기존에 등록된 회원인지 검사
-        if (team.isExist(memberId)) {
+        boolean exist = false;
+        for (int i = 0; i < team.members.length; i++) { // 팀 객체 안의 members배열 길이만큼 반복
+          if (team.members[i] == null) continue;
+          if (team.members[i].id.equals(memberId)) {
+              exist = true;
+              break;
+          }
+        }
+        
+        if (exist) {
             System.out.println("이미 등록된 회원입니다.");
             return;
-        }
+        } 
         
         // 팀 멤버 배열에서 빈 방을 찾아 그 방에 멤버 객체(의 주소)를 넣는다.
         for (int i = 0; i < team.members.length; i++) { // 팀 객체 안의 members배열 길이만큼 반복
@@ -107,7 +116,7 @@ public class TeamMemberController {
         
         Team team = teamDao.get(teamName);
         if (team == null) {
-            System.out.printf("%s 팀은 존재하지 않습니다.\n", teamName);
+            System.out.printf("%s 팀은 존재하지 않습니다.", teamName);
             return;
         }
         
