@@ -17,7 +17,30 @@ public class Team {
     
     // 사용자 정의 데이터 타입에서 메서드 정의란?
     // => 새 데이터 타입의 값을 다룰 연산자를 정의하는 것을 의미한다.
+    
+    // 연산자는 외부에서 사용하는 것이기 때문에 공개해야 한다.
+    // => 그래서 public modifier를 사용한다.
+    public int addMember(Member member) {
+        
+    }
+    
+    public int deleteMember(String memberId) {
+        
+    }
+    
+    public boolean isExist(String memberId) { // 팀에 들어있는 데이터중에서 멤버가 있는지 없는지 검사한다.
+                                              // 팀의 멤버값을 다루는 메서드, 연산자
+        for (int i = 0; i < this.members.length; i++) { // 팀 객체 안의 members배열 길이만큼 반복
+            if (this.members[i] == null) continue;
+            if (this.members[i].id.equals(memberId)) {
+                return true;
+            }
+          }
+        return false;
+    }
+    
 }
+
 
 // ver 15 - 멤버를 저장할 인스턴스 변수를 추가한다.
 //          팀 멤버 배열에 멤버 객체를 추가하고 빼는 메서드를 새로 정의한다.
