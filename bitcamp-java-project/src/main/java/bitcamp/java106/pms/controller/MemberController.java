@@ -8,13 +8,11 @@ import java.util.Scanner;
 
 public class MemberController { // 의존객체 -> MemberDao()가 없으면 안된다.
     Scanner keyScan;
-
-    MemberDao memberDao = new MemberDao(); // Member[] 배열과 memberIndex가 들어있다.
-                                           // 내부적으로 배열과 인덱스를 만드는 변수를 선언한다.
-                                           // new MemberDao()를 할 때 만들어진다.
+    MemberDao memberDao;
     
-    public MemberController(Scanner scanner) {
+    public MemberController(Scanner scanner, MemberDao memberDao) {
         this.keyScan = scanner;
+        this.memberDao = memberDao;
     }
 
     public void service(String menu, String option) {

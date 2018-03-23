@@ -1,10 +1,13 @@
 package bitcamp.java106.pms.dao;
 
 import bitcamp.java106.pms.domain.Team;
+import bitcamp.java106.pms.domain.TeamMember;
 
 public class TeamDao {
     Team[] teams = new Team[1000];
     int teamIndex = 0;
+    String[][] arr = new String[1000][1000];
+    int arrIndex = 0;
     
     public void insert(Team team) {
         // 팀 정보가 담겨있는 객체의 주소를 배열에 보관한다.
@@ -48,6 +51,25 @@ public class TeamDao {
         return -1;
     }
     
+    public void memberinsert(String name, String id) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 1; j < arr[i].length - 1; j++) {
+                if (name.equals(arr[i][0].toLowerCase())) {
+                    System.out.println("이미 등록된 회원입니다.");
+                   
+                } else if(arr[i][j] == null)
+                       arr[i][j] = id;
+                       
+                }
+            }
+        }
+    
+    public void teaminsert(String name) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i][0] == null)
+                arr[i][0] = name;
+        }
+    }
     
 }
 

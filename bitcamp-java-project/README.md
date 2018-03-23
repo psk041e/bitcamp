@@ -21,7 +21,7 @@
 ...
 
 명령> member/add
-아이디? kim
+아이디? kim, 
 ...
 
 명령> team/member/add 오호라

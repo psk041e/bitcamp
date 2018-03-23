@@ -28,7 +28,7 @@ public class MemberDao {
         // 그 값이 -1 이면 동일한 id가 없는것 이기 때문에 null값을 반환,
         // -1 이 아니면 해당 인덱스의 배열값을 반환한다.
         int i = this.getMemberIndex(id);
-        if (i != -1) 
+        if (i == -1) 
             return null;
         return this.members[i];
     }
@@ -68,5 +68,7 @@ public class MemberDao {
         return -1;
     }
 }
+
+
 
 

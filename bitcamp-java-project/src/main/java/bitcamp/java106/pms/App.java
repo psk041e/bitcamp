@@ -5,6 +5,9 @@ import java.util.Scanner;
 import bitcamp.java106.pms.controller.BoardController;
 import bitcamp.java106.pms.controller.MemberController;
 import bitcamp.java106.pms.controller.TeamController;
+import bitcamp.java106.pms.controller.TeamMemberController;
+import bitcamp.java106.pms.dao.MemberDao;
+import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.util.Console;
 
 public class App {
@@ -29,10 +32,15 @@ public class App {
     public static void main(String[] args) {
         // 클래스를 사용하기 전에 필수 값을 설정한다.
         
-        TeamController teamController = new TeamController(keyScan);
-        MemberController memberController = new MemberController(keyScan);
+        TeamDao teamDao = new TeamDao();
+        MemberDao memberDao = new MemberDao();
+        TeamController teamController = new TeamController(keyScan, teamDao);
+        // 외부에서 필요한 값을 반드시 받을수 있도록 해주는것이 생성자이다.
+        // 생성자를 만들때는 셋팅하지 않으면 그 객체를 쓸수 없다 하는 값을 반드시 넘겨주도록 한다.
+        TeamMemberController teamMemberController = new TeamMemberController(keyScan, teamDao, memberDao); 
+        MemberController memberController = new MemberController(keyScan, memberDao);
         BoardController boardController = new BoardController(keyScan);
-
+        
         Console.keyScan = keyScan;
 
         while (true) {
@@ -50,6 +58,9 @@ public class App {
                 break;
             } else if (menu.equals("help")) {
                 onHelp();
+            } else if (menu.startsWith("team/member/")) {
+                // *** 주의! team/ 명령도 team/으로 시작하기 때문에 그 위에 먼저 team/member/를 써주어야 한다!
+                teamMemberController.service(menu, option);
             } else if (menu.startsWith("team/")) {
                 teamController.service(menu, option);
             } else if (menu.startsWith("member/")) {
@@ -64,3 +75,5 @@ public class App {
         }
     }
 }
+
+// ver 15 - TeamDao MemberDao를 다루는 메뉴 추가.
