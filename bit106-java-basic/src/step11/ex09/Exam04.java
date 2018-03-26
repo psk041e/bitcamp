@@ -31,6 +31,7 @@ public class Exam04 {
     
     public static void main(String[] args) {
         Sedan car1 = new Sedan();
+        
         car1.model = "티코";
         car1.cc = 800;
         

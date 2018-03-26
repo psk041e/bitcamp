@@ -15,6 +15,10 @@ public class Exam03 {
         Integer obj3 = Integer.valueOf("64", 16);
 //        Integer obj4 = Integer.parseInt(100);
         
+        // 추가.
+        // valueOf(String)은 new Integer()으로 객체를 반환하고 
+        // parseInt(String)은 int 기본 자료형을 반환한다.
+        
         System.out.printf("%d, %d, %d\n", obj1, obj2, obj3);
         
     }

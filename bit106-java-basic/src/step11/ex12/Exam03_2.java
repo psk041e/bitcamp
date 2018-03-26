@@ -40,7 +40,7 @@ public class Exam03_2 {
             System.out.println("m1 != m2");
         }
         
-        System.out.println(m1.equals(m2));
+        System.out.println(m1.equals(m2)); // equals()메서드를 재정의 했기 때문에 true가 나온다.
         
     }
 }

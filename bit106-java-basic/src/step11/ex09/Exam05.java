@@ -17,21 +17,25 @@ public class Exam05 {
         // instanceof 연산자!
         
         if (v instanceof Bike) {
-            Bike bike = (Bike) v;
+         // v의 주소가 Bike이면 Bike형으로 형전환하여 bike의 engine을 출력한다.
+            Bike bike = (Bike) v; 
             System.out.println("[바이크 정보]");
             System.out.printf("엔진의 존재: %b\n", bike.engine);
         } else if (v instanceof Car) {
+         // v의 주소가 Car이면 Car형으로 형전환하여 Car의 배기량, 밸브를 출력한다.
             Car car = (Car) v;
             System.out.println("[자동차 기본정보]");
             System.out.printf("cc: %d\n", car.cc);
             System.out.printf("밸브: %d\n", car.valve);
             
             if (v instanceof Sedan) {
+             // v의 주소가 Sedan이면 Sedan형으로 형전환하여 sedan의 썬루프, 자동변속을 출력한다.
                 Sedan sedan = (Sedan) v;
                 System.out.println("[승용차 기본정보]");
                 System.out.printf("썬루프: %b\n", sedan.sunroof);
                 System.out.printf("자동변속: %b\n", sedan.auto);
             } else if (v instanceof Truck) {
+             // v의 주소가 Truck이면 Truck형으로 형전환하여 truck의 덤프, 중량을 출력한다.
                 Truck truck = (Truck) v;
                 System.out.println("[트럭 정보]");
                 System.out.printf("덤프가능: %b\n", truck.dump);
