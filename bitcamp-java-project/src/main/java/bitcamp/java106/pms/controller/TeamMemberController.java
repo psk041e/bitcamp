@@ -59,29 +59,12 @@ public class TeamMemberController {
             return;
         }
             
-        // 기존에 등록된 회원인지 검사
-        boolean exist = false;
-        for (int i = 0; i < team.members.length; i++) { // 팀 객체 안의 members배열 길이만큼 반복
-          if (team.members[i] == null) continue;
-          if (team.members[i].id.equals(memberId)) {
-              exist = true;
-              break;
-          }
-        }
-        
-        if (exist) {
+        if (team.isExist(memberId)) {
             System.out.println("이미 등록된 회원입니다.");
             return;
         } 
         
-        // 팀 멤버 배열에서 빈 방을 찾아 그 방에 멤버 객체(의 주소)를 넣는다.
-        for (int i = 0; i < team.members.length; i++) { // 팀 객체 안의 members배열 길이만큼 반복
-            if (team.members[i] == null) {
-                team.members[i] = member;
-                System.out.println("추가하였습니다.");
-                break;
-            }
-        }
+        team.addMember(member);
         
     }
 
@@ -123,18 +106,11 @@ public class TeamMemberController {
         System.out.print("삭제할 팀원은? ");
         String memberId = keyScan.nextLine();
         
-        // 팀 멤버 삭제
-        System.out.println("[팀 멤버 삭제]");
-        for (int i = 0; i < team.members.length; i++) {
-            if (team.members[i] == null) continue;
-            if (team.members[i].id.equals(memberId)) {
-                team.members[i] = null;
-                System.out.println("삭제하였습니다.");
-                return; // 더이상 작업하지 않고 함수를 끝낸다.
-                        // break시 반복문을 멈추고 다음 라인으로 가서 "이 팀의 회원이 아닙니다"를 출력해버린다.
-            }
+        if (!team.isExist(memberId)) {
+            System.out.println("이 팀의 회원이 아닙니다.");
+            
         }
-        System.out.println("이 팀의 회원이 아닙니다.");
+        System.out.println("[팀 멤버 삭제]");
     }
 }
 

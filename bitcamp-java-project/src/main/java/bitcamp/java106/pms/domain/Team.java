@@ -21,15 +21,31 @@ public class Team {
     // 연산자는 외부에서 사용하는 것이기 때문에 공개해야 한다.
     // => 그래서 public modifier를 사용한다.
     public int addMember(Member member) {
-        
+     // 팀 멤버 배열에서 빈 방을 찾아 그 방에 멤버 객체(의 주소)를 넣는다.
+        for (int i = 0; i < this.members.length; i++) { // 팀 객체 안의 members배열 길이만큼 반복
+            if (this.members[i] == null) {
+                this.members[i] = member;
+                System.out.println("추가하였습니다.");
+                return -1;
+            }
+        }
+        return 0;
     }
     
     public int deleteMember(String memberId) {
-        
+        for (int i = 0; i < this.members.length; i++) {
+            if (this.members[i] == null) continue;
+            if (this.members[i].id.equals(memberId)) {
+                this.members[i] = null;
+                System.out.println("삭제하였습니다.");
+                return 1;
+            }
+        }
+        return 0;
     }
     
     public boolean isExist(String memberId) { // 팀에 들어있는 데이터중에서 멤버가 있는지 없는지 검사한다.
-                                              // 팀의 멤버값을 다루는 메서드, 연산자
+                                              // 팀의 멤버값을 다루는 메서드, 연산
         for (int i = 0; i < this.members.length; i++) { // 팀 객체 안의 members배열 길이만큼 반복
             if (this.members[i] == null) continue;
             if (this.members[i].id.equals(memberId)) {
