@@ -1,7 +1,7 @@
-// 오버라이딩(overriding) - 응용 예: equals()
-package step11.ex11;
+// Object 클래스의 메서드를 오버라이딩 하기 - 응용 예: equals()
+package step11.ex12;
 
-public class Exam09_1 {
+public class Exam03_1 {
     
 //    int i;
 // 클래스 입장에서는 인스턴스 멤버이기 때문에 메인메소드에서 접근할 수 없다.
