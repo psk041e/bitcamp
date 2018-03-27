@@ -12,7 +12,7 @@ public class Exam02_1 extends C{
         // obj1.privateVar = 100; // 접근 불가! 오직 그 클래스 안에서만 사용가능.
         obj1.defaultVar = 100; // OK! 이 클래스는 A 클래스와 같은 패키지에 소속되어 있다.
         obj1.protectedVar = 100; // OK! 비록 이 클래스가 자식클래스는 아니지만
-                                 // 같은 패키지에 소속되어 있다.
+                                     // 같은 패키지에 소속되어 있다.
     
         obj1.publicVar = 100; //OK! 모두 다 접근 가능!
         
