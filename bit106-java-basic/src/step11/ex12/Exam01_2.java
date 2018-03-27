@@ -40,7 +40,7 @@ public class Exam01_2 {
             // toString()을 오버라이딩 했기 때문에 다른 결과가 출력된다.
             
             // println()에 String 이 아닌 객체를 넘기면,
-            // println()에서 내부적으로 그 객체에 대해 soTring()을 호출하여
+            // println()에서 내부적으로 그 객체에 대해 toString()을 호출하여
             // 그 리턴값을 출력한다.
             // 따라서, 다음 코드는 위의 코드와 같은 결과를 출력한다.
             System.out.println(s1);

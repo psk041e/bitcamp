@@ -22,6 +22,14 @@ public class TeamDao {
     }
     
     public Team get(String name) {
+        // getTeamIndex()
+        // 입력받은 name 값을 존재하는 team배열의 길이만큼 반복해
+        // 그중에 null 값이 있으면 건너뛰고
+        // 같은 name값이 있는 배열이 존재하면 그 배열의 인덱스 번호를 리턴한다.
+        //
+        // 그 인덱스 값을 i변수에 저장해서 그 값이 -1이면 같은 name값이 존재하지 않는다는
+        // 의미이므로 null을,
+        // -1 이외의 값이면 그 인덱스 번호의 팀배열을 리턴한다.
         int i = this.getTeamIndex(name);
         if (i == -1) 
             return null;
@@ -32,6 +40,7 @@ public class TeamDao {
         int i = this.getTeamIndex(team.getName());
         if (i != -1) 
             teams[i] = team;
+            // 입력받은 team객체의 주소값을 teams[i]번째 배열에 집어 넣어라!
     }
     
     public void delete(String name) {
