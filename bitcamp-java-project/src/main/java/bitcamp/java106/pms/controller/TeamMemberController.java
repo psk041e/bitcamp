@@ -1,28 +1,30 @@
 // 팀 멤버 관리 기능을 모아둔 클래스
 package bitcamp.java106.pms.controller;
 
-import java.sql.Date;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TeamDao;
+import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.util.Console;
 
 public class TeamMemberController {
     
     Scanner keyScan;
     TeamDao teamDao; // 자체적으로 만들지 않도록 해주고 생성할때 반드시 넘기도록 한다.
     MemberDao memberDao;
+    TeamMemberDao teamMemberDao;
     
     //TeamDao teamDao = new TeamDao();
     // App에서 한번만 new해주어야 한다.
     
-    public TeamMemberController(Scanner scanner, TeamDao teamDao, MemberDao memberDao) {
+    public TeamMemberController(Scanner scanner, TeamDao teamDao, 
+            MemberDao memberDao, TeamMemberDao teamMemberDao) {
         this.keyScan = scanner;
         this.teamDao = teamDao;
         this.memberDao = memberDao;
+        this.teamMemberDao = teamMemberDao;
     }
     
     public void service(String menu, String option) {
@@ -59,16 +61,15 @@ public class TeamMemberController {
             return;
         }
             
-        if (team.isExist(memberId)) {
+        if (teamMemberDao.isExist(teamName, memberId)) {
             System.out.println("이미 등록된 회원입니다.");
             return;
         } 
         
-        team.addMember(member);
+        teamMemberDao.addMember(teamName, memberId);
         
     }
 
-    // 팀 멤버 목록
     void onTeamMemberList(String teamName) { 
         if (teamName == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
@@ -84,11 +85,11 @@ public class TeamMemberController {
         System.out.println("[팀 멤버 목록]");
         System.out.print("회원들: ");
         
-        Member[] members = team.getMembers();
+        String[] members = teamMemberDao.getMembers(teamName);
         
         for (int i = 0; i < members.length; i++) {
             if (members[i] == null) continue;
-            System.out.printf("%s, ", members[i].getId());
+            System.out.printf("%s, ", members[i]);
         }
         System.out.println();
     }
@@ -109,12 +110,17 @@ public class TeamMemberController {
         System.out.print("삭제할 팀원은? ");
         String memberId = keyScan.nextLine();
         
-        if (!team.isExist(memberId)) {
+        if (!teamMemberDao.isExist(teamName, memberId)) {
             System.out.println("이 팀의 회원이 아닙니다.");
-            
+            return;
         }
+        
+        teamMemberDao.deleteMember(teamName, memberId);
+        
         System.out.println("[팀 멤버 삭제]");
+        System.out.println("삭제하였습니다.");
     }
 }
 
+// ver 17 - TeamMemberDao 클래스르 사용하여 팀 멤버의 아이디를 관리한다.
 // ver 15 - 팀 멤버를 등록, 조회, 삭제할 수 있는 기능 추가.

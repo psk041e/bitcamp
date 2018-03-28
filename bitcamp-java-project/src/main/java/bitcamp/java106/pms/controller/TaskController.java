@@ -5,8 +5,10 @@ package bitcamp.java106.pms.controller;
 import java.sql.Date;
 import java.util.Scanner;
 
+import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
+import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
@@ -17,11 +19,16 @@ public class TaskController {
     Scanner keyScan;
     TeamDao teamDao; 
     TaskDao taskDao;
+    MemberDao memberDao;
+    TeamMemberDao teamMemberDao;
     
-    public TaskController(Scanner scanner, TeamDao teamDao, TaskDao taskDao) {
+    public TaskController(Scanner scanner, TeamDao teamDao, 
+            TaskDao taskDao, MemberDao memberDao, TeamMemberDao teamMemberDao) {
         this.keyScan = scanner;
         this.teamDao = teamDao;
         this.taskDao = taskDao;
+        this.memberDao = memberDao;
+        this.teamMemberDao = teamMemberDao;
     } // 내가 만든 클래스를 잘못 쓰지 않도록 제약을 가해주어야 프로그램을 안정적으로 만들 수 있다.
       // TaskController.java와 App.java을 서로 다른 개발자가 개발하는 경우
       // App.java를 만드는 개발자가 반드시 입력받아야 하는 값을 무시하고 개발할 수 있다.
@@ -123,11 +130,10 @@ public class TaskController {
                                      // 레퍼런스 변수는 아무런 값도 넣지 않으면 모두 null로 초기화 된다.
                                      // -> 사용자가 아무런 값도 입력하지 않았을때는 문제가 없다.
                                      // but! 사용자가 어떤 값을 집어넣었을때 검사를 해 주어야 한다.  
-            Member member = team.getMember(memberId);
-            if (member == null) {
+            if (!teamMemberDao.isExist(team.getName(), memberId)) {
                 System.out.printf("'%s'는 팀의 회원이 아닙니다. 이 작업자는 비워두겠습니다.\n", memberId);
             } else {
-                task.setWorker(member);
+                task.setWorker(this.memberDao.get(memberId));
             }
         }
         
@@ -245,12 +251,11 @@ public class TaskController {
         String memberId = keyScan.nextLine();
         if (memberId.length() == 0) {
             task.setWorker(originTask.getWorker());
+        } else {
+            if (!teamMemberDao.isExist(team.getName(), memberId)) {
+                System.out.printf("'%s'는 팀의 회원이 아닙니다. 이 작업자는 비워두겠습니다.\n", memberId);
             } else {
-            Member member = team.getMember(memberId);
-            if (member == null) {
-                System.out.printf("'%s'는 이 팀의 회원이 아닙니다. 이 작업자는 비워두겠습니다.\n", memberId);
-            } else {
-                task.setWorker(member);
+                task.setWorker(this.memberDao.get(memberId));
             }
         }
         

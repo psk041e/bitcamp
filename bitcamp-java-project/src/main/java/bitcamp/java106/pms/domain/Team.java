@@ -13,7 +13,9 @@ public class Team {
     private int maxQty;
     private Date startDate;
     private Date endDate;
-    private Member[] members = new Member[10]; // 외부에서 배열을 집어넣는 것이 아니기 때문에 셋터겟터를 만들지 않는다.
+    
+    // 사용자 정의 데이터 타입에서 메서드 정의란?
+    // => 새 데이터 타입의 값을 다룰 연산자를 정의하는 것을 의미한다.
     
     public String getName() {
         return name;
@@ -55,57 +57,6 @@ public class Team {
         this.endDate = endDate;
     }
 
-    public Member[] getMembers() {
-        return members;
-    }
-
-    // 사용자 정의 데이터 타입에서 메서드 정의란?
-    // => 새 데이터 타입의 값을 다룰 연산자를 정의하는 것을 의미한다.
-
-    // 연산자는 외부에서 사용하는 것이기 때문에 공개해야 한다.
-    // => 그래서 public modifier를 사용한다.
-    public int addMember(Member member) {
-     // 팀 멤버 배열에서 빈 방을 찾아 그 방에 멤버 객체(의 주소)를 넣는다.
-        for (int i = 0; i < this.members.length; i++) { // 팀 객체 안의 members배열 길이만큼 반복
-            if (this.members[i] == null) {
-                this.members[i] = member;
-                return -1;
-            }
-        }
-        return 0;
-    }
-    
-    public int deleteMember(String memberId) {
-        for (int i = 0; i < this.members.length; i++) {
-            if (this.members[i] == null) continue;
-            if (this.members[i].getId().equals(memberId)) {
-                this.members[i] = null;
-                return 1;
-            }
-        }
-        return 0;
-    }
-    
-    public Member getMember(String memberId) {
-        for (int i = 0; i < this.members.length; i++) {
-            if (this.members[i] == null) continue;
-            if (this.members[i].getId().equals(memberId)) {
-                return this.members[i];
-            }
-        }
-        return null;
-    }
-    
-    public boolean isExist(String memberId) { // 팀에 들어있는 데이터중에서 멤버가 있는지 없는지 검사한다.
-                                              // 팀의 멤버값을 다루는 메서드, 연산
-        for (int i = 0; i < this.members.length; i++) { // 팀 객체 안의 members배열 길이만큼 반복
-            if (this.members[i] == null) continue;
-            if (this.members[i].getId().equals(memberId)) {
-                return true;
-            }
-          }
-        return false;
-    }
 
     @Override
     public String toString() {
@@ -113,9 +64,7 @@ public class Team {
                 + ", endDate=" + endDate + "]";
     }
     // toString()오버라이딩 - 개발하는 동안 중간중간 그 값을 출력해서 확인하고 싶을 때 사용한다.
-    
-    
-}
+}   
 
 // ver 17 - getMember() 메서드 추가
 //          toString() 오버라이딩.
