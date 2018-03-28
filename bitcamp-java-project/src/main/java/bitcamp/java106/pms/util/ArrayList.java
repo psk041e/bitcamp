@@ -1,4 +1,4 @@
-package step12.ex01;
+package bitcamp.java106.pms.util;
 
 public class ArrayList {
     protected static final int DEFAULT_CAPACITY = 5;
@@ -86,3 +86,5 @@ public class ArrayList {
         return cursor; // 입력된 갯수와 똑같다.
     }
 }
+
+// ver 18 - 클래스 추가

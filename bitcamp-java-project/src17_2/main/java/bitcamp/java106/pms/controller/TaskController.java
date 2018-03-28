@@ -46,6 +46,9 @@ public class TaskController {
         Team team = teamDao.get(option);
         // 입력 받은 option값(team)과 동일한 팀명이 있는 배열이 존재한다면 
         // 그 배열의 값을 리턴하라
+        
+        
+        
         if (team == null) {
             System.out.printf("'%s' 팀은 존재하지 않습니다.", option);
             return; 
@@ -175,7 +178,7 @@ public class TaskController {
         int taskNo = Integer.parseInt(keyScan.nextLine());
         
         
-        Task task = taskDao.get(taskNo);
+        Task task = taskDao.get(team.getName(), taskNo);
         // 지정된 팀의 특정 작업을 가져와야 하므로 두개의 값이 필요하다.
         
         if (task == null) {
@@ -198,7 +201,7 @@ public class TaskController {
         System.out.print("변경할 작업의 번호? ");
         int taskNo = Integer.parseInt(keyScan.nextLine());
         
-        Task originTask = taskDao.get(taskNo);
+        Task originTask = taskDao.get(team.getName(), taskNo);
         if (originTask == null) {
             System.out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
                     team.getName(), taskNo);
@@ -274,7 +277,7 @@ public class TaskController {
         System.out.print("삭제할 작업의 번호? ");
         int taskNo = Integer.parseInt(keyScan.nextLine());
         
-        Task task = taskDao.get(taskNo);
+        Task task = taskDao.get(team.getName(), taskNo);
         if (task == null) {
             System.out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
                     team.getName(), taskNo);
@@ -296,7 +299,7 @@ public class TaskController {
         // 작업 상태를 String형으로 입력받아 int형으로 형변환해서 변수에 넣어준다.
         
         
-        Task task = taskDao.get(taskNo);
+        Task task = taskDao.get(team.getName(), taskNo);
         // 지정된 팀의 특정 작업을 가져와야 하므로 두개의 값이 필요하다.
         
         

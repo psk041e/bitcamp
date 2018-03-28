@@ -11,8 +11,6 @@ public class Task /*extends java.lang.Object*/ {
     public static final int WORKING = 1;
     public static final int COMPLETE = 9;
     
-    private static int count = 1;
-    
     // static이 붙지 않은 메모리 - 인스턴스는 primitive타입은 0 / 0.0 / false 로 셋팅한다.
     // 개발자들 사이에서 0이 셋팅된다고 말을 하면 헷갈려한다.
     // ex) Team taem; team = 0; 을 자꾸 시도한다.
@@ -30,72 +28,58 @@ public class Task /*extends java.lang.Object*/ {
     //public  Task() {}
     
     public Task(Team team) {
-        this.no= count++;
         this.team = team; 
     }
     
     public Task(Team team, String title ,Date startDate, Date endDate) {
-        this(team);
+        this.team = team;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.state = /*Task.*/READY; // 같은 Task안에 있기 때문에 생략 가능
     }
     
-    public int getNo() {
-        return no;
-    }
-
-    public void setNo(int no) {
-        this.no = no;
-    }
-
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
-
     public Date getStartDate() {
         return startDate;
     }
-
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-
     public Date getEndDate() {
         return endDate;
     }
-
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-    }
-
     public Member getWorker() {
         return worker;
     }
-
     public void setWorker(Member worker) {
         this.worker = worker;
     }
-
     public Team getTeam() {
         return team;
     }
-
     public void setTeam(Team team) {
         this.team = team;
+    }
+    public int getState() {
+        return state;
+    }
+    public void setState(int state) {
+        this.state = state;
+    }
+    public int getNo() {
+        return no;
+    }
+    public void setNo(int no) {
+        this.no = no;
     }
 
     @Override

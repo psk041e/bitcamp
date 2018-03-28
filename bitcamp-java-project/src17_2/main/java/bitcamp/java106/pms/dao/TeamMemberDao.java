@@ -1,11 +1,9 @@
 package bitcamp.java106.pms.dao;
 
-import bitcamp.java106.pms.util.ArrayList;
+import bitcamp.java106.pms.domain.Member;
+import bitcamp.java106.pms.domain.Team;
 
 public class TeamMemberDao {
-    // 팀 ArrayList, 멤버 ArrayList두개 사용
-    private ArrayList teamCollection = new ArrayList();
-    private ArrayList memberCollection = new ArrayList();
     
     private Object[][] teamMembers = new Object[1000][2];
     private int rowIndex;   // 현재 위치를 지정, 몇번째 행이냐?

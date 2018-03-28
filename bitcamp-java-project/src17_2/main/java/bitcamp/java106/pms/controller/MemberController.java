@@ -58,6 +58,7 @@ public class MemberController { // 의존객체 -> MemberDao()가 없으면 안�
         // 그리고, 그것을 list 배열의 길이만큼 반복하여 출력해준다.
         Member[] list = memberDao.list();
         for (int i = 0; i < list.length; i++) {
+            if (list[i] == null) continue;
             System.out.printf("%s, %s, %s\n", 
                     list[i].getId(), list[i].getEmail(), list[i].getPassword());
         }

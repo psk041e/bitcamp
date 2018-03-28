@@ -62,11 +62,10 @@ public class BoardController {
     void onBoardList() {
         System.out.println("[게시물 목록]");
         Board[] list = boardDao.list();
-        for (Board board : list) { // 배열의 특정 부분만 반복할 수 없다.
-                                   // 배열의 인덱스 번호를 사용할 수 없다.
-                                   // 그러나 배열의 처음부터 끝까지 반복할때 사용하기 편리하다. 
+        for (int i = 0; i < list.length; i++) {
+            if (list[i] == null) continue;
             System.out.printf("%d, %s, %s\n",
-                board.getNo(), board.getTitle(), board.getCreatedDate());
+                i, list[i].getTitle(), list[i].getCreatedDate());
         }
     }
 
@@ -101,12 +100,12 @@ public class BoardController {
             System.out.println("유효하지 않은 게시물 번호입니다.");
         } else {
             Board updateBoard = new Board();
-            updateBoard.setNo(board.getNo());
             System.out.printf("제목(%s)? ", board.getTitle());
             updateBoard.setTitle(this.keyScan.nextLine());
             System.out.printf("설명(%s)? ", board.getContent());
             updateBoard.setContent(this.keyScan.nextLine());
             updateBoard.setCreatedDate(board.getCreatedDate());
+            updateBoard.setNo(board.getNo());
             boardDao.update(updateBoard);
             System.out.println("변경하였습니다.");
         }
@@ -135,7 +134,6 @@ public class BoardController {
     
 }
 
-// ver 18 - BoardDao 변경 사항에 맞춰 이 클래스를 변경한다. 
 // ver 16 - Board 인스턴스 변수를 직접 사용하는 대신 겟터, 셋터 사용.
 // ver 14 - BoardDao를 사용하여 게시물 데이터를 관리한다.
 // ver 13 - 게시물 등록할 때 등록일의 문자열을 Date 객체로 만들어 저장.

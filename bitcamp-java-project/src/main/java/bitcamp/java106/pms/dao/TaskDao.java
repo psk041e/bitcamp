@@ -1,22 +1,22 @@
 package bitcamp.java106.pms.dao;
 
+import bitcamp.java106.pms.domain.Board;
 import bitcamp.java106.pms.domain.Task;
-import bitcamp.java106.pms.domain.Task;
+import bitcamp.java106.pms.util.ArrayList;
 
 public class TaskDao {
-    Task[] tasks = new Task[1000];
-    int taskIndex = 0;
+    ArrayList collection = new ArrayList();
     
     public void insert(Task task) {
-        task.setNo(taskIndex); // 방번호를 task에 넣는다.
-        this.tasks[this.taskIndex++] = task;
+        this.collection.add(task);
     }
     
     private int count(String teamName) { // 배열의 개수를 세어준다.
         int cnt = 0;
-        for (int i = 0; i < taskIndex; i++) {
-            if (tasks[i] == null) continue;
-            if (tasks[i].getTeam().getName().toLowerCase().equals(teamName)) {
+        for (int i = 0; i < collection.size(); i++) {
+            Task task = (Task) collection.get(i);
+            if (task.getTeam().getName().toLowerCase().equals(
+                    teamName.toLowerCase())) {
                 cnt++;
             }
         }
@@ -25,36 +25,49 @@ public class TaskDao {
     
     public Task[] list(String teamName) { // 지정된 팀의 작업만 배열에 담아서 보내준다.
         Task[] arr = new Task[this.count(teamName)];
-        for (int i = 0, x = 0; i < taskIndex; i++) {
-            if (tasks[i] == null) continue;
-            if (tasks[i].getTeam().getName().toLowerCase().equals(teamName)) {
-                arr[x++] = tasks[i];
+        for (int i = 0, x = 0; i< collection.size(); i++) {
+            Task task = (Task) collection.get(i);
+            if (task.getTeam().getName().toLowerCase().equals(
+                    teamName.toLowerCase())) {
+                arr[x++] = task;
             }
         }
         return arr;
     }
     
-    public Task get(String teamName, int taskNo) {
-        for (int i = 0; i < taskIndex; i++) {
-            if (tasks[i] == null) continue;
-            if (tasks[i].getTeam().getName().toLowerCase().equals(teamName) && 
-                    tasks[i].getNo() == taskNo) { // 두 조건 모두를 충족시키면 실행한다.
-                                                  // 작업번호와 팀명이 모두 같아야 한다.
-                return tasks[i];
-            }
-        }
-        return null;    // 값을 찾지 못하면 null값을 리턴한다.
+    public Task get(int taskNo) {
+        int index = this.getTaskIndex(taskNo);
+        if (index < 0)
+            return null;
+        return (Task) collection.get(index);
     }
     
     public void update(Task task) {
-        tasks[task.getNo()] = task;
+        int index = this.getTaskIndex(task.getNo());
+        if (index < 0)
+            return;
+        this.collection.set(index, task);
     }
     
     public void delete(int taskNo) {
-        tasks[taskNo] = null;
+        int index = this.getTaskIndex(taskNo);
+        if (index < 0)
+            return;
+        collection.remove(index);
+    }
+    
+    private int getTaskIndex(int taskNo) {
+        for (int i = 0; i < this.collection.size(); i++) {
+            Task task = (Task) collection.get(i);
+            if (task.getNo() == taskNo) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
 
+// ver 18 - ArrayList 클래스를 적용앟여 객체(의 주소) 목록을 관리한다.
 // ver 17 - 클래스 생성
 
 
