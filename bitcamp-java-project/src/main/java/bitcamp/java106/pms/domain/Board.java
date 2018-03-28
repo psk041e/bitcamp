@@ -5,6 +5,9 @@ import java.sql.Date;
 
 public class Board {
     private static int count = 1;
+    // 이전에는 데이터를 삭제하면 null로 바뀌고 그 방은 쓸수 없게 되었지만
+    // ArrayList 클래스를 사용해 
+    // 삭제를 하더라도 배열을 당겨서 빈 방 없이 사용할 수 있도록 만들었다.
     
     private int no;
     private String title;
