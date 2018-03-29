@@ -64,12 +64,11 @@ public class TeamController {
 
     void onTeamList() {
         System.out.println("[팀 목록]");
-        Team[] list = teamDao.list();
-        for (int i = 0; i < list.length; i++) {
-            if (list[i] == null) continue;
+        Team[] teams = teamDao.list();
+        for (Team team : teams) {                  
             System.out.printf("%s, %d, %s ~ %s\n", 
-                    list[i].getName(), list[i].getMaxQty(), 
-                    list[i].getStartDate(), list[i].getEndDate());
+                    team.getName(), team.getMaxQty(), 
+                    team.getStartDate(), team.getEndDate());
         }
     }
 
@@ -107,7 +106,7 @@ public class TeamController {
             System.out.println("해당 이름의 팀이 없습니다.");
         } else {
             Team updateTeam = new Team();
-            System.out.printf("팀명: %s\n? ", team.getName());
+            System.out.printf("팀명: %s\n", team.getName());
             updateTeam.setName(team.getName()); // 팀명은 바꾸지 말자
             System.out.printf("설명(%s)? ", team.getDescription());
             updateTeam.setDescription(this.keyScan.nextLine());

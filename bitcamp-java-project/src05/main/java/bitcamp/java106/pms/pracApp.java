@@ -5,27 +5,12 @@ import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.domain.Member;
 import java.util.Scanner;
 
-// ver 0.1 - 명령 입력 프롬프트를 출력한다.
-// ver 0.2 - 사용자 입력을 받아 출력한다.
-// ver 0.3 - 사용자로부터 입력 받는 것을 무한 반복한다.
-// ver 0.4 - quit 명령어 입력시 반복문을 종료한다.
-// ver 0.5 - help 명령을 구현한다.
-// ver 0.6 - team/add 명령을 구현한다.
-// ver 0.7 - team/list 명령을 구현한다.
-// ver 0.8 - team/view 명령을 구현한다.
-    // 1단계 : 입력 값에서 명령어와 검색어를 구분한다.
-    // 2단계 : 기능이나 코드가 바뀌면 그에 따라 적절히 변수명도 바뀔 필요가 있다.
-    // 3단계 : 입력 값에서 검색어를 ㅂ려도의 변수에 저장한다.
-    // 4단계 : 팀명이 없으면 안내문구를 출력한다.
-    // 5단계 : 팀명으로 배열을 뒤져 팀 정보를 찾는다.
-    // 6단계 : 팀명으로 검색할 때 대소문자를 구분하지 않는다.
-    // 7단게 : 일치하는 팀명이 없을 때 안내문구를 출력한다.
-// ver 0.9 - member/add 명령을 구현한다.
-    // 회원 정보를 담을 새로운 데이터타입을 정의한다. => Member.java
-    // 여러 회원 정보를 저장할 레퍼런스 배열을 준비한다.
-// ver 1.0 - member/list 명령을 구현한다.
-// ver 1.1 - member/view 명령을 구현한다.
-// ver 1.2 - 명령어를 잘못 입력했을 때 안내 문구를 출력한다.
+//ver 0.1 - 명령어를 입력 받는 코드를 메서드로 분리한다.
+//ver 0.2 - quit 명령어를 처리하는 코드를 메서드로 분리한다.
+//ver 0.3 - help 명령어를 처리하는 코드를 메서드로 분리한다.
+//ver 0.4 - team/add,list,view 명령어를 처리하는 코드를 메서드를 분리한다.
+//ver 0.5 - member/add,list,view 명령어를 처리하는 코드를 메서드를 분리한다.
+
 
 public class pracApp {
     public static void main(String[] args) {
@@ -37,10 +22,31 @@ public class pracApp {
         Member[] members = new Member[1000];
         int memberIndex = 0;
 
+        public String[] prompt() {
+            System.out.print("명령> ");
+            return keyScan.nextLine().toLowerCase().split(" ");
+        }
+        
+        public void onQuit() {
+            System.out.println("안녕히 가세요!");
+        }
+        
+        public void onHelp() {
+            System.out.println("[도움말]");
+            System.out.println("명령> help");
+            System.out.println("팀 등록 명령 : team/add");
+            System.out.println("팀 조회 명령 : team/list");
+            System.out.println("팀 상세조회 명령 : team/view 팀명");
+            System.out.println("회원 등록 명령 : member/add");
+            System.out.println("회원 조회 명령 : member/list");
+            System.out.println("회원 상세조회 명령 : member/view 아이디");
+            System.out.println("종료 : quit");
+        }
+        
+        
 
         while (true) {
-            System.out.print("명령> ");
-            String[] arr = keyScan.nextLine().toLowerCase().split(" ");
+            String[] arr = prompt();
             String menu = arr[0];
             String option = null;
             if (arr.length == 2) {
@@ -49,19 +55,10 @@ public class pracApp {
         
             
             if (menu.equals("quit")) {
-                System.out.println("안녕히 가세요!");
+                onQuit();
                 break;
             } else if (menu.equals("help")) {
-                System.out.println("[도움말]");
-                System.out.println("명령> help");
-                System.out.println("팀 등록 명령 : team/add");
-                System.out.println("팀 조회 명령 : team/list");
-                System.out.println("팀 상세조회 명령 : team/view 팀명");
-                System.out.println("회원 등록 명령 : member/add");
-                System.out.println("회원 조회 명령 : member/list");
-                System.out.println("회원 상세조회 명령 : member/view 아이디");
-                System.out.println("종료 : quit");
-                
+                onHelp();
             } else if (menu.equals("team/add")) {
                 System.out.println("[팀 정보 입력]");
                 Team team = new Team();

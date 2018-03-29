@@ -62,11 +62,11 @@ public class TeamController {
         // 어떤 메소드를 호출해야 하는데 그 메소드의 코드를 실행해야 하는데
         // 참조를 하지 않고 파라미터를 받아오면 사용가능하다(?)
         System.out.println("[팀 정보 조회]");
-        if (option == null) {
+        if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return; 
         }
-        int i = getTeamIndex(option);
+        int i = getTeamIndex(name);
 
         if (i == -1) {
             System.out.println("해당 이름의 팀이 없습니다.");
@@ -84,12 +84,12 @@ public class TeamController {
         // 어떤 메소드를 호출해야 하는데 그 메소드의 코드를 실행해야 하는데
         // 참조를 하지 않고 파라미터를 받아오면 사용가능하다(?)
         System.out.println("[팀 정보 변경]");
-        if (option == null) {
+        if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return; 
         }
 
-        int i = getTeamIndex(option);
+        int i = getTeamIndex(name);
 
         if (i == -1) {
             System.out.println("해당 이름의 팀이 없습니다.");
@@ -118,11 +118,11 @@ public class TeamController {
         // 어떤 메소드를 호출해야 하는데 그 메소드의 코드를 실행해야 하는데
         // 참조를 하지 않고 파라미터를 받아오면 사용가능하다(?)
         System.out.println("[팀 정보 삭제]");
-        if (option == null) {
+        if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return; 
         }
-       int i = getTeamIndex(option);
+       int i = getTeamIndex(name);
 
         if (i == -1) {
             System.out.println("해당 이름의 팀이 없습니다.");
