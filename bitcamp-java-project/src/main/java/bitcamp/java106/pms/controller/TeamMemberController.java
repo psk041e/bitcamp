@@ -122,5 +122,7 @@ public class TeamMemberController {
     }
 }
 
+
+// ver 18 - ArrayList가 적용된 TeamMemberDao를 사용한다.
 // ver 17 - TeamMemberDao 클래스르 사용하여 팀 멤버의 아이디를 관리한다.
 // ver 15 - 팀 멤버를 등록, 조회, 삭제할 수 있는 기능 추가.

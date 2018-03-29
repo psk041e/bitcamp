@@ -11,6 +11,9 @@ public class TeamMemberDao {
         String pmi = memberId.toLowerCase(); 
         for (int i = 0; i < teamCollection.size(); i++) { 
                String tn = teamCollection.get(i).toString().toLowerCase(); 
+               // teamCollection의 팀이름은 String이기 때문에 
+               // String 클래스에서 오버라이딩 한 대로 해시값이 아닌 실제 저장된 값이 출력된다.
+               // get()은 실제 스트링객체를 리턴한다.
                String mi = memberCollection.get(i).toString().toLowerCase();
                if (tn.equals(ptn) && mi.equals(pmi)) {
                    return i;
@@ -23,10 +26,9 @@ public class TeamMemberDao {
         if (this.isExist(teamName, memberId)) {
             return 0;
         }
-           this.teamMembers[rowIndex][0] = teamName;
-           this.teamMembers[rowIndex][1] = memberId;
-           rowIndex++;
-           return 1; 
+        teamCollection.add(teamName);
+        memberCollection.add(memberId);
+        return 1; 
        }
        
     public int deleteMember(String teamName, String memberId) { 
@@ -34,18 +36,17 @@ public class TeamMemberDao {
         if (index < 0) { // 존재하지 않는 멤버라면, 
             return 0;
         }
-        
-        this.teamMembers[index][0] = null;
-        this.teamMembers[index][1] = null;
+        teamCollection.remove(index);
+        memberCollection.remove(index);
         return 1; 
        }
        
        
-    public boolean isExist(String teamName, String memberId) { // 팀에 들어있는 데이터중에서 멤버가 있는지 없는지 검사한다.
+    public boolean isExist(String teamName, String memberId) {
            if (this.getIndex(teamName, memberId) < 0) {
-               return false; // 찾았을때
+               return false;
            } else {
-               return true; // 찾지 못했을 때
+               return true;
            }
        }
 
@@ -53,10 +54,8 @@ public class TeamMemberDao {
         int cnt = 0; // 로컬 변수는 자동 초기화 되지 않는다. 반드시 초기화 시켜줘야 한다.
         String ptn = teamName.toLowerCase();
         
-        for (int i = 0; i < this.rowIndex; i++) { 
-            if (this.teamMembers[i][0] == null) continue;
-        
-            String tn = ((String) this.teamMembers[i][0]).toLowerCase(); 
+        for (int i = 0; i < teamCollection.size(); i++) { 
+            String tn = teamCollection.get(i).toString().toLowerCase(); 
             if (tn.equals(ptn)) {
                 cnt++;
             }
@@ -68,12 +67,10 @@ public class TeamMemberDao {
         String ptn = teamName.toLowerCase();
         String[] members = new String[this.getMemberCount(teamName)];
         
-        for (int i = 0, x = 0; i < this.rowIndex; i++) { 
-            if (this.teamMembers[i][0] == null) continue;
-        
-            String tn = ((String) this.teamMembers[i][0]).toLowerCase(); 
+        for (int i = 0, x = 0; i < teamCollection.size(); i++) { 
+            String tn = teamCollection.toString().toLowerCase(); 
             if (tn.equals(ptn)) {
-               members[x++] = (String) this.teamMembers[i][1];
+               members[x++] = memberCollection.get(i).toString();
             }
         }
         return members;
@@ -85,5 +82,5 @@ public class TeamMemberDao {
 //
 
 
-
+// ver 18 - ArrayList를 적용하여 객체(의 주소) 목록을 관리한다.
 // ver 17 - 클래스 추가
