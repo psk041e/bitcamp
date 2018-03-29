@@ -1,4 +1,4 @@
-package step12.ex01;
+package bitcamp.java106.pms.util;
 
 public class ArrayList {
     protected static final int DEFAULT_CAPACITY = 5;
@@ -62,10 +62,12 @@ public class ArrayList {
     }
     
     public void add(int index, Object value) {
-        if (index < 0 || index > cursor) // 커서보다 하나 큰경우까지 가능
+        if (index < 0 || index >= cursor)
             return;
         
-        this.increaseArray();
+        if (cursor >= list.length) {
+            this.increaseArray();
+        }
         
         for (int i = cursor - 1; i >= index; i--) {
             list[i + 1] = list[i];
@@ -74,7 +76,7 @@ public class ArrayList {
         cursor++;
     }
     
-    private void increaseArray() {
+    private void increaseArray() { // 배열 복사&배열길이 5증가
         Object[] list2 = new Object[list.length + DEFAULT_CAPACITY];
         for (int i = 0; i < list.length; i++) {
             list2[i] = list[i];
@@ -83,23 +85,8 @@ public class ArrayList {
     }
     
     public int size() {
-        return cursor; // 입력된 갯수와 똑같다.
-    }
-    
-    public boolean contains(Object value) { // Object타입이지만 실제 String객체가 들어온다.
-                                            // 데이터 내용이 같은지 비교
-        for (Object obj : list) {
-            if (obj.equals(value))          // 같은 객체가 들어 있는지 검사하는 것이 아니다.
-                return true;                // 같은 내용을 가진 객체가 들어 있는지 검사하는 것이다.
-        }
-        return false;
-    }
-    
-    public int indexOf(Object value) {
-        for (int i = 0; i < list.length; i++) {
-            if (list[i].equals(value))          // 같은 객체가 들어 있는지 검사하는 것이 아니다.
-                return i;                       // 같은 내용을 가진 객체가 들어 있는지 검사하는 것이다.
-            }
-        return -1;
+        return cursor; // 입력된 갯수
     }
 }
+
+// ver 18 - 클래스 추가
