@@ -31,7 +31,7 @@ public class Exam01_1 {
         list.add(0, s2); // bbb, aaa, eee, ccc, ddd
         print(list);
         
-        list.add(5, "xxx"); // bbb, aaa, eee, ccc, ddd, xxx,
+        list.add(8, "xxx"); // bbb, aaa, eee, ccc, ddd, xxx,
         print(list);
     }
     

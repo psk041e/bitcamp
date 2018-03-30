@@ -25,7 +25,7 @@ public class ArrayList {
         this(DEFAULT_CAPACITY); // 5는 capacity에 들어가는 파라미터 값이다.
     }
     
-    public ArrayList(int capacity) {
+      public ArrayList(int capacity) {
         // super(); 항상 생성자에는 수퍼 클래스의 기본 생성자를 호출하는 문장이 숨겨져 있다.
         //          물론 개발자가 수퍼 클래스의 생성자를 호출 하겠다고 명시한다면
         //          당연히 자동으로 붙지 않는다.
@@ -37,7 +37,9 @@ public class ArrayList {
     }
     
     public void add(Object value) {
-        if (cursor >= list.length) {
+        if (cursor >= list.length) { 
+            // 새 값을 저장해야 하는데 배열이 꽉 차있는 상태라면
+            // 이 메서드로 가라
             this.increaseArray();
         }
         list[cursor++] = value;
@@ -48,7 +50,7 @@ public class ArrayList {
     }
     
     public void set(int index, Object value) {
-        list[index] = value;
+        list[index] = value; // replace이기 때문에 해당 인덱스에 집어넣어주기만 하면 된다.
     }
     
     public void remove(int index) {
@@ -65,7 +67,9 @@ public class ArrayList {
         if (index < 0 || index > cursor) // 커서보다 하나 큰경우까지 가능
             return;
         
-        this.increaseArray();
+        if (cursor >= list.length) {
+            this.increaseArray();
+        }
         
         for (int i = cursor - 1; i >= index; i--) {
             list[i + 1] = list[i];
@@ -101,5 +105,9 @@ public class ArrayList {
                 return i;                       // 같은 내용을 가진 객체가 들어 있는지 검사하는 것이다.
             }
         return -1;
+    }
+    public void printD() {
+        System.out.println(list.length);
+        System.out.println(cursor);
     }
 }

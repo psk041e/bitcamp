@@ -1,32 +1,24 @@
-package step12.ex02;
+package step13.ex02;
 
-public class LinkedList { // 패키지 멤버 클래스
+public class LinkedList2<E> { // 자바 튜토리얼 참고 
     
-    // 값을 저장할 바구니 클래스를 만든다.
-    // 이 클래스는 LinkedList에서만 사용할 것이기 때문에
-    // 일반적인 클래스인 패키지 멤버 클래스로 정의하지 않고,
-    // LinkedList 안에 정의한다. 
-    // 이렇게 클래스 안에 정의된 클래스를 "중첩 클래스(nested class)" 또는
-    // "내부 클래스(innder class)"라고 부른다.
-    protected class Bucket {  // inner 클래스도 구성요소이기 때문에 4개의 접근범위사용이 가능하다.
-        // 이 클래스의 역할은 기차에서 사람이나 물건을 싣는 객차의 역할을 수행한다.
-        public Object value; // 이 변수에 값을 저장한다. // 단지 데이터로 의미가 있고, 메서드도 없으므로 완전공개
-        public Bucket next; // 이 변수에는 다음 객차 주소를 저장한다.
-        public Bucket prev; // 이 변수에는 이전 객차 주소를 저장한다. 
-                            // inner클래스의 구성 요소일 경우에는 변수, 메서드와 똑같에 4개의 접근 범위을 모두 쓸 수 있다.
+    
+    protected class Bucket {  
+        public E value; 
+        public Bucket next; 
+        public Bucket prev; 
+                            
     }
     
-    // protected -> 자식클래스만은 자신이 상속받은 변수에 대해서 다룰수 있도록 한다.
-    protected Bucket head; // 리스트에서 맨 앞 객차의 주소를 저장하는 인스턴스 변수
-    protected Bucket tail; // 리스트에서 맨 뒤 객차(열차의 한 덩이)의 주소를 저장하는 인스턴스 변수
+    protected Bucket head; 
+    protected Bucket tail; 
     
-    public LinkedList() {
-        // LinkedList를 만들면 일단 맨 앞에 있는 빈 객차를 준비한다.
+    public LinkedList2() {
         head = new Bucket();
-        tail = head; // bucket=head=tail
+        tail = head;
     }
 
-    public void add(Object value) {
+    public void add(E value) {
         // 맨 끝 객차에 짐을 싣는다.
         tail.value = value;
         
@@ -41,7 +33,7 @@ public class LinkedList { // 패키지 멤버 클래스
         tail = bucket;
     }
 
-    public Object get(int i) {
+    public E get(int i) {
         Bucket cursor = head;
         int count = 0;
         
@@ -65,7 +57,7 @@ public class LinkedList { // 패키지 멤버 클래스
         return count;
     }
 
-    public Object remove(int i) {
+    public E remove(int i) {
         Bucket cursor = head;
 
         if (i == 0) {
@@ -93,7 +85,7 @@ public class LinkedList { // 패키지 멤버 클래스
         return null;
     }
 
-    public void add(int i, Object value) { // cursor는 결국 해당 위치를 가리킨다.
+    public void add(int i, E value) { // cursor는 결국 해당 위치를 가리킨다.
         Bucket cursor = head;
         int count = 0;
         

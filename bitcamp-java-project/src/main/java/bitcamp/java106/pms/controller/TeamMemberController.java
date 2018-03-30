@@ -1,6 +1,7 @@
-// 팀 멤버 관리 기능을 모아둔 클래스
+// 팀 멤버 관리 기능을 모아 둔 클래스
 package bitcamp.java106.pms.controller;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.dao.MemberDao;
@@ -12,12 +13,9 @@ import bitcamp.java106.pms.domain.Team;
 public class TeamMemberController {
     
     Scanner keyScan;
-    TeamDao teamDao; // 자체적으로 만들지 않도록 해주고 생성할때 반드시 넘기도록 한다.
+    TeamDao teamDao;
     MemberDao memberDao;
     TeamMemberDao teamMemberDao;
-    
-    //TeamDao teamDao = new TeamDao();
-    // App에서 한번만 new해주어야 한다.
     
     public TeamMemberController(Scanner scanner, TeamDao teamDao, 
             MemberDao memberDao, TeamMemberDao teamMemberDao) {
@@ -48,7 +46,7 @@ public class TeamMemberController {
         Team team = teamDao.get(teamName);
         if (team == null) {
             System.out.printf("%s 팀은 존재하지 않습니다.", teamName);
-            return; // void 이기 때문에 return 다음에 값을 주지 않는다.
+            return;
         }
         
         System.out.println("[팀 멤버 추가]");
@@ -57,44 +55,42 @@ public class TeamMemberController {
         
         Member member = memberDao.get(memberId);
         if (member == null) {
-            System.out.printf("%s 회원은 없습니다.\n", memberId);
+            System.out.printf("%s 회원은 없습니다.", memberId);
             return;
         }
-            
+        
         if (teamMemberDao.isExist(teamName, memberId)) {
             System.out.println("이미 등록된 회원입니다.");
             return;
-        } 
+        }
         
         teamMemberDao.addMember(teamName, memberId);
-        
     }
 
-    void onTeamMemberList(String teamName) { 
+    void onTeamMemberList(String teamName) {
         if (teamName == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return; 
         }
         
-        Team team = teamDao.get(teamName); // 팀 이름으로 팀 정보를 찾는다.
+        Team team = teamDao.get(teamName);
         if (team == null) {
             System.out.printf("%s 팀은 존재하지 않습니다.", teamName);
-            return; // void 이기 때문에 return 다음에 값을 주지 않는다.
+            return;
         }
-        
+
         System.out.println("[팀 멤버 목록]");
         System.out.print("회원들: ");
         
-        String[] members = teamMemberDao.getMembers(teamName);
-        
-        for (int i = 0; i < members.length; i++) {
-            if (members[i] == null) continue;
-            System.out.printf("%s, ", members[i]);
+        Iterator<String> iterator = teamMemberDao.getMembers(teamName);
+        if (iterator != null) {
+            while (iterator.hasNext()) {
+                System.out.printf("%s, ", iterator.next());
+            }
         }
         System.out.println();
     }
 
-    
     void onTeamMemberDelete(String teamName) {
         if (teamName == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
@@ -114,7 +110,7 @@ public class TeamMemberController {
             System.out.println("이 팀의 회원이 아닙니다.");
             return;
         }
-        
+
         teamMemberDao.deleteMember(teamName, memberId);
         
         System.out.println("[팀 멤버 삭제]");
@@ -122,7 +118,9 @@ public class TeamMemberController {
     }
 }
 
-
-// ver 18 - ArrayList가 적용된 TeamMemberDao를 사용한다.
-// ver 17 - TeamMemberDao 클래스르 사용하여 팀 멤버의 아이디를 관리한다.
-// ver 15 - 팀 멤버를 등록, 조회, 삭제할 수 있는 기능 추가.
+//ver 18 - ArrayList가 적용된 TeamMemberDao를 사용한다.
+//ver 17 - TeamMemberDao 클래스를 사용하여 팀 멤버의 아이디를 관리한다.
+//ver 16 - 인스턴스 변수를 직접 사용하는 대신 겟터, 셋터 사용.
+// ver 15 - 팀 멤버를 등록, 조회, 삭제할 수 있는 기능 추가. 
+// ver 14 - TeamDao를 사용하여 팀 데이터를 관리한다.
+// ver 13 - 시작일, 종료일을 문자열로 입력 받아 Date 객체로 변환하여 저장.
