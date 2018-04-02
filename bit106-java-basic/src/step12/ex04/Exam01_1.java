@@ -17,8 +17,8 @@ public class Exam01_1 {
         print(queue); 
         queue.offer(s2); // aaa, bbb,
         print(queue); 
-        queue.offer(s3);
-        print(queue); // aaa, bbb, ccc
+        queue.offer(s3); // aaa, bbb, ccc
+        print(queue);
         
         System.out.println("==>" + queue.poll()); // bbb, ccc,
         print(queue);

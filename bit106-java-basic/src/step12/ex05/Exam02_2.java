@@ -1,3 +1,5 @@
+// Iterator 의 사용
+
 package step12.ex05;
 
 import java.util.Iterator;

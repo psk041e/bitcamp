@@ -1,8 +1,7 @@
-// Stack 구현과 사용
+// java.util.Stack 사용
 package step12.ex03;
 
-import step12.ex02.LinkedList;
-
+import java.util.Stack;
 public class Exam01_2 {
 
     public static void main(String[] args) {
@@ -36,7 +35,7 @@ public class Exam01_2 {
         }
     }
     
-    static void print(LinkedList list) {
+    static void print(Stack list) {
         for (int i = 0; i < list.size(); i++) {
             System.out.print(list.get(i) + ", ");
         }

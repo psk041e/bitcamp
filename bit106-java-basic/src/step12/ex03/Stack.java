@@ -21,17 +21,17 @@ public class Stack extends LinkedList {
             // size()를 사용하면 꺼낼따마다 사이즈를 호출한다는것은 매번 for문을 돌며 카운트해야 한다는 것이다.
             // head와 tail이 같으면 입력된 값이 없다. size를 호출하는것보다 낫다.
         Bucket removeBucket = this.tail.prev; // 이전 버킷 주소를 담아놓는다.
-        if (this.tail.prev.prev != null) {
+        if (this.tail.prev.prev != null) { // 리스트에서 중간 버킷 제거할 때
             this.tail.prev.prev.next = tail;
-            this.tail.prev = this.tail.prev.prev;
-        } else {
+            this.tail.prev = this.tail.prev.prev; 
+        } else { // 리스트에서 맨 처음 버킷을 제거할 때-> 값이 들어있는 버킷이 하나뿐인 경우
             head = tail;
             head.prev = null;
         }
         
         return removeBucket.value;
         // 맨마지막것을 지운다.
-        // head부터 맨 끝에 도달할 때까지 반복문을 돌아 도달하면 처리한다. -> 
+        // head부터 맨 끝에 도달할 때까지 반복문을 돌아 도달하면 처리한다. 
     }
 }
 

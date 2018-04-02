@@ -1,4 +1,4 @@
-// java.util.concurrent.SynchronousQueue 구현과 사용
+// java.util.concurrent.ArrayBlockingQueue 구현과 사용
 package step12.ex04;
 
 import java.util.concurrent.ArrayBlockingQueue;

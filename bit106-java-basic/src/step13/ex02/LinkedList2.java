@@ -112,4 +112,16 @@ public class LinkedList2<E> { // 자바 튜토리얼 참고
             add(value);
         }
     }
+    
+    public E[] toArray(E[] arr) {
+        Bucket bucket = head;
+        int count = 0;
+        
+        while (cursor != tail) {
+            arr[count++] = cursor.value;
+            cursor = cursor.next;
+        }
+        
+        return arr;
+    }
 }

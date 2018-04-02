@@ -25,6 +25,8 @@ public class Exam01_1 {
         System.out.println("==>" + stack.pop()); // bbb
         print(stack);
         
+        System.out.println("----------------");
+        
         stack.push(s4);
         print(stack);
         stack.push(s5);
