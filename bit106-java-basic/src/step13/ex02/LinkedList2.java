@@ -2,12 +2,10 @@ package step13.ex02;
 
 public class LinkedList2<E> { // 자바 튜토리얼 참고 
     
-    
     protected class Bucket {  
         public E value; 
         public Bucket next; 
         public Bucket prev; 
-                            
     }
     
     protected Bucket head; 
@@ -19,17 +17,10 @@ public class LinkedList2<E> { // 자바 튜토리얼 참고
     }
 
     public void add(E value) {
-        // 맨 끝 객차에 짐을 싣는다.
         tail.value = value;
-        
-        // 새 객차를 만들어 맨 뒤에 붙인다.
         Bucket bucket = new Bucket();
         tail.next = bucket;
-        
-        // 새 객차에 이전 객차의 주소를 저장한다.
         bucket.prev = tail;
-        
-        // 새로 붙인 객체를 맨 끝 객체로 처리한다.
         tail = bucket;
     }
 
@@ -114,7 +105,7 @@ public class LinkedList2<E> { // 자바 튜토리얼 참고
     }
     
     public E[] toArray(E[] arr) {
-        Bucket bucket = head;
+        Bucket cursor = head;
         int count = 0;
         
         while (cursor != tail) {

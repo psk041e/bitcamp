@@ -1,12 +1,10 @@
 package bitcamp.java106.pms;
 
 import java.sql.Date;
-import java.util.HashMap;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.controller.BoardController;
 import bitcamp.java106.pms.controller.ClassroomController;
-import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.controller.MemberController;
 import bitcamp.java106.pms.controller.TaskController;
 import bitcamp.java106.pms.controller.TeamController;
@@ -60,17 +58,6 @@ public class App {
         ClassroomController classroomController = new ClassroomController(
                 keyScan);
         
-        HashMap<String,Controller> controllerMap = 
-                new HashMap<>();
-        // <String,Controller> : String 을 키로 사용, Controller 인터페이스에 따라 만든 클래스를 저장, 컨트롤러 객체
-        
-        controllerMap.put("board", boardController); // 컨트롤러 맵에 board 컨트롤러 저장
-        controllerMap.put("classroom", classroomController);
-        controllerMap.put("member", memberController);
-        controllerMap.put("task", taskController);
-        controllerMap.put("team", teamController);      
-        controllerMap.put("team/member", teamMemberController);
-        
         Console.keyScan = keyScan;
 
         while (true) {
@@ -88,19 +75,24 @@ public class App {
                 break;
             } else if (menu.equals("help")) {
                 onHelp();
-            } else {
-                int slashIndex = menu.lastIndexOf("/"); // 맨 끝에서부터 /인덱스를 찾아라
-                String controllerKey = menu.substring(0, slashIndex); // 0부터 slashIndex 바로 전까지 잘라라
-                Controller controller = controllerMap.get(controllerKey); // 맵에서 controllerKey를 가지고 찾는다.
-                
-                if (controller != null) {
-                    controller.service(menu, option); 
-                // controller에 담겨져 있는것은 입력받은 option에대한 XxxCnotroller의 주소이다.
-                }else {
-                    System.out.println("명령어가 올바르지 않습니다.");
-                }
-            } 
+            } else if (menu.startsWith("team/member/")) {
+                // *** 주의! team/ 명령도 team/으로 시작하기 때문에 그 위에 먼저 team/member/를 써주어야 한다!
+                teamMemberController.service(menu, option);
+            } else if (menu.startsWith("team/")) {
+                teamController.service(menu, option);
+            } else if (menu.startsWith("member/")) {
+                memberController.service(menu, option);
+            } else if (menu.startsWith("board/")) {
+                boardController.service(menu, option);
+            } else if (menu.startsWith("task/")) {
+                taskController.service(menu, option);
+            } else if (menu.startsWith("classroom/")) {
+                classroomController.service(menu, option);
+            }else {
+                System.out.println("명령어가 올바르지 않습니다.");
             }
+            System.out.println(); 
+        }
     }
     
     static void prepareMemberData(MemberDao memberDao) {

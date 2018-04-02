@@ -1,5 +1,4 @@
 // 이 클래스는 회원 관련 기능을 모두 둔 클래스이다.
-// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller;
 
 import bitcamp.java106.pms.domain.Member;
@@ -7,9 +6,7 @@ import bitcamp.java106.pms.util.Console;
 import bitcamp.java106.pms.dao.MemberDao;
 import java.util.Scanner;
 
-// MemberController는 Controller 규칙을 이행한다.
-//=> Controller 규칙에 따라 메서드를 만든다.
-public class MemberController implements Controller { // 의존객체 -> MemberDao()가 없으면 안된다.
+public class MemberController { // 의존객체 -> MemberDao()가 없으면 안된다.
     Scanner keyScan;
     MemberDao memberDao;
     

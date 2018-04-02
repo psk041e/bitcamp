@@ -1,4 +1,3 @@
-// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller;
 
 import java.sql.Date;
@@ -8,15 +7,23 @@ import bitcamp.java106.pms.dao.BoardDao;
 import bitcamp.java106.pms.domain.Board;
 import bitcamp.java106.pms.util.Console;
 
-// BoradController는 Controller 규칙을 이행한다.
-// => Controller 규칙에 따라 메서드를 만든다.
-// 반드시 같은 형식으로 메서드를 만들어야 한다.
-public class BoardController implements Controller {
+public class BoardController {
     Scanner keyScan;
 
     BoardDao boardDao = new BoardDao();
     
     public BoardController(Scanner scanner) {
+     // BaordController의 메서드를 이용하려면 반드시 설정해야 하는 값이 있다.
+        // Board[] 배열이나 boardIndex처럼 내부에서 생성하는 값이 있고,
+        // Scanner 처럼 외부에서 받아야 하는 값이 있다.
+        // 외부에서 "반드시 받아야 하는 값"은 생성자를 통해 입력 받도록 하면 된다.
+        // 이것이 생성자가 필요한 이유이다.
+        // 즉, 객체가 작업하는데 필수적으로 요구되는 값을 준비시키는 역할을 수행하는게
+        // 바로 "생성자"이다!
+        
+        // BoardController 객체를 생성할 때
+        // 필수 값을 반드시 입력 받도록 선언한다.
+        // 필수 값이 설정되어 있어야만 작업을 수행할 수 있기 때문이다.
         this.keyScan = scanner;
     }
     

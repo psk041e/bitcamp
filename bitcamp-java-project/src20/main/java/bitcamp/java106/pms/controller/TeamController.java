@@ -1,6 +1,4 @@
 // 팀 관련 기능을 모아 둔 클래스
-// Controller 규칙에 따라 메서드 작성
-
 package bitcamp.java106.pms.controller;
 
 import java.sql.Date;
@@ -12,9 +10,7 @@ import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
 
-// TeamController는 Controller 규칙을 이행한다.
-//=> Controller 규칙에 따라 메서드를 만든다.
-public class TeamController implements Controller {
+public class TeamController {
     Scanner keyScan;
     TeamDao teamDao;
     
