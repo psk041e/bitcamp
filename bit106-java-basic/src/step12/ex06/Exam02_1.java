@@ -29,14 +29,14 @@ public class Exam02_1 {
         Iterator 키를꺼내주는객체 = keys.iterator(); // 키가 들어있는 집합에서 키배열을 꺼낸다.
         while (키를꺼내주는객체.hasNext()) {
             Object key = 키를꺼내주는객체.next();
-            System.out.println(map.get(key)); // key를 사용하여 값을 꺼낸다.
+            System.out.println(map.get(key));
         }
         System.out.println("------------------------------");
         
         // 2) 배열을 사용
         Object[] keyArray = keys.toArray();
         for (Object key : keyArray) {
-            System.out.println(map.get(key)); // key를 사용하여 값을 꺼낸다.
+            System.out.println(map.get(key));
         }
         System.out.println("------------------------------");
         

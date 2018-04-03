@@ -15,5 +15,15 @@ public class Exam01_1 {
         list.add(new String("Hello"));
         list.add(new Integer(100));
         list.add(new HashSet());
+        
+        // 값 꺼내기
+        // 객체의 값을 꺼낼 때는 보통 해당 클래스로 형변환 한 다음에 사용해야 한다.
+        // 왜? get() 메서드의 리턴 타입이 Object이기 때문이다.
+        //
+        Member member = (Member) list.get(0);
+        System.out.println(member.name);
+        System.out.println(member.age);
+        // => 이렇게 값을 꺼낼 때 마다 그 객체의 원래 클래스로 형변환해야 하는 것은 매우 번거롭다.
+        
     }
 }

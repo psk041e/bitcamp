@@ -18,11 +18,5 @@ public class Exam01_2 {
         
     }
     
-    static void print(LinkedList list) {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.print(list.get(i) + ", ");
-        }
-        System.out.println();
-    }
 
 }

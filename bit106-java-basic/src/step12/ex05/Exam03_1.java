@@ -1,4 +1,4 @@
-// HashSet과 사용자 정의 데이터 타입
+// HashSet과 사용자 정의 데이터 타입 - 오버라이딩 하지 않은 경우
 package step12.ex05;
 
 import java.util.HashSet;

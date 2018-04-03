@@ -1,7 +1,7 @@
 // java.util.HashMap - key/value를 한 쌍으로 묶어 꺼내기
 package step12.ex06;
 
-import java.security.KeyStore.Entry;
+import java.util.Map.Entry;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -25,11 +25,12 @@ public class Exam02_2 {
         Set entrySet = map.entrySet(); // key/value가 한쌍으로 묶여있는 객체들이 들어있다.
         
         for (Object obj : entrySet) {
-            // Set 컬렉션에 들어 있는 객체는 원래 Entry 객체이다.
+            // Set 컬렉션에 들어있는 개체는 원래 Entry 객체이다.
             // Entry 객체에서 key와 값을 꺼내려면
             // 원래의 타입으로 형변환 해야 한다.
-            Entry entry = (Entry) obj; 
-            System.out.printf("%s ===> %s\n", entry.getKey(), entry.getValue());
+            Entry entry = (Entry) obj;
+            System.out.printf("%s ===> %s\n",
+                    entry.getKey(), entry.getValue());
         }
     
     }

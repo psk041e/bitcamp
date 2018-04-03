@@ -1,5 +1,5 @@
 // java.util.HashMap - 값을 저장할 때 key을 사용하여 저장한다.
-package step12.ex06;
+package step12.ex06; 
 
 import java.util.HashMap;
 
@@ -24,6 +24,7 @@ public class Exam01_1 {
         
         // 이전에 저장할 때 사용한 같은 키로 다른 값을 저장하면 기존 값을 덮어쓴다.
         map.put("s04", v5);
+        
         
         System.out.println(map.get("s01"));
         System.out.println(map.get("s02"));
