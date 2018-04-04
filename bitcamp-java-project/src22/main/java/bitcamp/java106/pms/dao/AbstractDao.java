@@ -11,6 +11,8 @@ public abstract class AbstractDao<E> {
     }
     
     public Iterator<E> list() {
+        // 전체 데이터를 꺼낸다.
+        // 특정 팀에대한 데이터를 꺼내줄수는 없다.(TaskController)
         return collection.iterator();
     }
 

@@ -1,16 +1,18 @@
 // 팀 관련 기능을 모아 둔 클래스
+// Controller 규칙에 따라 메서드 작성
+
 package bitcamp.java106.pms.controller;
 
 import java.sql.Date;
 import java.util.Iterator;
 import java.util.Scanner;
 
-import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TeamDao;
-import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
 
+// TeamController는 Controller 규칙을 이행한다.
+//=> Controller 규칙에 따라 메서드를 만든다.
 public class TeamController implements Controller {
     Scanner keyScan;
     TeamDao teamDao;
@@ -120,7 +122,7 @@ public class TeamController implements Controller {
             System.out.printf("종료일(%s)? ", team.getEndDate());
             updateTeam.setEndDate(Date.valueOf(this.keyScan.nextLine()));
 
-            int index = teamDao.indexOf(updateTeam.getName());
+            int index = teamDao.indexOf(team.getName());
             teamDao.update(index, updateTeam);
             System.out.println("변경하였습니다.");
         }
@@ -148,6 +150,5 @@ public class TeamController implements Controller {
     
 }
 
-// ver 22 - TeamDao 변경 사항에 맞춰 이 클래스를 변경한다.
 // ver 15 - TeamDao를 생성자에서 주입 받도록 변경.
 // ver 13 - 시작일, 종료일을 문자열로 입력 받아 Date 객체로 변환하여 저장.

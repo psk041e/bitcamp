@@ -138,5 +138,6 @@ public class MemberController { // 의존객체 -> MemberDao()가 없으면 안�
             }
         }
     }
-    
 }
+
+//ver 14 - MemberDao를 사용하여 회원 데이터를 관리한다.

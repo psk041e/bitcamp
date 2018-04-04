@@ -62,6 +62,7 @@ public class BoardController {
     void onBoardList() {
         System.out.println("[게시물 목록]");
         Board[] list = boardDao.list();
+        // 배열주소이므로 배열로 받는다.
         for (int i = 0; i < list.length; i++) {
             if (list[i] == null) continue;
             System.out.printf("%d, %s, %s\n",

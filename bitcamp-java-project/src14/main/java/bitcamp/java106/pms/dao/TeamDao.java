@@ -23,7 +23,7 @@ public class TeamDao {
         int i = this.getTeamIndex(name);
         if (i == -1) 
             return null;
-        return teams[i];
+        return teams[i]; // i번에 해당하는 배열의 Team주소를 리턴한다.
     }
     
     public void update(Team team) {
@@ -51,7 +51,7 @@ public class TeamDao {
     
 }
 
-
+//ver 14 - TeamController로부터 데이터 관리 기능을 분리하여 TeamDao 생성.
 
 
 

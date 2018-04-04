@@ -7,7 +7,7 @@ public class BoardDao {
     int boardIndex = 0;
     
     public void insert(Board board) {
-        board.no = boardIndex;
+        board.no = boardIndex; // board.no는 배열개수와 같다.
         this.boards[this.boardIndex++] = board;
     }
     

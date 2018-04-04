@@ -1,3 +1,4 @@
+// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller;
 
 import java.sql.Date;
@@ -8,6 +9,8 @@ import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.domain.Classroom;
 import bitcamp.java106.pms.util.Console;
 
+// ClassroomController는 Controller 규칙을 이행한다.
+//=> Controller 규칙에 따라 메서드를 만든다.
 public class ClassroomController implements Controller {
     Scanner keyScan;
 
@@ -52,7 +55,7 @@ public class ClassroomController implements Controller {
     void onList() {
         System.out.println("[수업 목록]");
         Iterator<Classroom> iterator = classroomDao.list();
-        while (iterator.hasNext()) { 
+        while (iterator.hasNext()) {
             Classroom classroom = iterator.next();
             System.out.printf("%d, %s, %s ~ %s, %s\n",
                 classroom.getNo(), classroom.getTitle(),
@@ -144,7 +147,6 @@ public class ClassroomController implements Controller {
     }
 }
 
-// ver 22 - ClassroomDao 변경 사항에 맞춰 이 클래스를 변경한다.
 // ver 20 - 클래스 추가
 // ver 18 - ClassroomDao 변경 사항에 맞춰 이 클래스를 변경한다. 
 // ver 16 - Classroom 인스턴스 변수를 직접 사용하는 대신 겟터, 셋터 사용.

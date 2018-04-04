@@ -59,6 +59,8 @@ public class MemberController implements Controller { // 의존객체 -> MemberD
         // list라는 Member[]배열 타입의 변수에 넣어준다.
         // 그리고, 그것을 list 배열의 길이만큼 반복하여 출력해준다.
         Iterator<Member> iterator = memberDao.list();
+        // iterator는 리스트가 아니라 memberDao.list()를 꺼내주는 도구이다.
+        // 꺼내주는것은 while문 안에서이다.
         while (iterator.hasNext()) {
             Member member = iterator.next();
             System.out.printf("%s, %s, %s\n", 

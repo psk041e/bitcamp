@@ -1,7 +1,7 @@
 // 상속 - Generalization 수행 후
 package step11.ex16;
 // <설명공간>
-// Sedan과 Truck의 공통 ㅣ능이
+// Sedan과 Truck의 공통 기능이
 // start(), shutdown(), run() 메서드를 추출하여
 // Car 클래스를 만들고
 // Sedan과 Truck은 이 클래스의 서브 클래스가 된다.

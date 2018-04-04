@@ -62,12 +62,13 @@ public class App {
         
         HashMap<String,Controller> controllerMap = 
                 new HashMap<>();
+        // <String,Controller> : String 을 키로 사용, Controller 인터페이스에 따라 만든 클래스를 저장, 컨트롤러 객체
         
-        controllerMap.put("board", boardController);
+        controllerMap.put("board", boardController); // 컨트롤러 맵에 board 컨트롤러 저장
         controllerMap.put("classroom", classroomController);
         controllerMap.put("member", memberController);
         controllerMap.put("task", taskController);
-        controllerMap.put("team", teamController);
+        controllerMap.put("team", teamController);      
         controllerMap.put("team/member", teamMemberController);
         
         Console.keyScan = keyScan;
@@ -81,24 +82,24 @@ public class App {
             } else {
                 option = null;
             }
-            
+
             if (menu.equals("quit")) {
                 onQuit();
                 break;
             } else if (menu.equals("help")) {
                 onHelp();
             } else {
-                int slashIndex = menu.indexOf("/");
-                String controllerKey = menu.substring(0, slashIndex);
-                Controller controller = controllerMap.get(controllerKey);
+                int slashIndex = menu.lastIndexOf("/"); // 맨 끝에서부터 /인덱스를 찾아라
+                String controllerKey = menu.substring(0, slashIndex); // 0부터 slashIndex 바로 전까지 잘라라
+                Controller controller = controllerMap.get(controllerKey); // 맵에서 controllerKey를 가지고 찾는다.
                 
                 if (controller != null) {
-                    controller.service(menu, option);
+                    controller.service(menu, option); 
+                // controller에 담겨져 있는것은 입력받은 option에대한 XxxCnotroller의 주소이다.
                 }else {
                     System.out.println("명령어가 올바르지 않습니다.");
                 }
-            
-        }}
+            } }
     }
     
     static void prepareMemberData(MemberDao memberDao) {
@@ -161,8 +162,7 @@ public class App {
         teamMemberDao.addMember("t2", "eee");
         teamDao.insert(team);
     }
-
-
+    
 }
 
 // ver 15 - TeamDao MemberDao를 다루는 메뉴 추가.

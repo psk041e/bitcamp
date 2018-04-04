@@ -26,7 +26,7 @@ public class MemberDao {
         //                   같은 값이 있으면 그 배열의 인덱스 값을 반환하는 메서드
         // getMemberIndex()메서드에서 받은 인덱스값을 저장하고
         // 그 값이 -1 이면 동일한 id가 없는것 이기 때문에 null값을 반환,
-        // -1 이 아니면 해당 인덱스의 배열값을 반환한다.
+        // -1 이 아니면 해당 인덱스 배열의 Member주소를 반환한다.
         int i = this.getMemberIndex(id);
         if (i != -1) 
             return null;
@@ -70,3 +70,4 @@ public class MemberDao {
 }
 
 
+//ver 14 - MemberController로부터 데이터 관리 기능을 분리하여 MemberDao 생성.
