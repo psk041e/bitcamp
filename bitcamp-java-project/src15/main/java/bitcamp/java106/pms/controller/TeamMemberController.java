@@ -60,13 +60,16 @@ public class TeamMemberController {
         }
             
         // 기존에 등록된 회원인지 검사
+        // 존재하는 팀에 대해서 다음 반복문을 수행한다.
         boolean exist = false;
         for (int i = 0; i < team.members.length; i++) { // 팀 객체 안의 members배열 길이만큼 반복
           if (team.members[i] == null) continue;
           if (team.members[i].id.equals(memberId)) {
               exist = true;
               break;
-          }
+              // 해당 if문이 true가 아니면 실행하지 않고 넘어간
+              // 따라서 exist는 false값인 채로 넘어가는 것이다.
+          } 
         }
         
         if (exist) {
@@ -138,4 +141,6 @@ public class TeamMemberController {
     }
 }
 
-// ver 15 - 팀 멤버를 등록, 조회, 삭제할 수 있는 기능 추가.
+//ver 15 - 팀 멤버를 등록, 조회, 삭제할 수 있는 기능 추가. 
+//ver 14 - TeamDao를 사용하여 팀 데이터를 관리한다.
+//ver 13 - 시작일, 종료일을 문자열로 입력 받아 Date 객체로 변환하여 저장.

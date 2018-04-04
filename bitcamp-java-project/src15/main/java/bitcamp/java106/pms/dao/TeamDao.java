@@ -74,7 +74,7 @@ public class TeamDao {
 }
 
 
-
+//ver 14 - TeamController로부터 데이터 관리 기능을 분리하여 TeamDao 생성.
 
 
 

@@ -69,6 +69,6 @@ public class MemberDao {
     }
 }
 
-
+//ver 14 - MemberController로부터 데이터 관리 기능을 분리하여 MemberDao 생성.
 
 

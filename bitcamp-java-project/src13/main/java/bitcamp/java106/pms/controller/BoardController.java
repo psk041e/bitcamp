@@ -111,6 +111,7 @@ public class BoardController {
             System.out.printf("내용(%s)? ", board.content);
             updateBoard.content = this.keyScan.nextLine();
             this.boards[i] = updateBoard;
+            System.out.println("변경하였습니다.");
 
         }
     }

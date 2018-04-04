@@ -146,5 +146,6 @@ public class TeamController {
     
 }
 
-// ver 15 - TeamDao를 생성자에서 주입 받도록 변경.
-// ver 13 - 시작일, 종료일을 문자열로 입력 받아 Date 객체로 변환하여 저장.
+/// ver 15 - TeamDao를 생성자에서 주입 받도록 변경.
+//ver 14 - TeamDao를 사용하여 팀 데이터를 관리한다.
+//ver 13 - 시작일, 종료일을 문자열로 입력 받아 Date 객체로 변환하여 저장.
