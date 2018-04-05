@@ -1,5 +1,5 @@
 // 디렉토리 삭제
-package step16;
+package step16.ex01;
 
 import java.io.File;
 

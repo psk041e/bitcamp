@@ -1,5 +1,5 @@
 // 디렉토리에 들어있는 파일(디렉토리) 목록을 꺼낼 때 필터 적용하기
-package step16;
+package step16.ex01;
 
 import java.io.File;
 import java.io.FilenameFilter;
