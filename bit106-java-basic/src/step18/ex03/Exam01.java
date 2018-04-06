@@ -9,6 +9,7 @@ public class Exam01 {
     protected void m3() {}
     void m4() {}
     private void m5() {}
+    
     public static void main(String[] args) {
         Class clazz = Exam01.class;
         

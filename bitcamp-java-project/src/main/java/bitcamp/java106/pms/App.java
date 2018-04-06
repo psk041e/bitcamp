@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import bitcamp.java106.pms.context.ApplicationContext;
 import bitcamp.java106.pms.controller.BoardController;
 import bitcamp.java106.pms.controller.ClassroomController;
 import bitcamp.java106.pms.controller.Controller;
@@ -20,6 +21,9 @@ import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
 
 public class App {
+    
+    static ApplicationContext iocContainer;
+    
     static Scanner keyScan = new Scanner(System.in);
     public static String option = null; 
     
@@ -38,38 +42,19 @@ public class App {
         System.out.println("종료 : quit");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+    
+        // 기본 객체 준비
+        HashMap<String,Object> defaultBeans = new HashMap<>();
+        defaultBeans.put("java.util.Scanner", keyScan);
         
-        TeamDao teamDao = new TeamDao();
-        MemberDao memberDao = new MemberDao();
-        TaskDao taskDao = new TaskDao();
-        TeamMemberDao teamMemberDao = new TeamMemberDao();
-
+        // 기본 객체와 함께 @Component가 붙은 클래스의 객체를 준비한다.
+        iocContainer = new ApplicationContext(
+                "bitcamp.java106.pms", defaultBeans);
+        
         // 테스트용 데이터를 준비하도록 다음 메서드를 호출한다.
-        prepareMemberData(memberDao);
-        prepareTeamData(teamDao, teamMemberDao);
-        
-        TeamController teamController = new TeamController(keyScan, teamDao);
-        TeamMemberController teamMemberController = new TeamMemberController(
-                keyScan, teamDao, memberDao, teamMemberDao); 
-        MemberController memberController = new MemberController(
-                keyScan, memberDao);
-        BoardController boardController = new BoardController(keyScan);
-        TaskController taskController = new TaskController(
-                keyScan, teamDao, taskDao, teamMemberDao, memberDao);
-        ClassroomController classroomController = new ClassroomController(
-                keyScan);
-        
-        HashMap<String,Controller> controllerMap = 
-                new HashMap<>();
-        // <String,Controller> : String 을 키로 사용, Controller 인터페이스에 따라 만든 클래스를 저장, 컨트롤러 객체
-        
-        controllerMap.put("board", boardController); // 컨트롤러 맵에 board 컨트롤러 저장
-        controllerMap.put("classroom", classroomController);
-        controllerMap.put("member", memberController);
-        controllerMap.put("task", taskController);
-        controllerMap.put("team", teamController);      
-        controllerMap.put("team/member", teamMemberController);
+        prepareMemberData();
+        prepareTeamData();
         
         Console.keyScan = keyScan;
 
@@ -91,7 +76,7 @@ public class App {
             } else {
                 int slashIndex = menu.lastIndexOf("/"); // 맨 끝에서부터 /인덱스를 찾아라
                 String controllerKey = menu.substring(0, slashIndex); // 0부터 slashIndex 바로 전까지 잘라라
-                Controller controller = controllerMap.get(controllerKey); // 맵에서 controllerKey를 가지고 찾는다.
+                Controller controller = (Controller) iocContainer.getBean(controllerKey);
                 
                 if (controller != null) {
                     controller.service(menu, option); 
@@ -102,7 +87,10 @@ public class App {
             } }
     }
     
-    static void prepareMemberData(MemberDao memberDao) {
+    static void prepareMemberData() {
+        MemberDao memberDao = (MemberDao) iocContainer.getBean(
+                "bitcamp.java106.pms.dao.MemberDao");
+        
         Member member = new Member();
         member.setId("aaa");
         member.setEmail("aaa@test.com");
@@ -139,9 +127,13 @@ public class App {
         memberDao.insert(member);
         
     }
-    static void prepareTeamData(
-            TeamDao teamDao,
-            TeamMemberDao teamMemberDao) {
+    static void prepareTeamData() {
+        
+        TeamDao teamDao = (TeamDao) iocContainer.getBean(
+                "bitcamp.java106.pms.dao.TeamDao");
+        TeamMemberDao teamMemberDao = (TeamMemberDao) iocContainer.getBean(
+                "bitcamp.java106.pms.dao.TeamMemberDao");
+        
         Team team = new Team();
         team.setName("t1");
         team.setMaxQty(5);

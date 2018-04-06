@@ -1,4 +1,4 @@
-// 현재 클래스에 선언된 모든 메서드 추출
+// 메서드 정보 추출 - 현재 클래스에 선언된 모든 메서드 정보 추출
 package step18.ex03;
 
 import java.lang.reflect.Method;

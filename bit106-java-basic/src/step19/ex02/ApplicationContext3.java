@@ -1,15 +1,22 @@
-// 응용 - 자바 CLASSPATH에 있는 파일에 절대 경로를 알아내는 방법
-package step18.ex06;
+// 디렉토리 경로 대신 패키지 이름을 입력 받아
+// 해당 패키지의 파일 목록을 알아내기
+package step19.ex02;
 
+import java.io.File;
 import java.net.URL;
-import java.util.Enumeration;
+import java.util.ArrayList;
+import java.util.List;
 
-// 자바 버추얼머신은 경로에 상관 없이 값을 꺼내준다.
-// 이 클래스가 있는 패키지 폴더에서 내가 지정한 파일을 찾아줘라
-// 자바 버추얼 머신 밑에 클래스를 로딩만 전문적으로 처리하는 것이 있다. -> ClassLoader
-public class Exam01 {
-
-    public static void main(String[] args) throws Exception {
+public class ApplicationContext3 { // 문맥,환경,상황
+    private ArrayList<File> list = new ArrayList<>(); // 파일 정보를 담을 arrayList
+    
+    public ApplicationContext3(String packageName) {
+        // 1) 패키지 이름에 포함된 .을 파일 경로의 /로 변경한다.
+        String path = packageName.replace(".", "/");
+        // ""를 쓰면 정규표현식(java에 상관없이 별도의 문법)이라는 특별한 문법이 된다. -> 특별한 의미를 가진다.
+        // replaceAll을 사용할 때 특히 조심해야 한다.
+        //
+        // 2) 해당 경로의 디렉토리를 classpath에서 찾아 실제 
         // 프로그램과 관련된 파일을 일반 경로에 두는 것 보다
         // JVM이 알고 있는 경로(CLASSPATH)에 두면 해당 파일을 보다 쉽게 찾을 수 있다.
         // 왜냐하면,
@@ -35,15 +42,34 @@ public class Exam01 {
         //       getResources()를 호출하여 여러 개의 경로 정보를 받아라!
         //    => 자원의 절대 경로 정보를 담고 있는 URL 객체를 리턴한다.
         // 
-        URL url = classLoader.getResource("step18/ex06");
+        URL url = classLoader.getResource(path);
         
-        // URL 정보에서 파일 경로를 문자열로 추출한다.
-        System.out.println(url.getPath());
-        System.out.println(url.getFile()); // getPath() + query
+        // 3) URL에서 실제 경로를 뽑아 File 객체를 생성한다.
+        File dir = new File(url.getPath());
         
-
-        // Enumeration -> Iterator와 유사한 일을 한다.(꺼내주는 일)
-        // 여러개를 받을거면 Enumeration을 사용해라
+        // 4) 해당 파일의 경로가 디렉토리를 가리키고 있다면,
+        //    그 디렉토리의 파일 목록을 알아낸다.
+        if (dir.isDirectory())
+            return;
+        findFiles(dir);
     }
-
+    
+    public void findFiles(File dir) { // 파일 객체를 담은 리스트 리턴
+        File[] files = dir.listFiles(); // 디렉토리인지 파일인지 구분해준다. 파일 배열을 리턴한다.
+        for (File f : files) {
+            if (f.isDirectory()) {
+                findFiles(f); // 재귀호출 -> ★코드가  복제된다고 생각해라★
+            } else {
+                this.list.add(f);
+            }
+        } 
+    }     // 디렉토리에서 목록을 가져와 arraylist에 담는다
+          // 배열보다 넣고 빼기가 편하기 때문에 arraylist에 담는다.
+    
+    public List<File> getFiles() {
+        return this.list;
+    }
+    
+    
+    
 }

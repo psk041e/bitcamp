@@ -1,9 +1,9 @@
 package bitcamp.java106.pms.dao;
 
-import java.util.LinkedList;
-
+import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Classroom;
 
+@Component
 public class ClassroomDao extends AbstractDao<Classroom> {
     
     public int indexOf(Object key) {

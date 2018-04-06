@@ -1,8 +1,6 @@
 // Reflection API : 클래스 로딩과 "class"라는 스태틱 변수
 package step18.ex01;
 
-import java.io.File;
-
 class X {
     static {
         System.out.println("X 클래스 로딩!");

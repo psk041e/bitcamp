@@ -1,4 +1,4 @@
-// 메서드 정보 추출 - static 메서드 호출
+// 메서드 정보 추출 - 메서드 호출
 package step18.ex03;
 
 import java.lang.reflect.Method;
@@ -13,7 +13,6 @@ public class Exam05 {
     public void minus(int a, int b) {
         System.out.printf("빼기: % d\n", a - b);
     }
-    
     
     public static void main(String[] args) throws Exception {
         Class clazz = Exam05.class;

@@ -10,10 +10,10 @@ package step15.ex01;
 //    호출할 때 오류가 발생할 것이다.
 //    원천적으로 이런 문제를 발생시키지 않기 위해
 //    일반 클래스는 추상 메서드를 갖지 않게 하였다.
-public class A3 { // 컴파일 오류!
-    // 메서드 앞에 abstract를 붙인다.
-    public abstract void m1();
-    
-
-}
+//public class A3 { // 컴파일 오류!
+//    // 메서드 앞에 abstract를 붙인다.
+//    public abstract void m1();
+//    
+//
+//}
   

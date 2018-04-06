@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import bitcamp.java106.pms.annotation.Component;
+
+@Component
 public class TeamMemberDao {
     
     private HashMap<String, ArrayList<String>> collection = new HashMap<>();

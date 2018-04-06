@@ -5,20 +5,20 @@ import java.sql.Date;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.dao.BoardDao;
 import bitcamp.java106.pms.domain.Board;
 import bitcamp.java106.pms.util.Console;
 
-// BoradController는 Controller 규칙을 이행한다.
-// => Controller 규칙에 따라 메서드를 만든다.
-// 반드시 같은 형식으로 메서드를 만들어야 한다.
+@Component("board")
 public class BoardController implements Controller {
     Scanner keyScan;
 
-    BoardDao boardDao = new BoardDao();
+    BoardDao boardDao;
     
-    public BoardController(Scanner scanner) {
+    public BoardController(Scanner scanner, BoardDao boardDao) {
         this.keyScan = scanner;
+        this.boardDao = boardDao;
     }
     
     public void service(String menu, String option) {

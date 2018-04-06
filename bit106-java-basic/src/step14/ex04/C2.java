@@ -6,6 +6,6 @@ package step14.ex04;
 // 리턴 타입이 다른 그런 메서드가 있다면
 // 둘 중 어떤 것을 상속 받느냐에 따라 규칙이 달라지기 때문에
 // 이런 경우에는 다중 상속이 불가하다! 컴파일 오류!
-public interface C2 extends A, B2 {
-    void m3();
-}
+//public interface C2 extends A, B2 {
+//    void m3();
+//}

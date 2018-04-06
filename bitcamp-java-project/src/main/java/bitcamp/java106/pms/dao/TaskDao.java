@@ -3,8 +3,10 @@ package bitcamp.java106.pms.dao;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Task;
 
+@Component
 public class TaskDao extends AbstractDao<Task> {
     
     public Iterator<Task> list(String teamName) { 

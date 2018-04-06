@@ -41,7 +41,6 @@ public class Exam03 {
         Class clazz2 = String.class;
         Class clazz3 = System.class;
         Class clazz4 = File.class;
-        // 자바의 모든 클래스에는 자신의 정보를 담고 있는 class라는 특별한 변수를 가지고 있다. 
     }        
         
 }
