@@ -8,5 +8,4 @@ public interface Controller {
     void service(String menu, String option);
 }
 
-// ver 21 - 인터페이스 추가
-
+//ver 21 - 인터페이스 추가

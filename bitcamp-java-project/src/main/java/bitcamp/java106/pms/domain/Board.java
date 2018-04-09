@@ -5,9 +5,6 @@ import java.sql.Date;
 
 public class Board {
     private static int count = 1;
-    // 이전에는 데이터를 삭제하면 null로 바뀌고 그 방은 쓸수 없게 되었지만
-    // ArrayList 클래스를 사용해 
-    // 삭제를 하더라도 배열을 당겨서 빈 방 없이 사용할 수 있도록 만들었다.
     
     private int no;
     private String title;
@@ -16,16 +13,16 @@ public class Board {
     
     public Board() {
         this.no = count++;
-        // 게시물 객체가 만들어 질 때마다 고유번호를 갖게 한다.
-        // 한번 번호가 들어가면 중간에 게시물이 없어지더라도
-        // 그 번호를 유지한다.
     }
-    
     
     public int getNo() {
         return no;
     }
     public void setNo(int no) {
+        // 외부에서 입력 받은 번호가 count 보다 클 때는 count의 값을 증가시켜야 한다.
+        if (no >= count) {
+            count = no + 1;
+        }
         this.no = no;
     }
     public String getTitle() {
@@ -47,8 +44,15 @@ public class Board {
         this.createdDate = createdDate;
     }
     
+    
 }
 
 //ver 18 - 게시물 객체의 고유 번호(no)를 static 변수(count)를 이용하여 자동 설정한다. 
-//ver 16 - 캡슐화 적용, 겟터, 셋터 추가.
-//ver 13 - 등록일의 데이터 타입을 String에서 Date으로 변경
+// ver 16 - 캡슐화 적용. 겟터, 셋터 추가.
+// ver 13 - 등록일의 데이터 타입을 String에서 Date으로 변경
+
+
+
+
+
+

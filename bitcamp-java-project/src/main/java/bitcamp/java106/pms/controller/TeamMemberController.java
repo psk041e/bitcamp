@@ -1,6 +1,4 @@
-// 팀 멤버 관리 기능을 모아 둔 클래스
 // Controller 규칙에 따라 메서드 작성
-
 package bitcamp.java106.pms.controller;
 
 import java.util.Iterator;
@@ -122,6 +120,7 @@ public class TeamMemberController implements Controller {
     }
 }
 
+//ver 23 - @Component 애노테이션을 붙인다.
 //ver 18 - ArrayList가 적용된 TeamMemberDao를 사용한다.
 //ver 17 - TeamMemberDao 클래스를 사용하여 팀 멤버의 아이디를 관리한다.
 //ver 16 - 인스턴스 변수를 직접 사용하는 대신 겟터, 셋터 사용.

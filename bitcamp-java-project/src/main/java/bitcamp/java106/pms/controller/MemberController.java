@@ -1,4 +1,3 @@
-// 이 클래스는 회원 관련 기능을 모두 둔 클래스이다.
 // Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller;
 
@@ -11,8 +10,9 @@ import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.util.Console;
 
 @Component("member")
-public class MemberController implements Controller { // 의존객체 -> MemberDao()가 없으면 안된다.
+public class MemberController implements Controller {
     Scanner keyScan;
+
     MemberDao memberDao;
     
     public MemberController(Scanner scanner, MemberDao memberDao) {
@@ -49,23 +49,16 @@ public class MemberController implements Controller { // 의존객체 -> MemberD
         System.out.print("암호? ");
         member.setPassword(this.keyScan.nextLine());
 
-        // 입력받은 멤버객체를 insert메서드에 넘겨준다.
-        // insert 메서드가 입력받은 객체를 새 인덱스의 배열에 넣어주고
-        // 인덱스 값은 +1한다.
         memberDao.insert(member);
     }
 
     void onMemberList() {
         System.out.println("[회원 목록]");
-        // list메서드에서 멤버가 들어있는 갯수만큼 반복해서
-        // 새로운 배열 arr에 집어넣어주고 그 주소값을 반환해 주면
-        // list라는 Member[]배열 타입의 변수에 넣어준다.
-        // 그리고, 그것을 list 배열의 길이만큼 반복하여 출력해준다.
         Iterator<Member> iterator = memberDao.list();
         while (iterator.hasNext()) {
             Member member = iterator.next();
             System.out.printf("%s, %s, %s\n", 
-                    member.getId(), member.getEmail(), member.getPassword());
+                member.getId(), member.getEmail(), member.getPassword());
         }
     }
 
@@ -77,12 +70,7 @@ public class MemberController implements Controller { // 의존객체 -> MemberD
         }
         
         Member member = memberDao.get(id);
-        // 입력받은 id값을 넘겨주면 get메서드에서는 이 값을
-        // getMemberIndex 메서드에 넘겨주고, 같은 값을 가진 배열을
-        // 찾아 존재하면 그 배열의 인덱스 값을 다시 get메소드의 i변수에
-        // 저장한다.
-        // 그리고 그 인덱스에 해당하는 배열의 값을 받아온다.
-        // 만약 id가 같은 값을 가진 배열이 없으면 null 값을 반환한다.
+
         if (member == null) {
             System.out.println("해당 아이디의 회원이 없습니다.");
         } else {
@@ -98,23 +86,20 @@ public class MemberController implements Controller { // 의존객체 -> MemberD
             System.out.println("아이디를 입력하시기 바랍니다.");
             return;
         }
-
-        Member member = memberDao.get(id);
         
+        Member member = memberDao.get(id);
+
         if (member == null) {
             System.out.println("해당 아이디의 회원이 없습니다.");
         } else {
             Member updateMember = new Member();
-            System.out.printf("아이디: %s\n", member.getId()); // 따로 입력 받지 않고 고정시켜 버린다.
+            System.out.printf("아이디: %s\n", member.getId());
             updateMember.setId(member.getId());
             System.out.printf("이메일(%s)? ", member.getEmail());
             updateMember.setEmail(this.keyScan.nextLine());
             System.out.printf("암호? ");
             updateMember.setPassword(this.keyScan.nextLine());
             
-            // 새로 변경하는 객체의 주소를 넘겨주면
-            // 이 객체의 id값과 동일한 값을 가지는 배열을 찾아
-            // 그 배열에 새로 변경하는 객체의 주소를 저장한다.
             int index = memberDao.indexOf(member.getId());
             memberDao.update(index, updateMember);
             System.out.println("변경하였습니다.");
@@ -129,18 +114,23 @@ public class MemberController implements Controller { // 의존객체 -> MemberD
         }
         
         Member member = memberDao.get(id);
-        // 입력받은 id값과 같은 값을 가지는 배열을 넘겨준다.
-        
+
         if (member == null) {
             System.out.println("해당 아이디의 회원이 없습니다.");
         } else {
             if (Console.confirm("정말 삭제하시겠습니까?")) {
                 memberDao.delete(id);
-                // 입력받은 id값과 같은 값을 가지는 배열을 찾아
-                // 존재한다면 그 배열의 주소를 null로 바꿔준다.
                 System.out.println("삭제하였습니다.");
             }
         }
     }
     
 }
+
+//ver 23 - @Component 애노테이션을 붙인다.
+//ver 22 - MemberDao 변경 사항에 맞춰 이 클래스를 변경한다.
+//ver 18 - ArrayList가 적용된 MemberDao를 사용한다.
+//         onMemberList()에서 배열의 각 항목에 대해 null 값을 검사하는 부분을 제거한다.
+//ver 16 - 인스턴스 변수를 직접 사용하는 대신 겟터, 셋터 사용.
+// ver 15 - MemberDao를 생성자에서 주입 받도록 변경.
+// ver 14 - MemberDao를 사용하여 회원 데이터를 관리한다.

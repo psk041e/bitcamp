@@ -1,6 +1,4 @@
-// 팀 관련 기능을 모아 둔 클래스
 // Controller 규칙에 따라 메서드 작성
-
 package bitcamp.java106.pms.controller;
 
 import java.sql.Date;
@@ -14,17 +12,15 @@ import bitcamp.java106.pms.util.Console;
 
 @Component("team")
 public class TeamController implements Controller {
+
     Scanner keyScan;
     TeamDao teamDao;
-    
-    //TeamDao teamDao = new TeamDao();
-    // App에서 한번만 new해주어야 한다.
     
     public TeamController(Scanner scanner, TeamDao teamDao) {
         this.keyScan = scanner;
         this.teamDao = teamDao;
     }
-    
+
     public void service(String menu, String option) {
         if (menu.equals("team/add")) {
             this.onTeamAdd();
@@ -62,7 +58,6 @@ public class TeamController implements Controller {
         team.setEndDate(Date.valueOf(this.keyScan.nextLine()));
 
         teamDao.insert(team);
-        
     }
 
     void onTeamList() {
@@ -83,7 +78,7 @@ public class TeamController implements Controller {
             return; // 값을 리턴하면 안되기 때문에 return 명령만 작성한다.
                     // 의미? 즉시 메서드 실행을 멈추고 이전 위치로 돌아간다.
         }
-
+        
         Team team = teamDao.get(name);
 
         if (team == null) {
@@ -110,8 +105,8 @@ public class TeamController implements Controller {
             System.out.println("해당 이름의 팀이 없습니다.");
         } else {
             Team updateTeam = new Team();
-            System.out.printf("팀명: %s\n", team.getName());
-            updateTeam.setName(team.getName()); // 팀명은 바꾸지 말자
+            System.out.printf("팀명 : %s\n", team.getName());
+            updateTeam.setName(team.getName());
             System.out.printf("설명(%s)? ", team.getDescription());
             updateTeam.setDescription(this.keyScan.nextLine());
             System.out.printf("최대인원(%d)? ", team.getMaxQty());
@@ -121,8 +116,8 @@ public class TeamController implements Controller {
             updateTeam.setStartDate(Date.valueOf(this.keyScan.nextLine()));
             System.out.printf("종료일(%s)? ", team.getEndDate());
             updateTeam.setEndDate(Date.valueOf(this.keyScan.nextLine()));
-
-            int index = teamDao.indexOf(team.getName());
+            
+            int index = teamDao.indexOf(updateTeam.getName());
             teamDao.update(index, updateTeam);
             System.out.println("변경하였습니다.");
         }
@@ -147,8 +142,12 @@ public class TeamController implements Controller {
         }
     }
     
-    
 }
 
+//ver 23 - @Component 애노테이션을 붙인다.
+//ver 22 - TaskDao 변경 사항에 맞춰 이 클래스를 변경한다.
+//ver 18 - ArrayList가 적용된 TeamDao를 사용한다.
+//ver 16 - 인스턴스 변수를 직접 사용하는 대신 겟터, 셋터 사용.
 // ver 15 - TeamDao를 생성자에서 주입 받도록 변경.
+// ver 14 - TeamDao를 사용하여 팀 데이터를 관리한다.
 // ver 13 - 시작일, 종료일을 문자열로 입력 받아 Date 객체로 변환하여 저장.

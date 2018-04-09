@@ -1,4 +1,3 @@
-// 팀 작업 관리 기능을 모아 둔 클래스
 // Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller;
 
@@ -276,5 +275,7 @@ public class TaskController implements Controller {
     }
 }
 
-// ver18 - ArrayList가 적용된 TeamDao를 사용한다.
-// ver 17 - 클래스 생성
+//ver 23 - @Component 애노테이션을 붙인다.
+//ver 22 - TaskDao 변경 사항에 맞춰 이 클래스를 변경한다.
+//ver 18 - ArrayList가 적용된 TaskDao를 사용한다.
+//ver 17 - 클래스 생성

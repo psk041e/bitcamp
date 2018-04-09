@@ -13,18 +13,18 @@ public class Exam04 {
         
         // 파라미터가 없는 메서드를 찾을 때는 파라미터의 타입 정보를 넘기지 않는다.
         System.out.println(clazz.getMethod("m1").getName());
-        System.out.println("---");
+        
         // 파라미터가 있는 메서드를 찾을 때 그 파라미터 타입 정보를 넘겨야 한다.
         // 타입 정보 = 클래스 정보 = Class 객체
-        // System.out.println(clazz.getMethod("m2", String.class).getName());
+         System.out.println(clazz.getMethod("m2", String.class).getName());
         Class parameterType = String.class;
         Method m = clazz.getMethod("m2", parameterType);
         System.out.println(m.getName());
-        System.out.println("===");
+        
         parameterType = Class.forName("java.lang.String");
         m = clazz.getMethod("m2", parameterType);
         System.out.println(m.getName());
-        System.out.println("***");
+        
         // primitive 타입도 클래스 정보가 있다.
         // int = int.class
         // byte,short,in,long,float,double,boolean,char 는 비록 클래스는 아니지만,

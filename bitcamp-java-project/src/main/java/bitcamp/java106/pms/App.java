@@ -5,15 +5,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.context.ApplicationContext;
-import bitcamp.java106.pms.controller.BoardController;
-import bitcamp.java106.pms.controller.ClassroomController;
 import bitcamp.java106.pms.controller.Controller;
-import bitcamp.java106.pms.controller.MemberController;
-import bitcamp.java106.pms.controller.TaskController;
-import bitcamp.java106.pms.controller.TeamController;
-import bitcamp.java106.pms.controller.TeamMemberController;
+import bitcamp.java106.pms.dao.BoardDao;
 import bitcamp.java106.pms.dao.MemberDao;
-import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
@@ -29,6 +23,12 @@ public class App {
     
     static void onQuit() {
         System.out.println("안녕히 가세요!");
+        BoardDao boardDao = (BoardDao) iocContainer.getBean(BoardDao.class);
+        try {
+        	boardDao.save();
+        } catch (Exception e) {
+        	System.out.println("게시물 데이터 저장 중 오류 발생!");
+        }
     }
 
     static void onHelp() {
@@ -43,7 +43,7 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
-    
+        
         // 기본 객체 준비
         HashMap<String,Object> defaultBeans = new HashMap<>();
         defaultBeans.put("java.util.Scanner", keyScan);
@@ -52,7 +52,7 @@ public class App {
         iocContainer = new ApplicationContext(
                 "bitcamp.java106.pms", defaultBeans);
         
-        // 테스트용 데이터를 준비하도록 다음 메서드를 호출한다.
+        // 테스트용 데이터를 준비한다. 
         prepareMemberData();
         prepareTeamData();
         
@@ -67,26 +67,29 @@ public class App {
             } else {
                 option = null;
             }
-
+            
             if (menu.equals("quit")) {
                 onQuit();
                 break;
             } else if (menu.equals("help")) {
                 onHelp();
             } else {
-                int slashIndex = menu.lastIndexOf("/"); // 맨 끝에서부터 /인덱스를 찾아라
-                String controllerKey = menu.substring(0, slashIndex); // 0부터 slashIndex 바로 전까지 잘라라
+                int slashIndex = menu.lastIndexOf("/");
+                String controllerKey = (slashIndex < 0) ? 
+                        menu : menu.substring(0, slashIndex);
+                
                 Controller controller = (Controller) iocContainer.getBean(controllerKey);
                 
                 if (controller != null) {
-                    controller.service(menu, option); 
-                // controller에 담겨져 있는것은 입력받은 option에대한 XxxCnotroller의 주소이다.
-                }else {
+                    controller.service(menu, option);
+                } else {
                     System.out.println("명령어가 올바르지 않습니다.");
                 }
-            } }
+            }
+
+            System.out.println(); 
+        }
     }
-    
     static void prepareMemberData() {
         MemberDao memberDao = (MemberDao) iocContainer.getBean(
                 "bitcamp.java106.pms.dao.MemberDao");
@@ -125,8 +128,8 @@ public class App {
         member.setPassword("1111");
         
         memberDao.insert(member);
-        
     }
+    
     static void prepareTeamData() {
         
         TeamDao teamDao = (TeamDao) iocContainer.getBean(
@@ -149,12 +152,20 @@ public class App {
         team.setMaxQty(5);
         team.setStartDate(Date.valueOf("2018-2-1"));
         team.setEndDate(Date.valueOf("2018-6-30"));
+        teamDao.insert(team);
         teamMemberDao.addMember("t2", "ccc");
         teamMemberDao.addMember("t2", "ddd");
         teamMemberDao.addMember("t2", "eee");
-        teamDao.insert(team);
+        
     }
-    
 }
 
-// ver 15 - TeamDao MemberDao를 다루는 메뉴 추가.
+//ver 17 - Task 관리 기능 추가
+// ver 15 - TeamDao와 MemberDao 객체 생성. 
+//          팀 멤버를 다루는 메뉴 추가.
+
+
+
+
+
+

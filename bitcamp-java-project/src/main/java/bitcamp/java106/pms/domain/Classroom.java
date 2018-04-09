@@ -3,7 +3,8 @@ package bitcamp.java106.pms.domain;
 import java.sql.Date;
 
 public class Classroom {
-    private static int count; // 스태틱변수, 인스턴스 변수는 생성되는 순간 초기화된다.
+    private static int count;
+    
     private int no;
     private String title;
     private Date startDate;
@@ -11,14 +12,15 @@ public class Classroom {
     private String room;
     
     public Classroom() {
-        this.no = ++count; // 1부터 시작되도록 한후 no에 넣는다.
+        this.no = ++count;
     }
     
-     @Override
+    @Override
     public String toString() {
         return "Classroom [no=" + no + ", title=" + title + ", startDate=" + startDate + ", endDate=" + endDate
                 + ", room=" + room + "]";
     }
+    
     public int getNo() {
         return no;
     }
@@ -49,5 +51,6 @@ public class Classroom {
     public void setRoom(String room) {
         this.room = room;
     }
+    
     
 }

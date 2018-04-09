@@ -1,4 +1,4 @@
-// 파라미터 - 파라미터 정보 알아내기
+// 리턴타입
 package step18.ex05;
 
 import java.io.File;
