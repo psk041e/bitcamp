@@ -1,2 +1,1 @@
-t1:user01,user02,user03,user04,user06,
-t2:user05,user06,user07,user08,
+t1:user01,user02,user03,user04,t2:user05,user06,user07,user08,

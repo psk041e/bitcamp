@@ -47,6 +47,7 @@ public class ClassroomDao extends AbstractDao<Classroom> {
         }
         out.close();
     }
+    
     public int indexOf(Object key) {
         int classroomNo = (Integer) key;
         for (int i = 0; i < collection.size(); i++) {

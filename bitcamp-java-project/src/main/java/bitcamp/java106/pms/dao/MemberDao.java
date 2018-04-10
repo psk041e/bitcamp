@@ -38,7 +38,7 @@ public class MemberDao extends AbstractDao<Member> {
         Iterator<Member> members = this.list();
         while (members.hasNext()) {
             Member member = members.next();
-            out.printf("%s,%s,%s\n", member.getId(), member.getEmail(), 
+            out.printf("%s,%s,%s\n", member.getId(), member.getEmail(),
                     member.getPassword());
         }
         out.close();

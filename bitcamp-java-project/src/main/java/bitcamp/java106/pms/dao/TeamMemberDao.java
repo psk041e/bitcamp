@@ -16,7 +16,7 @@ import bitcamp.java106.pms.annotation.Component;
 public class TeamMemberDao {
     
     private HashMap<String, ArrayList<String>> collection = new HashMap<>();
-    
+ 
     public TeamMemberDao() throws Exception {
         load();
     }
@@ -32,13 +32,14 @@ public class TeamMemberDao {
                     list.add(id);
                 }
                 collection.put(arr[0], list);
-            } catch (Exception e) {
-                break;
+            } catch (Exception e) { // 데이터를 모두 읽었거나 파일 형식에 문제가 있다면,
+                //e.printStackTrace();
+                break; // 반복문을 나간다.
             }
         }
         in.close();
     }
-     
+    
     public void save() throws Exception {
         PrintWriter out = new PrintWriter(new FileWriter("data/teammember.csv"));
         Set<String> keyList = collection.keySet();
@@ -49,9 +50,10 @@ public class TeamMemberDao {
                 out.printf("%s,", id);
             }
             out.println();
-        } 
+        }
         out.close();
     }
+    
     
     public int addMember(String teamName, String memberId) {
         String teamNameLC = teamName.toLowerCase();
@@ -111,6 +113,7 @@ public class TeamMemberDao {
 // 메서드 시그너처(method signature) = 함수 프로토타입(function prototype)
 // => 메서드의 이름과 파라미터 형식, 리턴 타입에 대한 정보를 말한다.
 
+//ver 24 - File I/O 적용
 //ver 23 - @Component 애노테이션을 붙인다.
 //ver 19 - 우리 만든 ArrayList 대신 java.util.LinkedList를 사용하여 목록을 다룬다. 
 //ver 18 - ArrayList를 적용하여 객체(의 주소) 목록을 관리한다.

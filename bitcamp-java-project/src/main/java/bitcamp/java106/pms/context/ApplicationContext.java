@@ -160,10 +160,10 @@ public class ApplicationContext {
         return objPool.get(name);
     }
     
-    public Object getBean(Class type) {
+    public Object getBean(Object type) {
         Collection objList = objPool.values();
         for (Object obj : objList) {
-            if (obj.getClass()== type)
+            if (obj.getClass() == type) 
                 return obj;
         }
         return null;

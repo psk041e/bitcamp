@@ -34,7 +34,7 @@ public class Task {
         return no;
     }
     public void setNo(int no) {
-        if (no >= count) 
+        if (no >= count)
             count = no + 1;
         this.no = no;
     }
