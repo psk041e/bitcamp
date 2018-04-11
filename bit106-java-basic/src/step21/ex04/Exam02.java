@@ -4,20 +4,21 @@ package step21.ex04;
 public class Exam02 {
     
     static void m1() throws Exception {
+        // m2()와 같다.
         m2();
     }
     
     static void m2() throws Exception {
         // m3()에서 발생된 예외를 상위 호출자에게 던지려면
         // m2() 메서드에서도 선언부에 예외를 기술해야 한다.
-        // 
+        // => "m2() 안에서 Exception 예외가 발생합니다" 라고!
         m3();
     }
     
     static void m3() throws Exception {
         // m4()에서 발생된 예외를 상위 호출자에게 던지려면
         // m3() 또한 메서드 선언부에 해당 예외를 기술해야 한다.
-        // => "m3() 안에서 Exception 예외가 발생한다."
+        // => "m3() 안에서 Exception 예외가 발생합니다."라고!
         m4();
     }
     
