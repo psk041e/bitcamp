@@ -163,13 +163,14 @@ public class ApplicationContext {
     public Object getBean(Class type) {
         Collection objList = objPool.values();
         for (Object obj : objList) {
-            if (obj.getClass()== type)
+            if (obj.getClass() == type) 
                 return obj;
         }
         return null;
     }
 }
 
+//ver 24 - 타입으로 객체를 찾는 getBean() 메서드 추가
 //ver 23 - 클래스 정의
 
 

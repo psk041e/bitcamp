@@ -22,32 +22,14 @@ public class BoardListController implements Controller {
     }
     
     public void service(String menu, String option) {
-        System.out.println("[게시물 목록]");
-        Iterator<Board> iterator = boardDao.list();
-        while (iterator.hasNext()) {
-            Board board = iterator.next();
-            System.out.printf("%d, %s, %s\n",
-                board.getNo(), board.getTitle(), board.getCreatedDate());
+            System.out.println("[게시물 목록]");
+            Iterator<Board> iterator = boardDao.list();
+            while (iterator.hasNext()) {
+                Board board = iterator.next();
+                System.out.printf("%d, %s, %s\n",
+                    board.getNo(), board.getTitle(), board.getCreatedDate());
+            }
         }
-    }
-
-    void onBoardView(String option) {
-        System.out.println("[게시물 조회]");
-        if (option == null) {
-            System.out.println("번호를 입력하시기 바랍니다.");
-            return;
-        }
-        
-        Board board = boardDao.get(Integer.parseInt(option));
-        
-        if (board == null) {
-            System.out.println("유효하지 않은 게시물 번호입니다.");
-        } else {
-            System.out.printf("팀명: %s\n", board.getTitle());
-            System.out.printf("설명: %s\n", board.getContent());
-            System.out.printf("등록일: %s\n", board.getCreatedDate());
-        }
-    }
 }
 
 //ver 23 - @Component 애노테이션을 붙인다. BoardDao를 받도록 생성자 변경.

@@ -57,8 +57,8 @@ public class TaskListController implements Controller {
                     (task.getWorker() == null) ? 
                             "-" : task.getWorker().getId());
         }
-        System.out.println();
     }
+    
 }
 
 //ver 23 - @Component 애노테이션을 붙인다.

@@ -1,13 +1,20 @@
 package bitcamp.java106.pms.dao;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Iterator;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
+import bitcamp.java106.pms.domain.Board;
 import bitcamp.java106.pms.domain.Classroom;
 
 @Component
@@ -18,34 +25,36 @@ public class ClassroomDao extends AbstractDao<Classroom> {
     }
     
     public void load() throws Exception {
-        Scanner in = new Scanner(new FileReader("data/classroom.csv"));
-        while (true) {
-            try {
-                String[] arr = in.nextLine().split(",");
-                Classroom classroom = new Classroom();
-                classroom.setNo(Integer.parseInt(arr[0]));
-                classroom.setTitle(arr[1]);
-                classroom.setStartDate(Date.valueOf(arr[2]));
-                classroom.setEndDate(Date.valueOf(arr[3]));
-                classroom.setRoom(arr[4].equals(" ") ? "" : arr[4]);
-                this.insert(classroom);
-            } catch (Exception e) {
-                break;
-            }
-        }
-        in.close();
+        try ( 
+            ObjectInputStream in = new ObjectInputStream(
+                                   new BufferedInputStream(
+                                   new FileInputStream("data/classroom.data")));
+            ) {
+                
+                while (true) {
+                    try {
+                        this.insert((Classroom) in.readObject());
+                    } catch (Exception e) {
+                        break; // 데이터를 읽을 수 없으면 예외를 던진다.
+                    }
+                }
+            //in.close(); 자동으로 하기 때문에 필요 없다.
+            } 
     }
     
     public void save() throws Exception {
-        PrintWriter out = new PrintWriter(new FileWriter("data/classroom.csv"));
-        Iterator<Classroom> classrooms = this.list();
-        while (classrooms.hasNext()) {
-            Classroom classroom = classrooms.next();
-            out.printf("%d,%s,%s,%s,%s\n", classroom.getNo(), classroom.getTitle(),
-                    classroom.getStartDate(), classroom.getEndDate(),
-                    classroom.getRoom().equals("") ? " " : classroom.getRoom());
+        try (
+                ObjectOutputStream out = new ObjectOutputStream(
+                                new BufferedOutputStream(
+                                new FileOutputStream("data/classroom.data")));
+                 ) {
+            
+            Iterator<Classroom> classrooms = this.list();
+            
+            while (classrooms.hasNext()) {
+                out.writeObject(classrooms.next());
+            }
         }
-        out.close();
     }
     
     public int indexOf(Object key) {

@@ -45,7 +45,6 @@ public class TaskStateController implements Controller {
             return;
         }
         
-        
         System.out.println("[작업 진행 상태]");
         System.out.print("상태를 변경할 작업의 번호? ");
         int taskNo = Integer.parseInt(keyScan.nextLine());

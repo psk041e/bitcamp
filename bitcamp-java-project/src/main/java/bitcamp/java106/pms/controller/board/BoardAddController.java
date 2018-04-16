@@ -22,6 +22,7 @@ public class BoardAddController implements Controller {
     }
     
     public void service(String menu, String option) {
+        // 이 컨트롤러는 오직 게시물 입력에 대해서만 작업을 수행한다.
         System.out.println("[게시물 입력]");
         Board board = new Board();
 
@@ -36,6 +37,7 @@ public class BoardAddController implements Controller {
 
         boardDao.insert(board);
     }
+    
 }
 
 //ver 23 - @Component 애노테이션을 붙인다. BoardDao를 받도록 생성자 변경.

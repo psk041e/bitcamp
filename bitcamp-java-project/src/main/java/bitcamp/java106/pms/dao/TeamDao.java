@@ -1,13 +1,21 @@
 package bitcamp.java106.pms.dao;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Iterator;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
+import bitcamp.java106.pms.domain.Board;
+import bitcamp.java106.pms.domain.Classroom;
 import bitcamp.java106.pms.domain.Team;
 
 @Component
@@ -18,33 +26,36 @@ public class TeamDao extends AbstractDao<Team> {
     }
     
     public void load() throws Exception {
-        Scanner in = new Scanner(new FileReader("data/team.csv"));
-        while (true) {
-            try {
-                String[] arr = in.nextLine().split(",");
-                Team team = new Team();
-                team.setName(arr[0]);
-                team.setDescription(arr[1]);
-                team.setMaxQty(Integer.parseInt(arr[2]));
-                team.setStartDate(Date.valueOf(arr[3]));
-                team.setEndDate(Date.valueOf(arr[4]));
-                this.insert(team);
-            } catch (Exception e) {
-                break;
-            }
-        }
-        in.close();
+        try ( 
+            ObjectInputStream in = new ObjectInputStream(
+                                   new BufferedInputStream(
+                                   new FileInputStream("data/team.data")));
+            ) {
+                
+                while (true) {
+                    try {
+                        this.insert((Team) in.readObject());
+                    } catch (Exception e) {
+                        break; // 데이터를 읽을 수 없으면 예외를 던진다.
+                    }
+                }
+            //in.close(); 자동으로 하기 때문에 필요 없다.
+            } 
     }
     
     public void save() throws Exception {
-        PrintWriter out = new PrintWriter(new FileWriter("data/team.csv"));
-        Iterator<Team> teams = this.list();
-        while (teams.hasNext()) {
-            Team team = teams.next();
-            out.printf("%s,%s,%d,%s,%s\n", team.getName(), team.getDescription(),
-                    team.getMaxQty(), team.getStartDate(), team.getEndDate());
+        try (
+                ObjectOutputStream out = new ObjectOutputStream(
+                                new BufferedOutputStream(
+                                new FileOutputStream("data/team.data")));
+                 ) {
+            
+            Iterator<Team> teams = this.list();
+            
+            while (teams.hasNext()) {
+                out.writeObject(teams.next());
+            }
         }
-        out.close();
     }
     
     public int indexOf(Object key) {

@@ -69,4 +69,3 @@ public class MemberDao extends AbstractDao<Member> {
 
 
 
-

@@ -64,8 +64,6 @@ public class TaskViewController implements Controller {
         System.out.printf("작업상태: %s\n", getStateLabel(task.getState()));
     }
     
-    // 다음 메서드와 같이 인스턴스 변수를 사용하지 않는 메서드라면,
-    // static을 붙여 클래스 메서드로 만들라!
     public static String getStateLabel(int state) {
         switch (state) {
         case Task.READY: return "작업대기";

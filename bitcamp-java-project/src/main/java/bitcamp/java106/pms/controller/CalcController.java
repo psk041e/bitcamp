@@ -1,15 +1,9 @@
 // Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller;
 
-import java.sql.Date;
-import java.util.Iterator;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
-import bitcamp.java106.pms.controller.Controller;
-import bitcamp.java106.pms.dao.BoardDao;
-import bitcamp.java106.pms.domain.Board;
-import bitcamp.java106.pms.util.Console;
 
 @Component("calc")
 public class CalcController implements Controller {
@@ -26,10 +20,9 @@ public class CalcController implements Controller {
             System.out.println("입력 형식 예) 2 + 3");
             return;
         }
-        
+        String op = arr[1];
         int a = Integer.parseInt(arr[0]);
         int b = Integer.parseInt(arr[2]);
-        String op = arr[1];
         int result = 0;
         
         switch (op) {
@@ -37,12 +30,12 @@ public class CalcController implements Controller {
         case "-": result = a - b; break;
         case "*": result = a * b; break;
         case "/": result = a / b; break;
-        default:
+        default: 
             System.out.printf("%s 연산은 지원하지 않습니다.", op);
             return;
         }
-        System.out.printf("%d %s %d = %d", a, op, b, result);
         
+        System.out.printf("%d %s %d = %d\n", a, op, b, result);
     }
 }
 

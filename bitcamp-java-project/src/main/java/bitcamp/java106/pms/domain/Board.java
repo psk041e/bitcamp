@@ -1,14 +1,18 @@
 // 게시글 데이터를 저장할 새 데이터 타입을 정의한다.
 package bitcamp.java106.pms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Board {
+public class Board implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private static int count = 1;
     
     private int no;
     private String title;
-    private String content;
+    private 
+    String content;
     private Date createdDate;
     
     public Board() {
@@ -45,7 +49,8 @@ public class Board {
     
 }
 
-//ver 18 - 게시물 객체의 고유 번호(no)를 static 변수(count)를 이용하여 자동 설정한다. 
+// ver 27 - java.io.Serializable 인터페이스 구현
+// ver 18 - 게시물 객체의 고유 번호(no)를 static 변수(count)를 이용하여 자동 설정한다. 
 // ver 16 - 캡슐화 적용. 겟터, 셋터 추가.
 // ver 13 - 등록일의 데이터 타입을 String에서 Date으로 변경
 

@@ -30,6 +30,7 @@ public class MemberListController implements Controller {
                 member.getId(), member.getEmail(), member.getPassword());
         }
     }
+
 }
 
 //ver 23 - @Component 애노테이션을 붙인다.

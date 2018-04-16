@@ -46,6 +46,7 @@ public class BoardUpdateController implements Controller {
             System.out.println("변경하였습니다.");
         }
     }
+
 }
 
 //ver 23 - @Component 애노테이션을 붙인다. BoardDao를 받도록 생성자 변경.

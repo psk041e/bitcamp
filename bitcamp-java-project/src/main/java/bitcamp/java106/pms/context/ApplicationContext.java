@@ -163,7 +163,7 @@ public class ApplicationContext {
     public Object getBean(Object type) {
         Collection objList = objPool.values();
         for (Object obj : objList) {
-            if (obj.getClass() == type) 
+            if (obj.getClass() == type)
                 return obj;
         }
         return null;

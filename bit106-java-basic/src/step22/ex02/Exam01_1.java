@@ -6,7 +6,7 @@ import java.io.FileWriter;
 public class Exam01_1 {
     public static void main(String[] args) throws Exception {
         // 1) 문자 단위로 출력할 도구 준비
-        FileWriter out = new FileWriter("temp/test1.data");
+        FileWriter out = new FileWriter("temp/test2.txt");
         
         // 2) 문자 출력하기
         // => 자바는 문자 데이터를 다룰 때 UTF-16(2바이트) 유니코드를 사용한다.
@@ -20,7 +20,7 @@ public class Exam01_1 {
         //
         // => 따라서 다음 4바이트 값을 출력하면
         //    앞의 2바이트는 버리고, 뒤의 2바이트를 UTF-8코드표에 따라
-        //    1 ~ 3바이트 값으로 변환하여 출력한다.
+        //    1 ~ 4바이트 값으로 변환하여 출력한다.(한국어는 3byte이지만 4byte인 언어도 있다.)
         out.write(0x7a6bac00); 
         
         out.close();
