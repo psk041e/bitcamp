@@ -47,7 +47,7 @@ public class HTTPServer {
             
             // HTTP 프로토콜에서 요청 정보를 읽는다.
             boolean firstLine = true;
-            String requestURI;
+            String requestURI = null;
             
             while (true) {
                 String line = in.nextLine(); 
