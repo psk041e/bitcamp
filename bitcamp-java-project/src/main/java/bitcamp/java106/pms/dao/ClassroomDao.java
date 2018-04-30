@@ -8,6 +8,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Classroom;
 import bitcamp.java106.pms.jdbc.DataSource;
@@ -15,95 +18,40 @@ import bitcamp.java106.pms.jdbc.DataSource;
 @Component
 public class ClassroomDao {
 
-    DataSource dataSource;
+    SqlSessionFactory sqlSessionFactory;
     
-    public ClassroomDao(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public ClassroomDao(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
     }
     
     public int delete(int no) throws Exception {
-        try (
-            Connection con = dataSource.getConnection();
-            PreparedStatement stmt = con.prepareStatement(
-                "delete from pms_classroom where crno=?");) {
-            
-            stmt.setInt(1, no);
-            return stmt.executeUpdate();
+        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
+            int count = sqlSession.delete("bitcamp.java106.pms.dao.ClassroomDao.delete",no);
+            sqlSession.commit();
+            return count;
         } 
     }
     
     public List<Classroom> selectList() throws Exception {
-        try (
-            Connection con = dataSource.getConnection();
-            PreparedStatement stmt = con.prepareStatement(
-                "select crno,titl,sdt,edt,room from pms_classroom");
-            ResultSet rs = stmt.executeQuery();) {
-            
-            ArrayList<Classroom> arr = new ArrayList<>();
-            while (rs.next()) {
-                Classroom classroom = new Classroom();
-                classroom.setNo(rs.getInt("crno"));
-                classroom.setTitle(rs.getString("titl"));
-                classroom.setStartDate(rs.getDate("sdt"));
-                classroom.setEndDate(rs.getDate("edt"));
-                classroom.setRoom(rs.getString("room"));
-                arr.add(classroom);
-            }
-            return arr;
-        }
+        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
+            return sqlSession.selectList("bitcamp.java106.pms.dao.ClassroomDao.selectList");
+        } 
     }
 
     public int insert(Classroom classroom) throws Exception {
-        try (
-            Connection con = dataSource.getConnection();
-            PreparedStatement stmt = con.prepareStatement(
-                "insert into pms_classroom(titl,sdt,edt,room) values(?,?,?,?)");) {
-            
-            stmt.setString(1, classroom.getTitle());
-            stmt.setDate(2, classroom.getStartDate(), Calendar.getInstance(Locale.KOREAN));
-            stmt.setDate(3, classroom.getEndDate(), Calendar.getInstance(Locale.KOREAN));
-            stmt.setString(4, classroom.getRoom());
-        
-            return stmt.executeUpdate();
-        }
+        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
+            int count = sqlSession.insert("bitcamp.java106.pms.dao.ClassroomDao.insert", classroom);
+            sqlSession.commit();
+            return count;
+        } 
     }
 
     public int update(Classroom classroom) throws Exception {
-        try (
-            Connection con = dataSource.getConnection();
-            PreparedStatement stmt = con.prepareStatement(
-                "update pms_classroom set titl=?, sdt=?, edt=?, room=? where crno=?");) {
-            
-            stmt.setString(1, classroom.getTitle());
-            stmt.setDate(2, classroom.getStartDate(), Calendar.getInstance(Locale.KOREAN));
-            stmt.setDate(3, classroom.getEndDate(), Calendar.getInstance(Locale.KOREAN));
-            stmt.setString(4, classroom.getRoom());
-            stmt.setInt(5, classroom.getNo());
-            return stmt.executeUpdate();
-        }
-    }
-
-    public Classroom selectOne(int no) throws Exception {
-        try (
-            Connection con = dataSource.getConnection();
-            PreparedStatement stmt = con.prepareStatement(
-                "select crno,titl,sdt,edt,room from pms_classroom where crno=?");) {
-            
-            stmt.setInt(1, no);
-            
-            try (ResultSet rs = stmt.executeQuery();) {
-                if (!rs.next()) 
-                    return null;
-                
-                Classroom classroom = new Classroom();
-                classroom.setNo(rs.getInt("crno"));
-                classroom.setTitle(rs.getString("titl"));
-                classroom.setStartDate(rs.getDate("sdt"));
-                classroom.setEndDate(rs.getDate("edt"));
-                classroom.setRoom(rs.getString("room"));
-                return classroom;
-            }
-        }  
+        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
+            int count = sqlSession.update("bitcamp.java106.pms.dao.ClassroomDao.update", classroom);
+            sqlSession.commit();
+            return count;
+        } 
     }
 }
 

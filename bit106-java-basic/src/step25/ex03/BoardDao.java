@@ -51,7 +51,7 @@ public class BoardDao {
 
     public int insert(Board board) throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        try ( // close 자동호출을 윌해 try 사용, 항상 try문을 나가기 전에 close가 자동으로 일어난다.
+        try ( // close 자동호출을 위해 try 사용, 항상 try문을 나가기 전에 close가 자동으로 일어난다.
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
                     "java106", "1111");

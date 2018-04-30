@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import step25.ex04.Board;
+
 public class BoardDao {
     DataSource dataSource;
     
@@ -31,21 +33,21 @@ public class BoardDao {
     
     public List<Board> list() throws Exception {
         try (
-            Connection con = dataSource.getConnection();
-            PreparedStatement stmt = con.prepareStatement(
-                "select bno,titl,rdt from ex_board");
-            ResultSet rs = stmt.executeQuery();) {
-            
-            ArrayList<Board> arr = new ArrayList<>();
-            while (rs.next()) {
-                Board board = new Board();
-                board.setNo(rs.getInt("bno"));
-                board.setTitle(rs.getString("titl"));
-                board.setRegisteredDate(rs.getDate("rdt"));
-                arr.add(board);
+                Connection con = dataSource.getConnection();
+                PreparedStatement stmt = con.prepareStatement(
+                    "select bno,titl,rdt from ex_board");
+                ResultSet rs = stmt.executeQuery();) {
+                
+                ArrayList<Board> arr = new ArrayList<>();
+                while (rs.next()) {
+                    Board board = new Board();
+                    board.setNo(rs.getInt("bno"));
+                    board.setTitle(rs.getString("titl"));
+                    board.setRegisteredDate(rs.getDate("rdt"));
+                    arr.add(board);
+                }
+                return arr;
             }
-            return arr;
-        }
     }
 
     public int insert(Board board) throws Exception {
