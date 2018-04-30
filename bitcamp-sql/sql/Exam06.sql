@@ -37,15 +37,15 @@ values(104, 'N', '1004', '국민은행');
 
 /* 강사 데이터 입력 */
 insert into memb(mno, name, tel, email, pwd)
-values(200, 's200', '111-1111', 's200@', password('1111'));
+values(200, 's200', '111-1111', 's200@', sha2('1111',224));
 insert into memb(mno, name, tel, email, pwd)
-values(201, 's201', '111-1111', 's201@', password('1111'));
+values(201, 's201', '111-1111', 's201@', sha2('1111',224));
 insert into memb(mno, name, tel, email, pwd)
-values(202, 's202', '111-1111', 's202@', password('1111'));
+values(202, 's202', '111-1111', 's202@', sha2('1111',224));
 insert into memb(mno, name, tel, email, pwd)
-values(203, 's203', '111-1111', 's203@', password('1111'));
+values(203, 's203', '111-1111', 's203@', sha2('1111',224));
 insert into memb(mno, name, tel, email, pwd)
-values(204, 's204', '111-1111', 's204@', password('1111'));
+values(204, 's204', '111-1111', 's204@', sha2('1111',224));
 
 insert into tcher(mno, hr_pay, acc_no, bank)
 values(200, 10000, '2000', '신한은행');
