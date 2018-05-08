@@ -4,7 +4,8 @@ package bitcamp.java106.pms.controller.task;
 import java.io.PrintWriter;
 import java.util.List;
 
-import bitcamp.java106.pms.annotation.Component;
+import org.springframework.stereotype.Component;
+
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
@@ -35,7 +36,6 @@ public class TaskListController implements Controller {
                 out.printf("'%s' 팀은 존재하지 않습니다.\n", teamName);
                 return;
             }
-            
             List<Task> list = taskDao.selectList(team.getName());
             for (Task task : list) {
                 out.printf("%d,%s,%s,%s,%s\n", 

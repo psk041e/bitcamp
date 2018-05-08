@@ -4,14 +4,35 @@
 
 // 1) gradle 빌드 도구가 사용할 플러그인 추가
 // => 이클립스 관련 파일을 생성하고 제거하는 명령어가 들어 있는 플러그인
-apply plugin: 'eclipse'
+apply plugin: 'eclipse' 
 
 // => 자바 관련 작업을 수행할 명령어가 들어 있는 플러그인
 apply plugin: 'java'
 
+// => web archive 파일을 다루는 명령어가 들어 있는 플러그인
+apply plugin: 'war'
+
+compileJava {
+    // 컴파일 할 때 소스 파일의 인코딩 옵션을 추가할 것이다.
+    options.encoding = 'UTF-8'
+}
+
+war {
+    // war 파일을 생성할 때 사용할 파일명 설정하기
+    // => 파일명을 설정하지 않으면 프로젝트 이름으로 생성된다.
+    archiveName = "pms.war"
+}
+
+// 프로젝트에서 사용하는 의존 라이브러리를 외부의 디렉토리로 복사하는 명령 추가
+task copyJars(type: Copy) {
+  from configurations.runtime
+  into "build/libs/deps"
+}
+
 // => 의존 라이브러리를 보관하고 있는 서버를 지정한다.
 repositories {
-    mavenCentral()
+    // https://repo.maven.apache.org/maven2/ 서버에서 다운로드 받는다.
+    mavenCentral() 
 }
 
 // => 다운로드할 의존 라이브러리를 지정한다.
@@ -19,6 +40,20 @@ dependencies {
     // MySQL JDBC Driver 라이브러리
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
     
-    // Mybatis 라이브러리 
+    // Mybatis 라이브러리
     compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'
+    
+    // Spring IoC 컨테이너 라이브러리
+    compile group: 'org.springframework', name: 'spring-context', version: '5.0.5.RELEASE'
+    
+    // 서블릿 라이브러리
+    // => 어느 버전의 서블릿 규칙에 따라 만든 서버인지에 따라 
+    //    그 버전의 라이브러리를 다운로드 받아야 한다.
+    // => 즉 서버와 같은 버전의 라이브러리를 다운로드 받아서 사용해야만 그 서버에서 실행할 수 있다.
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    
 }
+
+
+
+

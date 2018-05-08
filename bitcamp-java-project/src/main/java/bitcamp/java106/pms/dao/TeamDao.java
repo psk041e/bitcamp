@@ -1,19 +1,12 @@
 package bitcamp.java106.pms.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Component;
 
-import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.jdbc.DataSource;
 
 @Component
 public class TeamDao {
@@ -30,8 +23,7 @@ public class TeamDao {
                     "bitcamp.java106.pms.dao.TeamDao.delete", name);
             sqlSession.commit();
             return count;
-            
-        }  
+        } 
     }
     
     public List<Team> selectList() throws Exception {
@@ -43,7 +35,8 @@ public class TeamDao {
 
     public int insert(Team team) throws Exception {
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            int count = sqlSession.insert("bitcamp.java106.pms.dao.TeamDao.insert", team);
+            int count = sqlSession.insert(
+                    "bitcamp.java106.pms.dao.TeamDao.insert", team);
             sqlSession.commit();
             return count;
         }
@@ -51,20 +44,22 @@ public class TeamDao {
 
     public int update(Team team) throws Exception {
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            int count = sqlSession.update("bitcamp.java106.pms.dao.TeamDao.update", team);
+            int count = sqlSession.update(
+                    "bitcamp.java106.pms.dao.TeamDao.update", team);
             sqlSession.commit();
             return count;
         }
     }
 
     public Team selectOne(String name) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession();) {
+        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
             return sqlSession.selectOne(
                     "bitcamp.java106.pms.dao.TeamDao.selectOne", name);
-        } 
-    }
+        }
+    }    
 }
 
+//ver 33 - Mybatis 적용 
 //ver 32 - DB 커넥션 풀 적용
 //ver 31 - JDBC API 적용
 //ver 24 - File I/O 적용

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 팩토리 메서드를 통해 객체를 만들기 -->
+    
+    <bean id="c1" class="bitcamp.java106.step06.CarFactory"
+        factory-method="create">
+        <constructor-arg value="티코"></constructor-arg>
+    </bean>
+    <!-- 
+        d속성
+            factory-method="스태틱 메서드 이름"
+            class="스태틱 메서드가 들어있는 클래스 이름"
+        d자바 코드:
+            Object obj = CarFactory.create("티코");
+            objPool.put("c1", c1); -->
+         <!-- 이 객체를 만들라는 것이 아니라 이 메서드의 객체값을 
+              c1이라는 이름으로 저장하고 파라미터로 티코를 넘긴다. -->
+    
+    <bean id="c2" class="bitcamp.java106.step06.CarFactory"
+        factory-method="create">
+        <constructor-arg value="소나타"></constructor-arg>
+    </bean>
+
+    <bean id="c3" class="bitcamp.java106.step06.CarFactory"
+        factory-method="create">
+        <constructor-arg value="오호라"></constructor-arg>
+    </bean>
+</beans>
+
+
+
+
+
+
+

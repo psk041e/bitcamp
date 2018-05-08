@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 팩토리 메서드를 통해 객체를 만들기 - 응용 -->
+    
+    <!-- "yyyy-MM-dd" 형식의 문자열을 가지고 java.sql.Date 객체 만들기 
+        d자바코드:
+         Date d1 = Date.valueOf("yyyy-MM-dd");
+        d클래스의 "스태틱 메서드"를 호출해서 그 리턴값을 저장하고자 할 때
+          -->    
+          <!-- 메서드의 리턴값을 d1으로 저장 -->
+          <!-- factory-method ==> 호출할 스태틱 메서드명 -->
+    <bean id="d1" class="java.sql.Date" 
+        factory-method="valueOf">
+        <constructor-arg value="2018-05-04"/> <!-- 파라미터를 넘긴다. -->
+    </bean>
+</beans>
+
+
+
+
+
+
+

@@ -1,16 +1,11 @@
 package bitcamp.java106.pms.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-
-import bitcamp.java106.pms.annotation.Component;
+import org.springframework.stereotype.Component;
 
 @Component
 public class TeamMemberDao {
@@ -70,6 +65,7 @@ public class TeamMemberDao {
     }
 }
 
+//ver 33 - Mybatis 적용
 //ver 32 - DB 커넥션 풀 적용
 //ver 31 - JDBC API 적용
 //ver 24 - File I/O 적용

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 빈의 이름을 지정하는 다양한 방법 -->
+
+    <!-- id: 빈의 이름 -->
+    <bean id="c1" class="bitcamp.java106.step02.Car"/>
+
+    <!-- name: 빈의 별명 -->
+    <bean id="c2" name="c3" class="bitcamp.java106.step02.Car"/>
+    
+    <!-- id를 지정하지 않고 name만 지정하면 name이 id로 사용된다.-->  
+    <!--절대 이름은 중복되서는 안된다!-->
+    <bean name="c3" class="bitcamp.java106.step02.Car"/>
+
+</beans>

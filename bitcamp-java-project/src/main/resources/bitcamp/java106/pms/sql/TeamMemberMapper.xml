@@ -2,46 +2,36 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<mapper namespace="bitcamp.java106.pms.dao.TeamMemberDao">
 
+<mapper namespace="bitcamp.java106.pms.dao.TeamMemberDao">
+  
   <select id="selectList" 
           resultType="string" parameterType="string">
-    select mid from pms_team_member 
+    select mid from pms2_team_member 
     where tnm=#{value}
-    <!-- limit #{startIndex}, #{pageSize} -->
+    <!--  limit #{startIndex}, #{pageSize} -->
   </select>
   
   <insert id="insert" parameterType="map">
-    insert into pms_team_member(tnm,mid) 
+    insert into pms2_team_member(tnm,mid) 
     values(#{teamName},#{memberId})
-  </insert> 
-
+  </insert>
+  
   <select id="isExist" parameterType="map" resultType="int">
-    select count(*)
-    from pms_team_member 
+    select count(*) 
+    from pms2_team_member 
     where tnm=#{teamName} and mid=#{memberId}
   </select>
   
-  <update id="update" parameterType="Team">
-    update pms_team set 
-      dscrt=#{description}, 
-      max_qty=#{maxQty}, 
-      sdt=#{startDate}, 
-      edt=#{endDate} 
-    where name=#{name}
-  </update>
-  
   <delete id="delete" parameterType="map">
-    delete from pms_team_member 
+    delete from pms2_team_member 
     where tnm=#{teamName} and mid=#{memberId}
   </delete>
-  
-  <update id="updateState" parameterType="map">
-    update pms_team set 
-      stat=#{state} 
-    where tano=#{no}
-  </update>
-  
 </mapper>
+
+
+
+
+
+
 

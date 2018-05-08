@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Component;
 
-import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Task;
 
 @Component
@@ -17,7 +17,7 @@ public class TaskDao {
     public TaskDao(SqlSessionFactory sqlSessionFactory) {
         this.sqlSessionFactory = sqlSessionFactory;
     }
-           
+            
     public int delete(int no) throws Exception {
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
             int count = sqlSession.delete(
@@ -53,24 +53,27 @@ public class TaskDao {
     }
 
     public Task selectOne(int no) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession();) {
-            return sqlSession.selectOne("bitcamp.java106.pms.dao.TaskDao.selectOne", no);
-        }  
+        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
+            return sqlSession.selectOne(
+                    "bitcamp.java106.pms.dao.TaskDao.selectOne", no);
+        }
     }
 
     public int updateState(int no, int state) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession();) {
+        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
             HashMap<String,Object> paramMap = new HashMap<>();
             paramMap.put("no", no);
             paramMap.put("state", state);
-            
-            int count = sqlSession.update("bitcamp.java106.pms.dao.TaskDao.updateState", paramMap);
+
+            int count = sqlSession.update(
+                    "bitcamp.java106.pms.dao.TaskDao.updateState", paramMap);
             sqlSession.commit();
             return count;
         }
     }
 }
 
+//ver 33 - Mybatis 적용
 //ver 32 - DB 커넥션 풀 적용
 //ver 31 - JDBC API 적용
 //ver 24 - File I/O 적용

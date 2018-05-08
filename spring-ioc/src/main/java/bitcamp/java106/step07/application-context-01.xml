@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    
+    <bean id="c1" class="bitcamp.java106.step07.Car">
+        <property name="model" value="티코"/>
+        <property name="maker" value="비트자동차"/>
+        <property name="cc" value="890"/> 
+        <!-- integer.parseint해서 int값으로 바꾼 후 넘겨준다. -->
+        <property name="auto" value="true"></property>
+        <property name="createdDate" value="2018-5-8"/>
+        <!-- 문자열을 Date객체로 만드는 내장객체가 존재하지 않아 에러가 뜨게 된다. -->
+    </bean>
+</beans>
+
+
+
+
+
+
+

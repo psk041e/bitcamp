@@ -4,15 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <properties resource="bitcamp/java106/pms/sql/jdbc.properties"></properties>
-  <!-- 클래스가 아니라 파일경로이기 때문에 /를 사용한다. -->
+
   <typeAliases>
     <typeAlias type="bitcamp.java106.pms.domain.Board" alias="Board"/>
     <typeAlias type="bitcamp.java106.pms.domain.Classroom" alias="Classroom"/>
     <typeAlias type="bitcamp.java106.pms.domain.Member" alias="Member"/>
     <typeAlias type="bitcamp.java106.pms.domain.Task" alias="Task"/>
     <typeAlias type="bitcamp.java106.pms.domain.Team" alias="Team"/>
-    <typeAlias type="bitcamp.java106.pms.domain.TeamMember" alias="TeamMember"/>
-    <!-- 파일경로가 아니라 클래스이기 때문에 .을 사용한다. -->
   </typeAliases>
 
   <environments default="development">
@@ -36,6 +34,7 @@
     <mapper resource="bitcamp/java106/pms/sql/TeamMemberMapper.xml"/>
   </mappers>
 </configuration>
+
 
 
 
