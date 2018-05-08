@@ -30,7 +30,7 @@ public class BeanUtils {
     }
     
     public static void printBeanNames(ApplicationContext iocContainer) {
-        System.out.println("[생성된 빈의 이름 목록");
+        System.out.println("[생성된 빈의 이름 목록]");
         String[] names = iocContainer.getBeanDefinitionNames();
         for (String name : names) {
             System.out.println(name);

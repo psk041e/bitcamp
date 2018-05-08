@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd"> 
+        <!-- 한줄로 적어도 된다. 순서는 상관 없다. 
+             p(property)와 c(constructor),instance는 schemaLocation 정보를 설정하지 않는다.
+             => 내부적으로 처리하기 때문이다.
+             => 해당되는 url에 접속하고 파일을 다운해 그파일에 annotation이 정의되어있는지 확인한다. 
+             => 따라서 인터넷이 연결되지 않으면 에러가 난다. xsd파일을 서버에서 다운하지 못하기 때문이다.
+             -->
+             
+        <!-- location="네임스페이스명 url 네임스페이스명 url 네임스페이스명 url... 
+             => 한줄로 적으면 유지보수가 힘들다.
+             => 네임스페이스명
+                url
+               d네임스페이스명
+                url
+                ... 따라서 이와 같이 사용한다.
+         -->
+        
+        <!-- 태그 이름이 정의된 구역의 그룹명 
+            => 자바(클래스들이 들어있는 그룹): 패키지
+               d자바의 그룹은 그룹 안에 하위 그룹을 둘 수 있다.
+               d자바의 그룹명은 영문자나 숫자를 사용한다.
+               d자바에서는 패키지에 소속된 그룹을 가리킬때는 다음과 같이 쓴다. 
+               ex) bitcamp.java106.step08
+               
+            => xml: 네임스페이스(=네임공간=네임 영역=그룹)
+               xml세계에서 그룹이름은 url이름을 가지고 있다.
+               xml에서 그룹을 지정할 때는 
+               http://www.springframework.org/schema/context 처럼 긴 이름을 사용한다.
+               d이것을 웹브라우저에서 검색하면 그룹에대한,그룹에 어떤 태그들이 들어있는지 상세한 정보를 보여준다.
+               d이 태그가 들어있는 패키지 명을 길게 준 것이다.
+               d이것에 대한 자세한 명세서는 .xsd 파일에 정의되어있다.(맨마지막이 가장최신버전)
+               ex) http://www.springframework.org/schema/context
+                   => beans 네임스페이스를 가리키는 파일을 가리킨다. 
+               d네임스페이스와 네임스페이스 규칙을 정의하고 있는 명세서의 위치를 똑같이한다.
+                => 일관성있게 이름을 주었다.
+                
+            cf)오히려 자바의 패키지라는 것이 일반적이지 않은 이름이다.
+               d프로그래밍에서는 보통 이런것을 네임스페이스라고 부른다.
+               d그런데 유독 자바에서만 이름들을 모아놓은 그룹을 패키지라고 부른다.
+        -->
+    
+    <!-- 클래스에 붙은 특정 애노테이션을 처리할 BeanPostProcessor 등록하기
+         @Autowired => AutowiredAnnotationBeanPostProcessor
+         @Qualifier => ?
+         @Resourecs => ?
+         @...       => ?
+         d위와 같이 특정 Annotation을 처리하고 싶다면, 그 Annotation을 처리할 객체를 등록해야한다.
+         d문제는,
+         d각각의 Annotation에 대해 어떤 클래스가 처리하는지 암기를 해야 하고,
+         d또한 다음 AutowiredAnnotationBeanPostProcessor 경우와 같이
+         <bean> 태그를 이용하여 그 객체를 등록해야 한다.
+         => 결론! 매우 번거롭고 불편하다.
+         d그래서 스프링 프레임워크는 이런 개발자의 어려움을 덜어주고자
+         d애노테이션을 처리할 클래스를 자동 등록하는 특별한 단축 태그를 제공한다.
+         d현재 스프링 프레임워크에는 Annotation이 15개 있다.
+         d버전이 업그레이드 될 수록 암기해야할것이 늘어나게 된다.
+    
+     -->
+    
+    <!-- 애노테이션을 처리하려면 다음과 같이 처리해주는 객체를 등록해야 한다. -->
+    <!-- => 그러나 매번 이런식으로 할 필요 없다. -->
+    <!-- <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> -->
+    <context:annotation-config/>
+    <!-- 위의 태그를 추가하면, 개발자가 일일이 BeanPostProcessor를 등록할 필요가 없다.
+         d내부적으로 관련된 BeanPostProcessor를 자동으로 등록한다. (알아서 6개가 등록된다.)
+         d따라서 개발자는 각각의 애노테이션을 처리할 BeanPostProcessor의 이름을
+         d암기할 필요가 없어서 편하다!
+         => 이 태그를 추가하면 @Qualifier 애노테이션을 처리할 BeanPostProcessor가 자동 등록된다!
+     -->
+    
+	    <bean id="c1" class="bitcamp.java106.step08.Car6">
+	        <property name="model" value="티코"/>
+	        <property name="maker" value="비트자동차"/>
+	        <property name="cc" value="890"/> 
+	        <property name="auto" value="true"/>
+	    </bean>
+    
+    <bean id="e1" class="bitcamp.java106.step08.Engine">
+        <property name="maker" value="비트자동차"/>
+        <property name="valve" value="16"/>
+        <property name="cylinder" value="4"/>
+    </bean>
+    
+    <bean id="e2" class="bitcamp.java106.step08.Engine">
+        <property name="maker" value="캠프자동차"/>
+        <property name="valve" value="32"/>
+        <property name="cylinder" value="8"/>
+    </bean>
+</beans>
+
+
+
+
+
+
+
