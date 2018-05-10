@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+  version="4.0"
+  metadata-complete="false">
+    <!-- metadata-complete 값이 true이면 web.xml 파일에 등록된 정보만 유호하다.
+         @WebServlet, @WebFilter 처럼 애노테이션으로도 지정하 수 있으려면,
+         false 값으로 설정해야 한다. -->
+
+    <!-- 선택 항목, 생략해도 된다. -->
+    <description>
+      => 웹 애플리케이션에 대한 설명을 적는 태그이다.
+    </description>
+    
+    <!-- 선택 항목, 생략해도 된다. -->
+    <display-name>
+      => 서버 관리자 화면에서 출력될 웹 애플리케이션 이름을 적는 태그이다.
+    </display-name>
+
+    <!-- 
+    <request-character-encoding>UTF-8</request-character-encoding>
+     -->
+
+    <!-- 개발자가 만든 서블릿 클래스의 정보를 등록 -->
+    <servlet>
+        <!-- 서블릿 클래스의 별명: 보통 유지보수 하기 쉽게 클래스명을 사용한다. -->
+      <servlet-name>I am okok</servlet-name>
+      <!-- 서블릿 클래스의 QName(Fully-qualified class name)이다. 반드시 패키지이름을 포함해야 한다. --> 
+      <servlet-class>step02.Exam02</servlet-class>
+    </servlet>
+
+    <!-- 서블릿 클래스에 URL 경로를 지정한다.
+         d클라이언트는 여기에 지정된 URL을 사용하여 서블릿 클래스 실행을 요청한다. -->
+    <servlet-mapping>
+        <!-- 내부적으로 위에 정의된 서블릿 클래스를 찾을 때 사용할 별명, 공백이 들어가도 상관없다. 문자열이다.
+             d위에 정의된것과 똑같아야 한다.-->
+        <servlet-name>I am okok</servlet-name>
+        <!-- 클라이언트가 요청할 때 사용할 서블릿 이름 -->
+        <url-pattern>/step02/exam02</url-pattern>
+    </servlet-mapping>
+
+    <!-- 클라이언트가 요청한 자원을 찾을 수 없을 때
+         d서블릿 컨테이너는 URL로 지정된 폴더를 찾는다.
+         d그리고 다음에 나열된 파일을 순서대로 찾는다. -> 먼저 나온것을 먼저 찾는다.
+         d있다면, 그 파일을 클라이언트에게 보낸다.
+         d다음의 파일이 없다면 에러를 띄워라
+         d폴더에 환영하는 인삿말이 있다면 찾아서 실행하라는 것이다. -->    
+    <welcome-file-list> 
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file> <!-- 이 파일이 있다면 실행해서 뿌려준다. -->
+    </welcome-file-list>
+
+</web-app>
