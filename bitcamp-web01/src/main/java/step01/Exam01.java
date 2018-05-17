@@ -10,6 +10,17 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 
+//=> javax.servlet.Servlet 규칙에 따라 클래스를 만들어야 한다.
+//=> Servlet 인터페이스
+// 호출자? 즉 이 규칙에 따라 호출자하는 자는 누구냐?
+// - 서블릿 컨테이너(servlet container)이다. 
+//   예) 톰캣 서버
+//=> 일반적으로 실행할 수 있는 자바 클래스를 만들 듯이 main() 메서드를 만들어봐야 소용없다.
+//=> 서블릿 컨테이너가 호출할 클래스이기 때문에, 
+// 서블릿 컨테이너가 호출하는 메서드를 갖는 클래스를 만들어야 한다.
+//=> 서블릿 컨테이너가 어떤 메서드를 호출할지 이미 규칙으로 정의되어 있다.
+// 바로 그 규칙이 Servlet 인터페이스인 것이다.
+//
 // javax.servlet.Servlet 규칙에 따라 클래스를 만들어야 한다.
 //
 // 이렇게 만든 서블릿을 실행하려면 서블릿 컨테이너에 등록해야 한다.
