@@ -16,13 +16,13 @@ import bitcamp.java106.pms.domain.Classroom;
 import bitcamp.java106.pms.servlet.InitServlet;
 
 @SuppressWarnings("serial")
-@WebServlet("/classroom/list")
+@WebServlet("/classroom/list") // 일부러 form.html의 폴더명을 classroom 과 똑같이 만들어서 경로가 같은것처럼 한다.
 public class ClassroomListServlet extends HttpServlet {
-    ClassroomDao classroomDao;
-
+    ClassroomDao classroomDao; // 의존객체
+    
     @Override
     public void init() throws ServletException {
-        classroomDao = InitServlet.getApplicationContext().getBean(ClassroomDao.class); 
+        classroomDao = InitServlet.getApplicationContext().getBean(ClassroomDao.class);
     }
 
     @Override
@@ -30,21 +30,44 @@ public class ClassroomListServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
 
-        response.setContentType("text/plain;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<meta charset='UTF-8'>");
+        out.println("<title>강의 목록</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>강의 목록</h1>");
         
         try {
             List<Classroom> list = classroomDao.selectList();
+            
+            out.println("<p><a href='form.html'>새 강의</a></p>");
+            out.println("<table border='1'>");
+            out.println("<tr>");
+            out.println("    <th>번호</th><th>강의명</th><th>기간</th><th>강의실</th>");
+            out.println("</tr>");
+            
             for (Classroom classroom : list) {
-                out.printf("%d, %s, %s ~ %s, %s\n",
-                    classroom.getNo(), classroom.getTitle(), 
-                    classroom.getStartDate(), classroom.getEndDate(),
-                    classroom.getRoom());
+                out.println("<tr>");
+                out.printf("    <td>%d</td>\n", classroom.getNo());
+                out.printf("    <td><a href='view?no=%d'>%s</a></td>",
+                        classroom.getNo(),classroom.getTitle());
+                out.printf("    <td>%s~%s</td>\n", 
+                        classroom.getStartDate(), classroom.getEndDate());
+                out.printf("   <td>%s</td>", classroom.getRoom());
+                out.println("</tr>");
             }
+            out.println("</table>");
         } catch (Exception e) {
-            out.println("목록 가져오기 실패!");
+            out.println("<p>목록 가져오기 실패!</p>");
             e.printStackTrace(out);
         }
+        out.println("</body>");
+        out.println("</html>");
     }
 }
 

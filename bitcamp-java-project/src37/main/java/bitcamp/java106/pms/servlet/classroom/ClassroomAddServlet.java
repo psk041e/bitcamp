@@ -15,9 +15,9 @@ import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.domain.Classroom;
 import bitcamp.java106.pms.servlet.InitServlet;
 
+@SuppressWarnings("serial")
 @WebServlet("/classroom/add")
 public class ClassroomAddServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
     ClassroomDao classroomDao;
     
     @Override
@@ -38,15 +38,29 @@ public class ClassroomAddServlet extends HttpServlet {
         classroom.setEndDate(Date.valueOf(request.getParameter("endDate")));
         classroom.setRoom(request.getParameter("room"));
         
-        response.setContentType("text/plain;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<meta charset='UTF-8'>");
+        out.println("<meta http-equiv='Refresh' content='1;url=list'>");
+        
+        out.println("<title>강의 등록</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>강의 등록 결과</h1>");
+        
         try {
             classroomDao.insert(classroom);
-            out.println("등록 성공!");
+            out.println("<p>등록 성공!</p>");
         } catch (Exception e) {
-            out.println("등록 실패!");
+            out.println("<p>등록 실패!</p>");
             e.printStackTrace(out);
         }
+        out.println("</body>");
+        out.println("</html>");
     }
 }
 
