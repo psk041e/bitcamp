@@ -1,6 +1,19 @@
 # 자바 프로젝트
 
-## src37
+## src39 - forward, include 기술 적용
+학습 목표
+    - forward와 include의 용도를 이해하고 적용할 수 있다.
+
+## src38 - refresh, redirect, forward, include 기술 적용
+학습 목표
+    - refresh와 redirect의 동작을 이해하고 사용할 수 있다.
+작업내용
+    - 등록, 변경, 삭제 후 refresh와 redirect를 적절히 적용하기
+
+## src37 - 서블릿 기술 적용
+학습목표
+    - 서블릿을 만들고 배치할 수 있다.
+    
 
 ## src36 - Tomcat 서블릿 컨테이너 적용 
 학습목표
