@@ -2,7 +2,6 @@ package bitcamp.java106.pms.servlet.team;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,23 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+
 import bitcamp.java106.pms.dao.TeamDao;
-import bitcamp.java106.pms.dao.TeamMemberDao;
-import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.servlet.InitServlet;
+import bitcamp.java106.pms.support.WebApplicationContextUtils;
 
 @SuppressWarnings("serial")
 @WebServlet("/team/view")
 public class TeamViewServlet extends HttpServlet {
 
     TeamDao teamDao;
-    TeamMemberDao teamMemberDao;
     
     @Override
     public void init() throws ServletException {
-        teamDao = InitServlet.getApplicationContext().getBean(TeamDao.class);
-        teamMemberDao = InitServlet.getApplicationContext().getBean(TeamMemberDao.class);
+        ApplicationContext iocContainer = 
+                WebApplicationContextUtils.getWebApplicationContext(
+                this.getServletContext()); 
+        teamDao = iocContainer.getBean(TeamDao.class);
     }
     
     @Override
@@ -35,7 +35,6 @@ public class TeamViewServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
 
-        request.setCharacterEncoding("UTF-8");
         String name = request.getParameter("name");
         
         response.setContentType("text/html;charset=UTF-8");
@@ -85,62 +84,19 @@ public class TeamViewServlet extends HttpServlet {
             out.println("<a href='list'>목록</a>");
             out.println("<button>변경</button>");
             out.printf("<a href='delete?name=%s'>삭제</a>\n", name);
-            out.printf("<a href='../task/list?teamName=%s'>작업목록</a>\n", name); 
-            // 상대경로, 현재 위치가 team방이기 때문에 그 상위의 방으로 가서 task로 들어가라는 뜻이다.
+            out.printf("<a href='../task/list?teamName=%s'>작업목록</a>\n", name);
             out.println("</p>");
             out.println("</form>");
             
-            List<Member> members = teamMemberDao.selectListWithEmail(name);
-            
-            out.println("<h2>회원 목록</h2>");
-            out.println("<form action='member/add' method='post'>");
-            // 'http://localhost:8888/bitcamp-java-project/team/member/add'
-            // 현재 team까지 똑같기 때문에 그부분까지 생략 가능하다.
-            // 입력 폼으로 보낼때는 보통get으로 보내지 않는다.
-            out.println("<input type='text' name='memberId' placeholder='회원아이디'>");
-            // placeholder: 회색으로 된 안내문구가 출력되고 입력할때 없어진다.
-            out.printf("<input type='hidden' name='teamName' value='%s'>\n", name); 
-            // 파라미터로 이미 받았기 때문에 변수로 넣어준다.
-            // 눈에는 보이지 않지만 teamName이 넘어간다.
-            // 입력폼에 있는 값을 서버로 넘기고 싶은데 보일 필요가 없을 때 사용한다.
-            out.println("<button>추가</button>");
-            out.println("</form>");
-            out.println("<table border='1'>");
-            out.println("<tr><th>아이디</th><th>이메일</th><th> </th></tr>");
-            for (Member member : members) {
-                out.printf("<tr>"
-                        + "<td>%s</td>"
-                        + "<td>%s</td>"
-                        + "<td><a href='member/delete?teamName=%s&memberId=%s'>삭제</a></td>"
-                        + "</tr>\n",
-                        member.getId(), 
-                        member.getEmail(),
-                        name,
-                        member.getId()); 
-                // 기존에 selectList는 멤버 아이디 목록을 List에 담아서 리턴한다.
-                // selectList를 뜯어고치게 되면 다른 화면에서 이미 저 메서드를 쓰고 있기 때문에 다른 프로그램도 모두 뜯어고쳐야 한다.
-                // 그래서 기존의 selectList는 사용할수 없다.
-                // 우리는 id와 email두가지가 필요하기 때문이다.
-                //
-                // 현업에서 기존에 있는 메서드가 내가 원하는 값을 가지지 않는다고 해서 그 메서드를 뜯어고치면
-                // 그 메서드를 사용하는 프로그램을 모두 뜯어고쳐야 한다.
-                // 따라서 새로운 메서드를 만들어야 한다. 그러나 그동안 그렇게 해온 메서드들, 쓰레기들이 엄청 많을 것이다.
-                // 하지만 어쩔수 없이 새로운 메서드를 만들어야 한다.
-                // 5~7년이 넘어가면 어차피 리뉴얼을 한다. 리뉴얼을 하지 않으면 유지보수하는데 더 큰 고통이 따른다.
-                
-                // 여기서 팀을 삭제하면 처음부터 멤버를 다시 그려야 한다.
-                // 그래서 Ajax가 나타난 것이다. Ajax는 7,8년 전부터 잘 구현하고 있다.
-                // Ajax는 javascript이다. 이것은 삭제를 하면 처음부터 refresh하지 않고 그 부분만 삭제하도록 해준다.
-                // javascript를 쓰지 않으면 현대적인 기능을 사용하지 못한다.
-            }
-            out.println("</table>");
+            // 팀 회원의 목록을 출력하는 것은 TeamMemberListServlet에게 맡긴다.
+            RequestDispatcher 요청배달자 = request.getRequestDispatcher("/team/member/list");
+            요청배달자.include(request, response);
+            // TeamMemberListServlet이 작업을 수행한 후 이 서블릿으로 되돌아 온다.
                
         } catch (Exception e) {
             RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
-            request.setAttribute("error", e); 
+            request.setAttribute("error", e);
             request.setAttribute("title", "팀 상세조회 실패!");
-            // 다른 서블릿으로 실행을 위임할 때,
-            // 이전까지 버퍼로 출력한 데이터는 버린다.
             요청배달자.forward(request, response);
         }
         out.println("</body>");
@@ -148,6 +104,7 @@ public class TeamViewServlet extends HttpServlet {
     }
 }
 
+//ver 40 - filter 적용
 //ver 39 - forward 적용
 //ver 37 - 컨트롤러를 서블릿으로 변경
 //ver 31 - JDBC API가 적용된 DAO 사용

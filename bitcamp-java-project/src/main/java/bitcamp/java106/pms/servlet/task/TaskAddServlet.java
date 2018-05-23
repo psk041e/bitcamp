@@ -13,13 +13,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.servlet.InitServlet;
+import bitcamp.java106.pms.support.WebApplicationContextUtils;
 
 @SuppressWarnings("serial")
 @WebServlet("/task/add")
@@ -28,12 +30,15 @@ public class TaskAddServlet extends HttpServlet {
     TeamDao teamDao;
     TaskDao taskDao;
     TeamMemberDao teamMemberDao;
-    
+
     @Override
     public void init() throws ServletException {
-        teamDao = InitServlet.getApplicationContext().getBean(TeamDao.class);
-        taskDao = InitServlet.getApplicationContext().getBean(TaskDao.class);
-        teamMemberDao = InitServlet.getApplicationContext().getBean(TeamMemberDao.class);
+        ApplicationContext iocContainer = 
+                WebApplicationContextUtils.getWebApplicationContext(
+                this.getServletContext()); 
+        teamDao = iocContainer.getBean(TeamDao.class);
+        taskDao = iocContainer.getBean(TaskDao.class);
+        teamMemberDao = iocContainer.getBean(TeamMemberDao.class);
     }
     
     @Override
@@ -41,9 +46,8 @@ public class TaskAddServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
-        request.setCharacterEncoding("UTF-8");
         String teamName = request.getParameter("teamName");
-
+        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
@@ -54,47 +58,44 @@ public class TaskAddServlet extends HttpServlet {
         out.println("<title>작업 등록</title>");
         out.println("</head>");
         out.println("<body>");
-        
         out.printf("<h1>'%s' 팀의 작업 등록</h1>\n", teamName);
         
-        try { // 존재하는 팀인지 먼저 확인한다.
+        try {
             Team team = teamDao.selectOne(teamName);
             if (team == null) {
-                throw new Exception(teamName + " 팀은 존재하지 않습니다.\n");
+                throw new Exception(teamName + " 팀은 존재하지 않습니다.");
             }
-            
             List<Member> members = teamMemberDao.selectListWithEmail(teamName);
             
             out.println("<form action='add' method='post'>");
-            out.printf("<input type='hidden' name='teamName' value='%s'>\n", teamName); 
-            // 눈에는 보이지 않지만 서버에 보내기 위해 input 태그에 넣어주는 것이다.
+            out.printf("<input type='hidden' name='teamName' value='%s'>\n", teamName);
             out.println("<table border='1'>");
             out.println("<tr>");
-            out.println("   <th>작업명</th><td><input type='text' name='title'></td>");
+            out.println("    <th>작업명</th><td><input type='text' name='title'></td>");
             out.println("</tr>");
             out.println("<tr>");
-            out.println("   <th>시작일</th><td><input type='date' name='startDate'></td>");
+            out.println("    <th>시작일</th><td><input type='date' name='startDate'></td>");
             out.println("</tr>");
             out.println("<tr>");
-            out.println("   <th>종료일</th><td><input type='date' name='endDate'></td>");
+            out.println("    <th>종료일</th><td><input type='date' name='endDate'></td>");
             out.println("</tr>");
             out.println("<tr>");
-            out.println("   <th>작업자</th>");
-            out.println("   <td>");
-            out.println("       <select name='memberId'>");
-            out.println("           <option value=''>--선택 안함--</option>");
+            out.println("    <th>작업자</th>");
+            out.println("    <td>");
+            out.println("        <select name='memberId'>");
+            out.println("            <option value=''>--선택 안함--</option>");
             
             for (Member member : members) {
-                out.printf("           <option>%s</option>\n", member.getId());
+                out.printf("            <option>%s</option>\n", member.getId());
             }
             
-            out.println("       </select>");
-            out.println("   </td>");
+            out.println("        </select>");
+            out.println("    </td>");
             out.println("</tr>");
             out.println("</table>");
             out.println("<button>등록</button>");
             out.println("</form>");
-            
+
         } catch (Exception e) {
             out.printf("<p>%s</p>\n", e.getMessage());
             e.printStackTrace(out);
@@ -107,8 +108,8 @@ public class TaskAddServlet extends HttpServlet {
     protected void doPost(
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
+        
 
-        request.setCharacterEncoding("UTF-8");
         String teamName = request.getParameter("teamName");
         
         try {
@@ -118,18 +119,18 @@ public class TaskAddServlet extends HttpServlet {
             task.setEndDate(Date.valueOf(request.getParameter("endDate")));
             task.setTeam(new Team().setName(teamName));
             task.setWorker(new Member().setId(request.getParameter("memberId")));
-            task.setWorker(new Member().setId(request.getParameter("memberId")));
-           
+            
             Team team = teamDao.selectOne(task.getTeam().getName());
             if (team == null) {
-                throw new Exception(task.getTeam().getName() + " 팀은 존재하지 않습니다.\n");
+                throw new Exception(task.getTeam().getName() + " 팀은 존재하지 않습니다.");
             }
             
             if (task.getWorker().getId().length() > 0 &&
-                    !teamMemberDao.isExist( 
+                !teamMemberDao.isExist(
                     task.getTeam().getName(), task.getWorker().getId())) {
                 throw new Exception(task.getWorker().getId() + "는 이 팀의 회원이 아닙니다.");
             }
+            
             taskDao.insert(task);
             response.sendRedirect("list?teamName=" + 
                     URLEncoder.encode(teamName, "UTF-8"));
@@ -139,16 +140,15 @@ public class TaskAddServlet extends HttpServlet {
             
         } catch (Exception e) {
             RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
-            request.setAttribute("error", e); 
+            request.setAttribute("error", e);
             request.setAttribute("title", "작업 등록 실패!");
-            // 다른 서블릿으로 실행을 위임할 때,
-            // 이전까지 버퍼로 출력한 데이터는 버린다.
             요청배달자.forward(request, response);
         }
     }
-
+    
 }
 
+//ver 40 - filter 적용
 //ver 39 - forward 적용
 //ver 38 - redirect 적용
 //ver 37 - 컨트롤러를 서블릿으로 변경

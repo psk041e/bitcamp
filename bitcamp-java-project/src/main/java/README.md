@@ -1,6 +1,5 @@
 # 변경 내역
-- BoardAddServlet 변경
-
+- 모든 서블릿 변경
 
 
 

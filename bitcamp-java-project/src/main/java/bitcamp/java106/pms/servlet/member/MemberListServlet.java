@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.domain.Member;
-import bitcamp.java106.pms.servlet.InitServlet;
+import bitcamp.java106.pms.support.WebApplicationContextUtils;
 
 @SuppressWarnings("serial")
 @WebServlet("/member/list")
@@ -23,7 +25,10 @@ public class MemberListServlet extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-        memberDao = InitServlet.getApplicationContext().getBean(MemberDao.class);
+        ApplicationContext iocContainer = 
+                WebApplicationContextUtils.getWebApplicationContext(
+                this.getServletContext()); 
+        memberDao = iocContainer.getBean(MemberDao.class);
     }
 
     @Override
@@ -62,7 +67,7 @@ public class MemberListServlet extends HttpServlet {
             out.println("</table>");
         } catch (Exception e) {
             RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
-            request.setAttribute("error", e); 
+            request.setAttribute("error", e);
             request.setAttribute("title", "회원 목록조회 실패!");
             // 다른 서블릿으로 실행을 위임할 때,
             // 이전까지 버퍼로 출력한 데이터는 버린다.

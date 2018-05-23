@@ -1,4 +1,3 @@
-// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.servlet.classroom;
 
 import java.io.IOException;
@@ -12,25 +11,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+
 import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.domain.Classroom;
-import bitcamp.java106.pms.servlet.InitServlet;
+import bitcamp.java106.pms.support.WebApplicationContextUtils;
 
 @SuppressWarnings("serial")
-@WebServlet("/classroom/list") // 일부러 form.html의 폴더명을 classroom 과 똑같이 만들어서 경로가 같은것처럼 한다.
+@WebServlet("/classroom/list")
 public class ClassroomListServlet extends HttpServlet {
-    ClassroomDao classroomDao; // 의존객체
+    
+    ClassroomDao classroomDao;
     
     @Override
     public void init() throws ServletException {
-        classroomDao = InitServlet.getApplicationContext().getBean(ClassroomDao.class);
+        ApplicationContext iocContainer = 
+                WebApplicationContextUtils.getWebApplicationContext(
+                this.getServletContext()); 
+        classroomDao = iocContainer.getBean(ClassroomDao.class);
     }
 
     @Override
     protected void doGet(
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
-
+        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
@@ -55,17 +60,17 @@ public class ClassroomListServlet extends HttpServlet {
             for (Classroom classroom : list) {
                 out.println("<tr>");
                 out.printf("    <td>%d</td>\n", classroom.getNo());
-                out.printf("    <td><a href='view?no=%d'>%s</a></td>\n",
-                        classroom.getNo(),classroom.getTitle());
-                out.printf("    <td>%s~%s</td>\n", 
+                out.printf("    <td><a href='view?no=%d'>%s</a></td>\n", 
+                        classroom.getNo(), classroom.getTitle());
+                out.printf("    <td>%s~%s</td>\n",
                         classroom.getStartDate(), classroom.getEndDate());
-                out.printf("   <td>%s</td>\n", classroom.getRoom());
+                out.printf("    <td>%s</td>\n", classroom.getRoom());
                 out.println("</tr>");
             }
             out.println("</table>");
         } catch (Exception e) {
             RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
-            request.setAttribute("error", e); 
+            request.setAttribute("error", e);
             request.setAttribute("title", "강의 목록조회 실패!");
             // 다른 서블릿으로 실행을 위임할 때,
             // 이전까지 버퍼로 출력한 데이터는 버린다.
@@ -76,6 +81,8 @@ public class ClassroomListServlet extends HttpServlet {
     }
 }
 
+//ver 39 - forward 적용
+//ver 37 - 컨트롤러를 서블릿으로 변경
 //ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - ClassroomController에서 list() 메서드를 추출하여 클래스로 정의.

@@ -1,4 +1,3 @@
-// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.servlet.task;
 
 import java.io.IOException;
@@ -12,13 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.servlet.InitServlet;
+import bitcamp.java106.pms.support.WebApplicationContextUtils;
 
 @SuppressWarnings("serial")
 @WebServlet("/task/update")
@@ -30,18 +31,19 @@ public class TaskUpdateServlet extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-        teamDao = InitServlet.getApplicationContext().getBean(TeamDao.class);
-        taskDao = InitServlet.getApplicationContext().getBean(TaskDao.class);
-        teamMemberDao = InitServlet.getApplicationContext().getBean(TeamMemberDao.class);
+        ApplicationContext iocContainer =
+                WebApplicationContextUtils.getWebApplicationContext(
+                this.getServletContext()); 
+        teamDao = iocContainer.getBean(TeamDao.class);
+        taskDao = iocContainer.getBean(TaskDao.class);
+        teamMemberDao = iocContainer.getBean(TeamMemberDao.class);
     }
     
     @Override
     protected void doPost(
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
-
         
-        request.setCharacterEncoding("UTF-8");
         String teamName = request.getParameter("teamName");
         
         try {
@@ -56,26 +58,25 @@ public class TaskUpdateServlet extends HttpServlet {
             
             int count = taskDao.update(task);
             if (count == 0) {
-                throw new Exception("해당 작업이 없습니다.");
+                throw new Exception("<p>해당 작업이 없습니다.</p>");
             }
             response.sendRedirect("list?teamName=" + 
                     URLEncoder.encode(teamName, "UTF-8"));
-            // 웹 서버가 집어넣을 헤더값을 집어넣는것이다. 
-            // 웹서버에서 브라우저에 헤더값으로 응답할 때는 브라우저에서 해주지 않기 때문에 수동으로 처리해야 한다.
-            // location 헤더값 => 수동으로 집어넣는 것이기 때문에 자동으로 url인코딩 되지 않는다.
-            // 웹 서버가 자동으로 처리해주지 않는다. 이것은 개발자가 바꿔줘야 한다.
+            // 응답 헤더의 값으로 한글을 포함할 때는 
+            // 서블릿 컨테이너가 자동으로 URL 인코딩 하지 않는다.
+            // 위와 같이 개발자가 직접 URL 인코딩 해야 한다.
+            
         } catch (Exception e) {
             RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
-            request.setAttribute("error", e); 
+            request.setAttribute("error", e);
             request.setAttribute("title", "작업 변경 실패!");
-            // 다른 서블릿으로 실행을 위임할 때,
-            // 이전까지 버퍼로 출력한 데이터는 버린다.
             요청배달자.forward(request, response);
         }
     }
-
+    
 }
 
+//ver 40 - filter 적용
 //ver 39 - forward 적용
 //ver 38 - redirect 적용
 //ver 37 - 컨트롤러를 서블릿으로 변경
