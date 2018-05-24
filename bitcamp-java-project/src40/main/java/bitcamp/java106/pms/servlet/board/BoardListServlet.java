@@ -48,11 +48,6 @@ public class BoardListServlet extends HttpServlet {
         out.println("<title>게시물 목록</title>");
         out.println("</head>");
         out.println("<body>");
-        
-        //RequestDispatcher 요청배달자 = request.getRequestDispatcher("/header");
-        //요청배달자.include(request, response);
-        request.getRequestDispatcher("/header").include(request, response);
-
         out.println("<h1>게시물 목록</h1>");
         try {
             List<Board> list = boardDao.selectList();

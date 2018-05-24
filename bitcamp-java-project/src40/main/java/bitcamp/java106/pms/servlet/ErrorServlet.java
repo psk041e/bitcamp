@@ -25,8 +25,7 @@ public class ErrorServlet extends HttpServlet {
         out.println("<html>");
         out.println("<head>");
         out.println("<meta charset='UTF-8'>");
-        String refererUrl = request.getHeader("Referer"); 
-        // Referer이라는 헤드가 없다면 단순히 출력하고 끝난다.
+        String refererUrl = request.getHeader("Referer");
         if (refererUrl != null) {
             out.printf("<meta http-equiv='Refresh' content='5;url=%s'>", refererUrl); 
         }

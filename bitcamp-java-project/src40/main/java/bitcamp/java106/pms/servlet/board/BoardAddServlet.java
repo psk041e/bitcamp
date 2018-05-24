@@ -31,9 +31,6 @@ public class BoardAddServlet extends HttpServlet {
         boardDao = iocContainer.getBean(BoardDao.class);
     }
     
-    request.getRequestDispatcher("/header").include(request, response);
-
-    
     @Override
     protected void doPost(
             HttpServletRequest request, 

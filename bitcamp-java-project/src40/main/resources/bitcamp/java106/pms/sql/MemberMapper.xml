@@ -29,13 +29,6 @@
     where mid=#{value}
   </select>
   
-  <select id="selectOneWithPassword" parameterType="map" resultMap="MemberMap">
-  <!-- sql에 hashmap이 닉네임이 정해져 있다. 어차피 map의 자식이기 때문에 map을 사용한다. -->
-    select mid, email 
-    from pms2_member 
-    where mid=#{id} and pwd=sha2(#{password},224) <!-- 224bit --> 
-  </select>
-  
   <update id="update" parameterType="Member">
     update pms2_member set 
         email=#{email}, 

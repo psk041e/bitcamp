@@ -1,6 +1,5 @@
 package bitcamp.java106.pms.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -57,19 +56,7 @@ public class MemberDao {
             return sqlSession.selectOne(
                     "bitcamp.java106.pms.dao.MemberDao.selectOne", id);
         }   
-    }   
-    
-    public Member selectOneWithPassword(String id, String password) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            HashMap<String,String> params = new HashMap<>();
-            params.put("id", id);
-            params.put("password", password);
-            
-            return sqlSession.selectOne(
-                    "bitcamp.java106.pms.dao.MemberDao.selectOneWithPassword", params);
-            // 값을 여러 개 보낼때는 객체에 담거나 HashMap에 담아서 보내면 된다.
-        }   
-    }
+    }    
 }
 
 //ver 33 - Mybatis 적용
