@@ -1,7 +1,6 @@
 package bitcamp.java106.pms.servlet.task;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -40,63 +39,32 @@ public class TaskListServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
-        String teamName = request.getParameter("teamName");
 
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<meta charset='UTF-8'>");
-        out.println("<title>작업 목록</title>");
-        out.println("</head>");
-        out.println("<body>");
-        request.getRequestDispatcher("/header").include(request, response);
-        out.printf("<h1><a href='../team/view?name=%s'>%s</a>의 작업 목록</h1>\n", 
-                teamName, teamName);
-        
         try {
+            String teamName = request.getParameter("teamName");
             Team team = teamDao.selectOne(teamName);
             if (team == null) {
                 throw new Exception(teamName + " 팀은 존재하지 않습니다.");
             }
             List<Task> list = taskDao.selectList(team.getName());
             
-            out.printf("<p><a href='add?teamName=%s'>새작업</a></p>\n", teamName);
-            out.println("<table border='1'>");
-            out.println("<tr>");
-            out.println("    <th>번호</th><th>작업명</th><th>기간</th><th>작업자</th>");
-            out.println("</tr>");
+            request.setAttribute("team", team);
+            request.setAttribute("list", list);
             
-            for (Task task : list) {
-                out.println("<tr>");
-                out.printf("    <td>%d</td>", task.getNo());
-                out.printf("    <td><a href='view?no=%d'>%s</a></td>", 
-                        task.getNo(),
-                        task.getTitle());
-                out.printf("    <td>%s ~ %s</td>", 
-                        task.getStartDate(),
-                        task.getEndDate());
-                out.printf("    <td>%s</td>\n", 
-                        (task.getWorker() == null) ? "-" : task.getWorker().getId());
-                out.println("</tr>");
-            }
-            out.println("</table>");
+            response.setContentType("text/html;charset=UTF-8");
+            request.getRequestDispatcher("/task/list.jsp").include(request, response);
+            
         } catch (Exception e) {
             RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
             request.setAttribute("error", e);
             request.setAttribute("title", "작업 목록조회 실패!");
-            // 다른 서블릿으로 실행을 위임할 때,
-            // 이전까지 버퍼로 출력한 데이터는 버린다.
             요청배달자.forward(request, response);
         }
-        out.println("</body>");
-        out.println("</html>");
     }
 
 }
 
+//ver 42 - jsp 적용
 //ver 40 - CharacterEncodingFilter 필터 적용.
 //         request.setCharacterEncoding("UTF-8") 제거
 //ver 39 - forward 적용
