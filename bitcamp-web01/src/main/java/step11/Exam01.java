@@ -28,6 +28,7 @@ public class Exam01 extends HttpServlet {
         request.setAttribute("v3", "ccc"); // 매번 요청할때마다
         
         request.getRequestDispatcher("/step11/exam02").forward(request, response);
+        // 값을 받아서 exam02에서 출력한다.
         
         // forwarding 하고 including하는 서블릿끼리는 데이터를 공유한다. 그것을 확인해보자!
     

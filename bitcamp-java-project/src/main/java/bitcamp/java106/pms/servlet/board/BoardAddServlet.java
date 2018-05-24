@@ -24,15 +24,24 @@ public class BoardAddServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         // 1) 원래 코드는 InitServlet에서 스프링 IoC 컨테이너를 꺼냈다.
-        // boardDao = InitServlet.getapplicaio
+        //boardDao = InitServlet.getApplicationContext().getBean(BoardDao.class);
+        
+        // 2) ServletContextListener의 구현체에서 스프링 IoC 컨테이너를 꺼냈다. 
+        // boardDao = ContextLoaderListener.getApplicationContext().getBean(BoardDao.class);
+        
+        // 3) 실제 스프링 WebMVC 프레임워크에서는 ContextLoaderListener에 
+        //    getApplicationContext()가 없다.
+        //    대신에 WebApplicationContextUtils라는 클래스에서 
+        //    getWebApplicationContext() 메서드를 호출하여 꺼낸다.
+        //    
+        //    이런 스프링 방식을 모방하기 위해 우리는 WebApplicationContextUtils라는 
+        //    클래스를 만들었고 그 클래스로부터 스프링 IoC 컨테이너를 꺼내게 하였다.
+        //    복잡하더라도 이해하라!
         ApplicationContext iocContainer = 
                 WebApplicationContextUtils.getWebApplicationContext(
-                this.getServletContext()); 
+                        this.getServletContext()); 
         boardDao = iocContainer.getBean(BoardDao.class);
     }
-    
-    request.getRequestDispatcher("/header").include(request, response);
-
     
     @Override
     protected void doPost(
@@ -48,23 +57,16 @@ public class BoardAddServlet extends HttpServlet {
             response.sendRedirect("list");
             
         } catch (Exception e) {
-            // 예외가 발생하면 ErrorServlet으로 예외 내용을 출력하도록 실행을 위임한다.
-            // 1) 실행을 위임할 객체를 준비한다.
             RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
-            
-            // 2) 다른 서블릿에게 실행을 위임하기 전에 그 서블릿에 전달할 데이터가 있다면,
-            //    ServletRequest 보관소에 담아라.
             request.setAttribute("error", e);
             request.setAttribute("title", "게시물 등록 실패!");
-            
-            // 3) 다른 서블릿으로 실행을 위임한다.
             요청배달자.forward(request, response);
         }
     }
 
 }
 
-//ver 40 - filter 적용
+//ver 40 - 필터 적용
 //ver 39 - forward 적용
 //ver 38 - redirect 적용
 //ver 37 - BoardAddController 클래스를 서블릿으로 변경

@@ -27,7 +27,7 @@ public class TeamMemberListServlet extends HttpServlet {
     public void init() throws ServletException {
         ApplicationContext iocContainer = 
                 WebApplicationContextUtils.getWebApplicationContext(
-                this.getServletContext()); 
+                        this.getServletContext()); 
         teamMemberDao = iocContainer.getBean(TeamMemberDao.class);
     }
     

@@ -24,7 +24,7 @@ public class MemberDeleteServlet extends HttpServlet {
     public void init() throws ServletException {
         ApplicationContext iocContainer = 
                 WebApplicationContextUtils.getWebApplicationContext(
-                this.getServletContext()); 
+                        this.getServletContext()); 
         memberDao = iocContainer.getBean(MemberDao.class);
     }
 

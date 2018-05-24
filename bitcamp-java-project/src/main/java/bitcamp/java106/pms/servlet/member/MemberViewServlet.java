@@ -26,7 +26,7 @@ public class MemberViewServlet extends HttpServlet {
     public void init() throws ServletException {
         ApplicationContext iocContainer = 
                 WebApplicationContextUtils.getWebApplicationContext(
-                this.getServletContext()); 
+                        this.getServletContext()); 
         memberDao = iocContainer.getBean(MemberDao.class);
     }
 
@@ -47,6 +47,7 @@ public class MemberViewServlet extends HttpServlet {
         out.println("<title>멤버 보기</title>");
         out.println("</head>");
         out.println("<body>");
+        request.getRequestDispatcher("/header").include(request, response);
         out.println("<h1>멤버 보기</h1>");
         out.println("<form action='update' method='post'>");
         
@@ -87,7 +88,8 @@ public class MemberViewServlet extends HttpServlet {
     }
 }
 
-//ver 40 - filter 적용
+//ver 40 - CharacterEncodingFilter 필터 적용.
+//         request.setCharacterEncoding("UTF-8") 제거
 //ver 39 - forward 적용
 //ver 37 - 컨트롤러를 서블릿으로 변경
 //ver 31 - JDBC API가 적용된 DAO 사용

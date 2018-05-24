@@ -26,7 +26,7 @@ public class TeamViewServlet extends HttpServlet {
     public void init() throws ServletException {
         ApplicationContext iocContainer = 
                 WebApplicationContextUtils.getWebApplicationContext(
-                this.getServletContext()); 
+                        this.getServletContext()); 
         teamDao = iocContainer.getBean(TeamDao.class);
     }
     
@@ -47,6 +47,7 @@ public class TeamViewServlet extends HttpServlet {
         out.println("<title>팀 보기</title>");
         out.println("</head>");
         out.println("<body>");
+        request.getRequestDispatcher("/header").include(request, response);
         out.println("<h1>팀 보기</h1>");
         
         try {
@@ -104,7 +105,8 @@ public class TeamViewServlet extends HttpServlet {
     }
 }
 
-//ver 40 - filter 적용
+//ver 40 - CharacterEncodingFilter 필터 적용.
+//         request.setCharacterEncoding("UTF-8") 제거
 //ver 39 - forward 적용
 //ver 37 - 컨트롤러를 서블릿으로 변경
 //ver 31 - JDBC API가 적용된 DAO 사용

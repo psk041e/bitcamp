@@ -24,7 +24,7 @@ public class ClassroomDeleteServlet extends HttpServlet {
     public void init() throws ServletException {
         ApplicationContext iocContainer = 
                 WebApplicationContextUtils.getWebApplicationContext(
-                this.getServletContext()); 
+                        this.getServletContext()); 
         classroomDao = iocContainer.getBean(ClassroomDao.class);
     }
     

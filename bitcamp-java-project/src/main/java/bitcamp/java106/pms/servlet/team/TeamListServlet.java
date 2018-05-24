@@ -27,7 +27,7 @@ public class TeamListServlet extends HttpServlet {
     public void init() throws ServletException {
         ApplicationContext iocContainer = 
                 WebApplicationContextUtils.getWebApplicationContext(
-                this.getServletContext()); 
+                        this.getServletContext()); 
         teamDao = iocContainer.getBean(TeamDao.class);
     }
 
@@ -47,6 +47,7 @@ public class TeamListServlet extends HttpServlet {
         out.println("<title>팀 목록</title>");
         out.println("</head>");
         out.println("<body>");
+        request.getRequestDispatcher("/header").include(request, response);
         out.println("<h1>팀 목록</h1>");
         
         try {

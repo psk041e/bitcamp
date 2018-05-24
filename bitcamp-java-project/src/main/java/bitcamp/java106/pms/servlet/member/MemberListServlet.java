@@ -27,7 +27,7 @@ public class MemberListServlet extends HttpServlet {
     public void init() throws ServletException {
         ApplicationContext iocContainer = 
                 WebApplicationContextUtils.getWebApplicationContext(
-                this.getServletContext()); 
+                        this.getServletContext()); 
         memberDao = iocContainer.getBean(MemberDao.class);
     }
 
@@ -45,6 +45,7 @@ public class MemberListServlet extends HttpServlet {
         out.println("<title>멤버 목록</title>");
         out.println("</head>");
         out.println("<body>");
+        request.getRequestDispatcher("/header").include(request, response);
         out.println("<h1>멤버 목록</h1>");
         
         try {
