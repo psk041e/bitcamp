@@ -37,18 +37,18 @@ public class Exam02 extends HttpServlet {
             out.printf("%s=%s\n", cookie.getName(), cookie.getValue());
         }
         
-        // 웹브라우저가 웹서버로 쿠키를 보내는 HTTP 프로토콜?
-        //GET /bitcamp-web01/step10/ex01/exam02 HTTP/1.1
-        //Host: localhost:8888
-        //Connection: keep-alive
-        //Pragma: no-cache
-        //Cache-Control: no-cache
-        //Upgrade-Insecure-Requests: 1
-        //User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36
-        //Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
-        //Accept-Encoding: gzip, deflate, br
-        //Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
-        //Cookie: c1=123; JSESSIONID=A9CB1708BC2410A75CA97F960823C096
+// 웹브라우저가 웹서버로 쿠키를 보내는 HTTP 프로토콜?
+//        GET /bitcamp-web01/step10/ex01/exam02 HTTP/1.1
+//        Host: localhost:8888
+//        Connection: keep-alive
+//        Pragma: no-cache
+//        Cache-Control: no-cache
+//        Upgrade-Insecure-Requests: 1
+//        User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36
+//        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+//        Accept-Encoding: gzip, deflate, br
+//        Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+//        Cookie: c1=aaa; c2=123
         
     }
     

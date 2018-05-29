@@ -19,8 +19,6 @@ public class Exam03 extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
 
-        response.setCharacterEncoding("UTF-8");
-        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
@@ -38,7 +36,9 @@ public class Exam03 extends HttpServlet {
         ServletConfig config = this.getServletConfig();
         String name = config.getInitParameter("name");
         String age = config.getInitParameter("age");
+        
         out.printf("<p>name=%s, age=%s</p>\n", name, age);
+        
         out.println("</body>");
         out.println("</html>");
     }

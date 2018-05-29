@@ -18,16 +18,12 @@ public class Filter2 implements Filter{
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        // 최초로 필터 객체가 생성될 때 호출된다.
-        // 필터가 작업할 때 사용할 도구를 준비시키는 코드를 여기에 둔다.
         this.config = filterConfig;
         System.out.println("Filter2.init()");
     }
     
     @Override
     public void destroy() {
-        // 웹 애플리케이션을 멈추거나 서블릿 컨테이너를 멈출 때 호출된다.
-        // 필터가 init()를 통해 준비했던 도구나 자원을 해제시키는 코드를 여기에 둔다.
         System.out.println("Filter2.destroy()");
     }
     

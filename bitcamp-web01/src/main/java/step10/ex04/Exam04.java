@@ -19,7 +19,7 @@ public class Exam04 extends HttpServlet { // 입력폼, 이름을 입력받는�
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
-        // 세션에 보관된 '이름', '나이' 값을 가져온다.
+        // 세션에 보관된 '4나이' 값을 가져온다.
         HttpSession session = request.getSession();
         String name = (String) session.getAttribute("name");
         int age = (int) session.getAttribute("age"); // Integer객체를 int로 바꾼다. : auto-unboxing

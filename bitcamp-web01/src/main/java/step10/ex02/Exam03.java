@@ -42,14 +42,16 @@ public class Exam03 extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("쿠키를 보냈습니다.");
         
-        // 유효기간 설정된 쿠키의 프로토콜?
-        //HTTP/1.1 200
-        //Set-Cookie: c1=aaa; Path=/
-        //Set-Cookie: c2=bbb; Path=/bitcamp-web01/step10/ex02
-        //Set-Cookie: c3=ccc; Path=/bitcamp-web01/step10/ex02/exam04
-        //Content-Type: text/plain;charset=UTF-8
-        //Content-Length: 28
-        //Date: Wed, 23 May 2018 02:25:33 GMT
+// 쿠키를 클라이언트로 보내는 HTTP 프로토콜?
+//        HTTP/1.1 200
+//        Set-Cookie: c1=aaa; Path=/
+//        Set-Cookie: c2=bbb; Path=/bitcamp-web01/step10/ex02
+//        Set-Cookie: c3=ccc; Path=/bitcamp-web01/step10/ex02/exam04
+//        Content-Type: text/plain;charset=UTF-8
+//        Content-Length: 28
+//        Date: Wed, 23 May 2018 02:25:33 GMT
+//        (빈 줄)
+//        내용...
         
     }
     

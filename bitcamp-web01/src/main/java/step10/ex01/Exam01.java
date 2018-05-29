@@ -33,19 +33,21 @@ public class Exam01 extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("쿠키를 보냈습니다.");
         
-        // 쿠키(cookie)?
-        // => 웹서버에서 데이터를 보내 웹브라우저에 쪽에 저장하는 것
-        // => 웹브라우저는 웹서버로부터 받은 데이터를 보관하고 있다가
-        //    웹서버에 요청할 때마다 다시 보낸다.
-        //    예) 커피숍 쿠폰 
-        //
-        // 쿠키를 클라이언트로 보내는 Http프로토콜?
-        //HTTP/1.1 200
-        //Set-Cookie: c1=aaa
-        //Set-Cookie: c1=123
-        //Content-Type: text/plain;charset=UTF-8
-        //Content-Length: 28
-        //Date: Wed, 23 May 2018 01:17:36 GMT
+// 쿠키(cookie)?
+// => 웹서버에서 데이터를 보내 웹브라우저에 쪽에 저장하는 것
+// => 웹브라우저는 웹서버로부터 받은 데이터를 보관하고 있다가
+//    웹서버에 요청할 때마다 다시 보낸다.
+//    예) 커피숍 쿠폰 
+//
+// 쿠키를 클라이언트로 보내는 Http프로토콜?
+//        HTTP/1.1 200
+//        Set-Cookie: c1=aaa
+//        Set-Cookie: c1=123
+//        Content-Type: text/plain;charset=UTF-8
+//        Content-Length: 28
+//        Date: Wed, 23 May 2018 01:17:36 GMT
+//        (빈 줄)
+//        내용...
         
     }
     

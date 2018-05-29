@@ -1,4 +1,4 @@
-// 다른 서블릿의 작업을 포함하기 - include
+// 서블릿 실행 
 package step09.ex01;
 
 import java.io.IOException;
@@ -18,9 +18,6 @@ public class Exam02 extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
 
-        response.setCharacterEncoding("UTF-8");
-        String name = request.getParameter("name");
-        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         

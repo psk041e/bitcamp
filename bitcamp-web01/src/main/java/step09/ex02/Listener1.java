@@ -15,7 +15,7 @@ import javax.servlet.annotation.WebListener;
 //
 // 서블릿 컨테이너에서 발생하는 이벤트(event, 사건, 상태)
 // 1) 서블릿 컨테이너의 시작/종료 이벤트
-// 2) 요청이 들어오는 이벤트
+// 2) 요청이 시작/종료 이벤트
 // 3) ServletRequest에 값을 저장하고 제거하는 이벤트
 // 4) HttpSession 객체가 생성되고 제거되는 이벤트
 // 5) HttpSession에 값을 저장하고 제거하는 이벤트

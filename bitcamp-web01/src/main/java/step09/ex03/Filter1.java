@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 
 @WebFilter("/step09/ex03/*")
 public class Filter1 implements Filter {
-    // 아이콘 위에 D가 있다면 default이다. 구현하지 않아도 된다.
+    // context메뉴에서 아이콘 위에 D가 있다면 default이다. 구현하지 않아도 된다.
     
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

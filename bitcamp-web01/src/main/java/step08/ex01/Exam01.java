@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-@WebServlet("/step08/ex1/exam01")
+@WebServlet("/step08/ex01/exam01")
 public class Exam01 extends HttpServlet {
     @Override
     protected void doGet(

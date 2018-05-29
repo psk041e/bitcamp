@@ -1,4 +1,4 @@
-// ServletRequestAttributeListener
+// ServletRequestAttributeListener 테스트
 package step09.ex02;
 
 import java.io.IOException;
