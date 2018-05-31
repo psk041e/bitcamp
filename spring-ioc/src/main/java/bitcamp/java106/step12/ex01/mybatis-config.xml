@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="bitcamp/java106/step12/jdbc.properties"></properties>
+
+    <!-- 긴 이름의 클래스명을 사용하는 대신에 짧은 이름의 별명을 사용해보자! -->
+    <typeAliases> <!-- 자바클래스 명시는 . -->
+        <typeAlias type="bitcamp.java106.step12.Board" alias="Board"/>
+    </typeAliases>
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <mappers> <!-- 파일 명시는 / -->
+    <mapper resource="bitcamp/java106/step12/ex01/BoardMapper.xml"/>
+  </mappers>
+</configuration>

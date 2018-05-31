@@ -10,7 +10,7 @@
        <insert> 태그에는 insert 문장을,
        <update> 태그에는 update 문장을,
        <delete> 태그에는 delete 문장을 작성한다.
-                 그런데 insert/update/deltee 인 경우
+                 그런데 insert/update/delete 인 경우
        <insert>/<update/<delete> 구분없이 태그를 사용해도 된다.
                  어차피 SQL문을 찾을 때 id 속성 값으로 찾기 때문이다.
                  그럼에도 불구하고 유지보수의 일관성을 위해
