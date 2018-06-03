@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'eclipse-wtp'
+    id 'war'
+}
+
+compileJava {
+    options.encoding = "UTF-8"
+}
+
+eclipse {
+    wtp {
+        facet {
+            facet name: 'jst.web', version: '3.1'
+        }
+    }
+}
+
+dependencies {
+    // Spring IoC 컨테이너 라이브러리
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.0.6.RELEASE'
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    
+    // JSP 확장 태그인 JSTL 라이브러리
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    
+    compile 'com.google.guava:guava:23.0'
+    testCompile 'junit:junit:4.12'
+}
+
+repositories {
+    jcenter()
+}
