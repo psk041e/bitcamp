@@ -12,6 +12,6 @@ public class MessageBank {
     }
     
     public static String getMessage(String name) {
-        return messageMap.get(name);
+        return messageMap.get(name); 
     }
 }
