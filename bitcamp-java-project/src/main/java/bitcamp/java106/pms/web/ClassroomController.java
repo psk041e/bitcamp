@@ -1,75 +1,100 @@
 package bitcamp.java106.pms.web;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.MatrixVariable;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.domain.Classroom;
+import bitcamp.java106.pms.service.ClassroomService;
 
 @Controller
 @RequestMapping("/classroom")
 public class ClassroomController {
     
-    ClassroomDao classroomDao;
+    ClassroomService classroomService;
     
-    public ClassroomController(ClassroomDao classroomDao) {
-        this.classroomDao = classroomDao;
+    public ClassroomController(ClassroomService classroomService) {
+        this.classroomService = classroomService;
     }
     
-    @RequestMapping("/add")
+    @RequestMapping("form")
+    public void form(){
+    }
+    
+    @RequestMapping("add")
     public String add(Classroom classroom) throws Exception {
         
-        classroomDao.insert(classroom);
-        return "redirect:list.do";
+        classroomService.add(classroom);
+        return "redirect:list";
     }
     
-    @RequestMapping("/delete")
+    @RequestMapping("delete")
     public String delete(@RequestParam("no") int no) throws Exception {
      
-        int count = classroomDao.delete(no);
+        int count = classroomService.delete(no);
         if (count == 0) {
             throw new Exception("<p>해당 강의가 없습니다.</p>");
         }
-        return "redirect:list.do";
+        return "redirect:list";
     }
     
-    @RequestMapping("/list")
-    public String list(Map<String,Object> map) throws Exception {
-     
-        List<Classroom> list = classroomDao.selectList();
-        map.put("list", list);
-        return "/classroom/list.jsp";
+    @RequestMapping("list{page}")
+    public void list(
+            @MatrixVariable(defaultValue="1") int pageNo,
+            @MatrixVariable(defaultValue="3") int pageSize,
+            Map<String,Object> map) throws Exception {        
+        
+        map.put("list", classroomService.list(pageNo, pageSize));
     }
     
-    @RequestMapping("/update")
+    @RequestMapping("update")
     public String update(Classroom classroom) throws Exception {
      
-        int count = classroomDao.update(classroom);
+        int count = classroomService.update(classroom);
         if (count == 0) {
             throw new Exception("해당 강의가 존재하지 않습니다.");
         }
-        return "redirect:list.do";
+        return "redirect:list";
     }
     
-    @RequestMapping("/view")
+    @RequestMapping("{no}")
     public String view(
-            @RequestParam("no") int no, 
+            @PathVariable int no, 
             Map<String,Object> map) throws Exception {
      
-        Classroom classroom = classroomDao.selectOne(no);
-
+        Classroom classroom = classroomService.get(no);
         if (classroom == null) {
             throw new Exception("유효하지 않은 강의입니다.");
         }
         map.put("classroom", classroom);
-        return "/classroom/view.jsp";
+        return "classroom/view";
     }
+    
+    // GlobalBindingInitializer 에 등록했기 때문에 이 클래스에서는 제외한다.
+    /*
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(
+                java.sql.Date.class, 
+                new PropertyEditorSupport() {
+                    @Override
+                    public void setAsText(String text) throws IllegalArgumentException {
+                        this.setValue(java.sql.Date.valueOf(text));
+                    }
+                });
+    }
+    */
 }
 
+//ver 53 - DAO 대신 Service 객체 사용
+//ver 52 - InternalResourceViewResolver 적용
+//         *.do 대신 /app/* 을 기준으로 URL 변경
+//         페이지 관련 파라미터에 matrix variable 적용
+//ver 51 - Spring WebMVC 적용
 //ver 49 - 요청 핸들러의 파라미터 값 자동으로 주입받기
 //ver 48 - CRUD 기능을 한 클래스에 합치기
 //ver 47 - 애노테이션을 적용하여 요청 핸들러 다루기

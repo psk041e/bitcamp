@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <context:component-scan base-package="bitcamp.mvc.web"/>
+    
+    <!-- 클라이언트가 멀티파트 형식으로 보낸 데이터를 처리할 객체를 등록한다.
+        => 스프링의 CommonsMultipartResolver 클래스는 내부적으로
+           -아파치의 commons-fileupload 라이브러리를 사용하기 때문에
+           -이 라이브러리도 추가로 등록해야 한다.
+           -회사에 가면 아마 이 형식을 가장 많이 보게 될 것이다.
+       - 만약 Servlet3.0에서 제공하는 멀티파트 처리기능을 이용한다면,
+       - 다음의 빈 MultipartResolver 빈을 등록할 필요가 없다.
+       - 대신에 wegb.xml에 선언된 프론트 컨트롤러 서블릿 설정 부분에
+       <multipart-config> 태그를 추가하라! 
+     -->
+     <!-- 
+    <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="5000000"/>
+        서버에 보낼수 있는 데이터 크기에 제약조건이 걸려있다.
+    </bean>
+     -->
+</beans>
+
+
+
+
+
+

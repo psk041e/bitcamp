@@ -1,97 +1,83 @@
 package bitcamp.java106.pms.web;
 
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import bitcamp.java106.pms.dao.MemberDao;
-import bitcamp.java106.pms.dao.TeamDao;
-import bitcamp.java106.pms.dao.TeamMemberDao;
-import bitcamp.java106.pms.domain.Member;
-import bitcamp.java106.pms.domain.Team;
+import bitcamp.java106.pms.service.MemberService;
+import bitcamp.java106.pms.service.TeamService;
 
 @Controller
 @RequestMapping("/team/member")
 public class TeamMemberController {
     
-    TeamDao teamDao;
-    MemberDao memberDao;
-    TeamMemberDao teamMemberDao;
+    TeamService teamService;
+    MemberService memberService;
     
-    public TeamMemberController(TeamDao teamDao, 
-            MemberDao memberDao,
-            TeamMemberDao teamMemberDao) {
-        this.teamDao = teamDao;
-        this.memberDao = memberDao;
-        this.teamMemberDao = teamMemberDao;
+    public TeamMemberController(
+            TeamService teamService,
+            MemberService memberService) {
+        
+        this.teamService = teamService;
+        this.memberService = memberService;
     }
     
-    @RequestMapping("/add")
+    @RequestMapping("add")
     public String add(
             @RequestParam("teamName") String teamName,
             @RequestParam("memberId") String memberId,
             Map<String,Object> map) throws Exception {
         
-        Team team = teamDao.selectOne(teamName);
-        if (team == null) {
+        if (teamService.get(teamName) == null) {
             throw new Exception(teamName + " 팀은 존재하지 않습니다.");
         }
-        Member member = memberDao.selectOne(memberId);
-        if (member == null) {
+
+        if (memberService.get(memberId) == null) {
             map.put("message", "해당 회원이 없습니다!");
-            return "/team/member/fail.jsp";
+            return "team/member/fail";
         }
         
-        HashMap<String,Object> params = new HashMap<>();
-        params.put("teamName", teamName);
-        params.put("memberId", memberId);
-        
-        if (teamMemberDao.isExist(params)) {
+        if (teamService.isMember(teamName, memberId)) {
             map.put("message", "이미 등록된 회원입니다.");
-            return "/team/member/fail.jsp";
+            return "team/member/fail";
         }
-        teamMemberDao.insert(params);
-        return "redirect:../view.do?name=" + 
+        teamService.addMember(teamName, memberId);
+        return "redirect:../" + 
                 URLEncoder.encode(teamName, "UTF-8");
     }
     
-    @RequestMapping("/delete")
+    @RequestMapping("delete")
     public String delete(
             @RequestParam("teamName") String teamName,
             @RequestParam("memberId") String memberId,
             Map<String,Object> map) throws Exception {
          
-        HashMap<String,Object> params = new HashMap<>();
-        params.put("teamName", teamName);
-        params.put("memberId", memberId);
-        
-        int count = teamMemberDao.delete(params);
+        int count = teamService.deleteMember(teamName, memberId);
         if (count == 0) {
             map.put("message", "해당 회원이 없습니다!");
-            return "/team/member/fail.jsp";
+            return "team/member/fail";
         }
-        return "redirect:../view.do?name=" + 
+        return "redirect:../" + 
                 URLEncoder.encode(teamName, "UTF-8");
         // 개발자가 요청이나 응답헤더를 직접 작성하여 값을 주고 받으로 한다면,
         // URL 인코딩과 URL 디코딩을 손수 해 줘야 한다.
     }
     
-    @RequestMapping("/list")
-    public String list(
+    @RequestMapping("list")
+    public void list(
             @RequestParam("name") String teamName,
             Map<String,Object> map) throws Exception {
-       
-        List<Member> members = teamMemberDao.selectListWithEmail(teamName);
-        map.put("members", members);
-        return "/team/member/list.jsp";
+        map.put("members", teamService.getMembersWithEmail(teamName));
     }
 }
 
+//ver 53 - DAO 대신 Service 객체 사용
+//ver 52 - InternalResourceViewResolver 적용
+//         *.do 대신 /app/* 을 기준으로 URL 변경
+//ver 51 - Spring WebMVC 적용
 //ver 50 - DAO 변경에 맞춰 메서드 호출 변경
 //ver 49 - 요청 핸들러의 파라미터 값 자동으로 주입받기
 //ver 48 - CRUD 기능을 한 클래스에 합치기
