@@ -12,7 +12,6 @@ public interface MemberDao {
     int update(Member member);
     Member selectOne(String id);
     Member selectOneWithPassword(Map<String,Object> params);
-    int count(Map<String,Object> params);
 }
 
 //ver 52 - 페이지 단위로 데이터 가져오기

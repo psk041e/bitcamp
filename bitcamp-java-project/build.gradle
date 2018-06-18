@@ -58,6 +58,9 @@ dependencies {
     // JSP 확장 태그인 JSTL 라이브러리
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
     
+    // AOP 관련 라이브러리
+    compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.1'
+    
     
     // 서블릿 라이브러리
     // => 어느 버전의 서블릿 규칙에 따라 만든 서버인지에 따라 

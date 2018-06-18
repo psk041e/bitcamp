@@ -1,6 +1,7 @@
 package bitcamp.java106.pms.web;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -9,24 +10,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import bitcamp.java106.pms.dao.TaskDao;
+import bitcamp.java106.pms.dao.TeamDao;
+import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.service.TaskService;
-import bitcamp.java106.pms.service.TeamService;
 
 @Controller
 @RequestMapping("/team/{teamName}/task")
 public class TaskController {
     
-    TaskService taskService;
-    TeamService teamService;
+    TeamDao teamDao;
+    TaskDao taskDao;
+    TeamMemberDao teamMemberDao;
 
-    public TaskController(
-            TaskService taskService,
-            TeamService teamService) {
-        this.taskService = taskService;
-        this.teamService = teamService;
+    public TaskController(TeamDao teamDao,
+            TaskDao taskDao,
+            TeamMemberDao  teamMemberDao) {
+        this.teamDao = teamDao;
+        this.taskDao = taskDao;
+        this.teamMemberDao = teamMemberDao;
     }
     
     @RequestMapping("add")
@@ -38,11 +42,21 @@ public class TaskController {
         task.setTeam(new Team().setName(teamName));
         task.setWorker(new Member().setId(memberId));
         
-        if (teamService.get(teamName) == null) {
+        Team team = teamDao.selectOne(task.getTeam().getName());
+        if (team == null) {
             throw new Exception(task.getTeam().getName() + " 팀은 존재하지 않습니다.");
         }
         
-        taskService.add(task);
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("teamName", task.getTeam().getName());
+        params.put("memberId", task.getWorker().getId());
+        
+        if (task.getWorker().getId().length() > 0 &&
+            !teamMemberDao.isExist(params)) {
+            throw new Exception(task.getWorker().getId() + "는 이 팀의 회원이 아닙니다.");
+        }
+        
+        taskDao.insert(task);
         return "redirect:list";
         // 응답 헤더의 값으로 한글을 포함할 때는 
         // 서블릿 컨테이너가 자동으로 URL 인코딩 하지 않는다.
@@ -54,7 +68,8 @@ public class TaskController {
             @RequestParam("no") int no,
             @PathVariable String teamName) throws Exception {
         
-        if (taskService.delete(no) == 0) {
+        int count = taskDao.delete(no);
+        if (count == 0) {
             throw new Exception("해당 작업이 존재하지 않습니다.");
         }
         return "redirect:list";
@@ -68,13 +83,13 @@ public class TaskController {
             @PathVariable String teamName,
             Map<String,Object> map) throws Exception {
         
-        if (teamService.get(teamName) == null) {
+        Team team = teamDao.selectOne(teamName);
+        if (team == null) {
             throw new Exception(teamName + " 팀은 존재하지 않습니다.");
         }
-        
+        List<Member> members = teamMemberDao.selectListWithEmail(teamName);
+        map.put("members", members);
         map.put("teamName", teamName);
-        map.put("members", teamService.getMembersWithEmail(teamName));
-        
         return "task/form";
     }
     
@@ -90,11 +105,12 @@ public class TaskController {
         params.put("pageSize", pageSize);
         params.put("teamName", teamName);
         
-        if (teamService.get(teamName) == null) {
+        Team team = teamDao.selectOne(teamName);
+        if (team == null) {
             throw new Exception(teamName + " 팀은 존재하지 않습니다.");
         }
-        
-        map.put("list", taskService.list(teamName, pageNo, pageSize));
+        List<Task> list = taskDao.selectList(params);
+        map.put("list", list);
         map.put("teamName", teamName);
         return "task/list";
     }
@@ -108,7 +124,8 @@ public class TaskController {
         task.setTeam(new Team().setName(teamName));
         task.setWorker(new Member().setId(memberId));
         
-        if (taskService.update(task) == 0) {
+        int count = taskDao.update(task);
+        if (count == 0) {
             throw new Exception("<p>해당 작업이 없습니다.</p>");
         }
         return "redirect:list";
@@ -123,15 +140,17 @@ public class TaskController {
             @PathVariable int no,
             Map<String,Object> map) throws Exception {
         
-        Task task = taskService.get(no);
+        Task task = taskDao.selectOne(no);
         if (task == null) {
             throw new Exception("해당 작업을 찾을 수 없습니다.");
         }
         
-        map.put("teamName", teamName);
-        map.put("members", teamService.getMembersWithEmail(teamName));
+        List<Member> members = teamMemberDao.selectListWithEmail(
+                task.getTeam().getName());
+        
         map.put("task", task);
-
+        map.put("members", members);
+        map.put("teamName", teamName);
         return "task/view";
     }
     

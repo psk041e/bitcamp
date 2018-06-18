@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex03</title>
+
+<script>
+  // 웹브라우저는 HTML을 로딩한 후 위에서 아래로 태그가 나온 순서대로 실행한다.
+  // 
+  console.log("11111"); 
+  window.alert("잠깐!");
+	// head와 body사이에 자바스크립트 코드를 집어넣지 말아라
+	// 실행은 되지만 그렇게 하지 않도록 해라
+</script>
+
+<script>
+  console.log("22222");
+  window.alert("잠깐!");
+</script>
+</head>
+
+<body>
+<script>
+  console.log("33333");
+  window.alert("잠깐!");
+</script>
+
+<h1>자바스크립트 코드 실행 순서</h1>
+<script>
+  console.log("44444");
+  window.alert("잠깐!");
+</script>
+</body>
+</html>

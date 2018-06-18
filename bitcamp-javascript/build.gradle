@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+    id 'eclipse-wtp'
+    id 'war'
+}
+
+compileJava {
+    // 컴파일 할 때 소스파일에 인코딩 옵션을 추가할 것이다.
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    compile 'com.google.guava:guava:23.0'
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
+    testCompile 'junit:junit:4.12'
+}
+
+repositories {
+    jcenter()
+}

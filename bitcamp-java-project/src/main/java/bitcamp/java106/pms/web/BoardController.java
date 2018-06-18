@@ -1,5 +1,6 @@
 package bitcamp.java106.pms.web;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,11 @@ public class BoardController {
     BoardService boardService;
     
     public BoardController(BoardService boardService) {
-        this.boardService = boardService;
+        this.boardService= boardService;
     }
 
     @RequestMapping("form")
-    public void form() {
+    public void form(/*Model model*/) {
     }
     
     @RequestMapping("add")
@@ -45,9 +46,10 @@ public class BoardController {
     public void list(
             @MatrixVariable(defaultValue="1") int pageNo,
             @MatrixVariable(defaultValue="3") int pageSize,
-            Map<String,Object> map) {        
+            Map<String,Object> map) throws Exception {        
         
-        map.put("list", boardService.list(pageNo, pageSize));
+        List<Board> list = boardService.list(pageNo, pageSize);
+        map.put("list", list);
     }
     
     @RequestMapping("update")
@@ -75,7 +77,6 @@ public class BoardController {
 
 }
 
-//ver 53 - DAO 대신 Service 객체 사용
 //ver 52 - InternalResourceViewResolver 적용
 //         *.do 대신 /app/* 을 기준으로 URL 변경
 //         페이지 관련 파라미터에 matrix variable 적용
