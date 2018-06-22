@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex10-5</title>
+</head>
+<body>
+<h1>객체 - 객체 생성과 초기화  V</h1>
+<script>
+"use strict"
+
+// {} 표기법을 이용하여 객체 생성과 초기화를 수행한다.
+function createScore(name, kor, eng, math) {
+	return { // 객체를 리턴하는 함수의 경우 이와같은 형태를 많이 보게 될 것이다.
+		"name": name, // 프로퍼티이름: 변수명
+		'kor': kor,
+		'eng': eng,
+		'math': math,
+		sum () { // 함수는 "sum" X 
+			return this.kor + this.eng + this.math
+		},
+		aver () {
+		    return this.sum() / 3
+		}
+	} // 자바스크립트는 문장의 끝이 명확하면, 세미콜론을 생략할 수 있다. 
+	  // 중괄호를 닫는것들은 모두 세미콜론을 뺀다.
+}
+
+var scores = []; // new Array();
+scores[0] = createScore("홍길동", 100, 100, 100);
+scores[1] = createScore("임꺽정", 90, 90, 90);
+scores[2] = createScore("유관순", 80, 80, 80);
+
+// 과목의 점수를 변경하더라도, 합계와 평균은 다시 계산되기 때문에 편하다.
+// 특정 과목의 점수가 바뀌면 다시 합계와 평균을 계산해야 한다.
+scores[2].kor = 100;
+
+for (var score of scores) {
+    console.log(score.name, score.kor, score.eng, score.math, 
+    		score.sum(), score.aver());
+}
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

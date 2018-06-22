@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex07</title>
+</head>
+<body>
+<h1>AJAX - readyState와 status II</h1>
+<form>
+a: <input id="ia" type="number" name="a"><br>
+b: <input id="ib" type="text" name="b"><br>
+<!-- 버튼의 타입을 지정하지 않으면 기본이 submit 버튼이다.
+     submit 버튼을 클릭하면 웹브라우저가 form 값을 가지고 서버에 자동으로 요청한다.
+     form의 action속성을 지정하지 않으면 기본이 현재 페이지의 URL이다. -->
+<button id="btn1" type="button">계산 요청</button>
+<button id="btn2" type="reset">초기화</button><br> <!-- reset버튼은 같은 form 에 있는 내용만 초기화시킨다. -->
+<textarea id="ta" cols="40" rows="5"></textarea>
+</form>
+
+<!-- 버튼에 타입을 지정하지 않으면 일반적으로 submit버튼이 된다.
+form으로 묶이지 않았을 때는 아무런 영향을 미치지 않지만 
+submit버튼은 form으로 묶이는 순간 그 데이터를 가지고 서버에 요청을 한다.
+action을 지정하지 않으면 기본값이 현재 URL이기 때문에  
+HTML을 다시 요청해서 refresh효과가 나는 사태가 발생한다.
+
+AJAX에서 input박스에 name값을 지정하지 않기 때문에 알아채기 힘들다.
+주소창에 물음표가 붙었는지 얼른 확인해야 한다.
+
+이런 부분을 꼼꼼하게 확인하도록 해라
+의도대로 동작이 되냐 안되냐는 URL을 확인해보면 된다. 
+AJAX로 요청할 때는 submit버튼으로 요청하면 안된다.
+특히 form 안에 버튼을 만들 때 type을 반드시 일반버튼으로 지정해 주어야 한다.
+-->
+
+<script>
+"use strict"
+// 서버가 응답한 콘텐트를 가지고 작업을 수행할 때,
+// 먼저 서버의 응답 상태를 검사하라!
+// 정상적인 응답(200)일 경우에 작업을 수행하라!
+
+var ta = document.querySelector("#ta"),
+    btn2 = document.querySelector("#btn2"),
+    ia = document.querySelector("#ia"),
+    ia = document.querySelector("#ia"); // 실무에서 변수를 연달아 할 때는 콤마,를 찍는 방식을 많이 쓴다.
+
+document.querySelector("#btn1").onclick = () => {
+    var xhr = new XMLHttpRequest(); 
+
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4) {
+        	// 즉 다음과 같이 서버의 응답 상태를 검사한다.
+        	if(xhr.status == 200) {
+        	   ta.value=xhr.responseText;
+        	} else {
+        		window.alert("서버 작업 실패!");
+        		var e = new MouseEvent("click");
+        		btn2.dispatchEvent(e); 
+        		// 내가 확인 버튼을 누르면 reset버튼을 누르지 않아도 누른것처럼 해준다.
+        		// 실무에서 이렇게 사용한다. 
+        	}
+        }
+    };
+    // 입력한 값을 받아서 test4에 출력하겠다.
+    xhr.open("POST", "../../jsp/test4.jsp?a=" + ia.value + "&b=" + ib.value, true); 
+    xhr.send();
+};
+
+    // 다운로드할 데이터가 많지 않기 때문에 2번 후 바로 3,4번이 출력된다.
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex04</title>
+</head>
+<body>
+<h1>객체 - 신트슨변수</h1>
+<script>
+"use strict"
+
+function Score(name, kor, eng, math) {
+	this.getName = function() {return name}
+	this.setName = function(n) {name = n}
+	
+	this.getKor = function() {return kor}
+	this.setKor = function(k) {kor = k}
+	
+	this.getEng = function() {return eng}
+	this.setEng = function(e) {eng = e}
+	
+	this.getMath = function() {return math}
+	this.setMath = function(m) {math = m}
+	
+	this.sum = function() {
+	    return kor + eng + math 
+	}
+	this.aver = function() {
+	    return this.sum() / 3
+	}
+}
+
+// 자바로 표현하면 인스턴스 함수
+Score.prototype.sum = function() {  
+    return this.kor + this.eng + this.math 
+}   
+
+Score.prototype.aver = function() {
+    return this.sum() / 3
+}
+
+var s1 = new Score("홍길동", 100, 100, 100);
+var s2 = new Score("임꺽정", 90, 90, 90);
+
+console.log(s1.name) 
+console.log(s1.getName(), s1.sum(), s1.aver())
+
+s1.setName("임꺽정")
+s1.setKor(90)
+console.log(s1.getName(), s1.sum(), s1.aver())
+// setName()에서 사용한 name 변수와 getName()에서 사용한 name 변수가 같다.
+// 결론!
+// 바깥 함수를 한 번 호출할 때 생성한 모든 클로저(closure)들은
+// 바깥 함수의 로컬 변수를 복제본을 공유한다.
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

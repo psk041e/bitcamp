@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex10-6</title>
+</head>
+<body>
+<h1>객체 - 객체 생성과 초기화  VI</h1>
+<script>
+"use strict"
+
+// 자바스크립트로 일반 함수를 생성자처럼 쓸 수 있다.
+// 함수를 생성자처럼 사용하기
+function createScore(name, kor, eng, math) {
+	// 자바스크립트의 일반 함수를 생성자처럼 사용할 때는
+	// new 명령을 사용하여 외부에서 빈 객체를 생성한 후,
+	// 이 함수를 호출해야 한다.
+	// 이때 외부에서 생성한 객체는 this를 통해 접근할 수 있다.
+	// 주의!
+	// => 자바스크립트는 생성자를 만드는 별도의 문법이 없다!
+	// => 단지 일반 함수를 이용하여 생성자처럼 사용할 뿐이다.
+	//
+	// 일반 함수를 생성자로서 사용한다는 의미?
+	// => new 명령 다음에 즉시 호출하는 것을 의미한다.
+	// => 예) new createScore();
+	//
+	// 생성자로서 함수를 호출한다면, 빈 객체에 필수 변수와 함수를 추가시키는 
+	// Object()라는 함수가 먼저 호출된다. (여기서 기본 프로퍼티가 들어간다.)
+	// 꼭 자바에서 수퍼 클래스의 생성자를 호출하는 것과 같다!
+	
+	// new한 후 바로 쓴다면, 생성자 함수로 쓰겠다.
+	// 생성자 함수로 호출이 된다면, 빈객체에 변수를 집어넣는것이다.
+	// 그런데 이것 외에 다른것이 들어가는 경우가 있을것이다.
+	// this.Object();
+	
+	// 자바에서는 클래스끼리 상속받는 관계이지만, 자바스크립트에서는 상수(함수간에)가 상속받는다.
+	// createScore가 어떤것을 상속받는다고 하지는 않았지만, 
+	// 이것을 생성자로 사용한다면, Object를 자동으로 상속받는 것이다.
+	
+	// 상위 생성자 정보 => __proto__:Object
+	
+	this.name = name;
+	this.kor = kor;
+	this.eng = eng;
+	this.math = math;
+	this.sum = function() {  
+			return this.kor + this.eng + this.math
+	};
+	this.aver = function() {
+		    return this.sum() / 3
+	}; 
+}
+
+var scores = []; // new Array();
+scores[0] = new createScore("홍길동", 100, 100, 100);
+scores[1] = new createScore("임꺽정", 90, 90, 90);
+scores[2] = new createScore("유관순", 80, 80, 80);
+
+// 과목의 점수를 변경하더라도, 합계와 평균은 다시 계산되기 때문에 편하다.
+// 특정 과목의 점수가 바뀌면 다시 합계와 평균을 계산해야 한다.
+scores[2].kor = 100;
+
+for (var score of scores) {
+    console.log(score.name, score.kor, score.eng, score.math, 
+    		score.sum(), score.aver());
+}
+
+console.log(scores[0]);
+console.log(scores[1]);
+console.log(scores[2]);
+console.log(scores[0].toString);
+// 크롬 개발자도구
+// createScore {name: "유관순", kor: 100, eng: 80, math: 80, sum: ƒ, …}
+// => 이 객체는 createScore로 초기화 했다. 
+//    무엇으로 초기화했는지 생성자 이름이 나온다.
+// createScore를 생성할 때 Object()가 먼저 호출된다.
+// => 위의 객체를 펼쳐보면 Object()가 들어있다.
+//
+// new 하면 아무것도 들어있지 않은 순수한 객체가 만들어진다.
+// 여기에 최소한의 변수가 들어가야 하는데 그것을 Object함수가 집어넣는다.
+// => 생성자로서 함수를 호출한다면, 빈 객체에 필수 변수와 함수를 추가시키는 
+// Object()라는 함수가 먼저 호출된다.
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

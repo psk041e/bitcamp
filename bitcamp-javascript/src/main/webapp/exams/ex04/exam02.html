@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex02</title>
+</head>
+<body>
+<h1>객체 - 프로퍼티 추가</h1>
+<script>
+"use strict"
+// 생성자를 이용하여 기본 객체를 준비한 후에
+// 필요한 프로퍼티(변수와 함수)를 추가할 수 있다.
+//
+
+var obj = new Object();
+
+// 기본 객체 안에는 다음의 함수들이 들어있다.
+console.log(obj.toString()); // Object를 리턴
+console.log(obj.valueOf()); // 객체 정보를 그대로 리턴
+console.log(obj.hasOwnProperty("toString")); 
+//결과값: false => 내가 새로 추가한 것이 있냐고 물어보는 것이므로 이미 있음에도 false라는 결과가 나온다.
+console.log(obj.hasOwnProperty("hashCode"));
+  
+// 이렇게 준비된 객체에 프로퍼티를 추가하고 싶다면 다음의 문법을 사용하라!
+// 객체.프로퍼티명 = 값;
+// 객체["프로퍼티명"] = 값;
+// 객체['프로퍼티명'] = 값;
+
+// 객체에 갑사을 저장할 수 있다.
+obj.title = "제목입니다.";
+obj["content"] = "내용입니다."
+obj['viewCount'] = 120; // 조회수
+
+// 물론 그 값으로 함수 객체이 주소를 저장할 수 있다.
+obj.plus = (a, b) => console.log("합계=", a + b);
+
+console.log(obj.hasOwnProperty("title"));
+console.log(obj.hasOwnProperty("content"));
+console.log(obj.hasOwnProperty("viewCount"));
+console.log(obj.hasOwnProperty("plus"));
+
+console.log(obj["title"]);
+console.log(obj['content']);
+console.log(obj.viewCount);
+obj.plus(100, 200);
+
+// 자바스크립트의 객체는 자바의 맵객체와 같다. 
+// 그렇게 바라보면 이해가 쉬워진다.
+  
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

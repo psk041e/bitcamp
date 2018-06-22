@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex05</title>
+</head>
+<body>
+<h1>DOM API - 분류명(class)으로 태그 찾기</h1>
+<h1 id="header1" class="g1">제목1</h1>
+<h2 id="header2" class="g1">제목1.1</h2>
+<h2 id="header3" class="g1">제목1.2</h2>
+
+<h1 id="header4" class="g2">제목2</h1>
+<h2 id="header5" class="g2">제목2.1</h2>
+<h2 id="header6" class="g2">제목2.2</h2>
+<script>
+"use strict"
+
+// HTMLCollection 객체는 배열은 아니지만,
+// 배열처럼 length 프러퍼티가 있고,
+
+var el = document.getElementsByClassName("g3");
+
+for (var e of el) {
+	cnosole.log(e.innerHTML);
+}
+// 태그를 찾을때 
+// 1) id로 찾는다.
+// => 같은 아이디를 갖는 태그가 여러개일 경우 
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

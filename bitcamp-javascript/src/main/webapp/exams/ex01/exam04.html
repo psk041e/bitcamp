@@ -2,39 +2,41 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ex04</title>
-
+<title>ex01</title>
 <script>
   // 웹브라우저는 HTML을 로딩한 후 위에서 아래로 태그가 나온 순서대로 실행한다.
-  // 
   console.log("11111"); 
+  var v1 = "aaaa";
   // 자바스크립트 실행 중 오류가 발생하면 즉시 script 태그의 실행을 중단하고
   // 다음 태그로 간다.
-  console.log(20/0);
-  window.alert("잠깐!");
+  console.lag("오류 발생!"); // log() 함수의 이름을 잘못 작성하여 lag()로 작성하였다. 그래서 실행 오류!
+  var v2 = "bbbb";
+  console.log("11111 okok!");
 	// head와 body사이에 자바스크립트 코드를 집어넣지 말아라
 	// 실행은 되지만 그렇게 하지 않도록 해라
 </script>
-
 <script>
   console.log("22222");
-  console.log(20/0);
-  window.alert("잠깐!");
+  console.lag("오류 발생!");
+  console.log("22222 okok!");
 </script>
 </head>
-
 <body>
 <script>
   console.log("33333");
-  console.log(20/0);
-  window.alert("잠깐!");
+  console.lag("오류 발생!");
+  console.log("33333 okok!");
 </script>
-
-<h1>자바스크립트 코드 실행 순서</h1>
+<h1>자바스크립트 오류 발생</h1>
 <script>
+  console.log(v1)
+  cnosole.log(v2);
   console.log("44444");
-  console.log(20/0);
-  window.alert("잠깐!");
+  console.lag("오류 발생!);
+  console.log("44444 okok!");
 </script>
 </body>
 </html>
+
+
+

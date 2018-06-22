@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex06</title>
+</head>
+<body>
+<h1>이벤트 - 이벤트 정보 다루기 III</h1>
+<button id="btn1">버튼1</button><br>
+
+<script>
+"use strict"
+
+// 태그 객체의 onclick 프로퍼티에 리스너 등록하고 이벤트 정보 추출
+var e = document.getElementById("btn1");
+e.onclick = function(e) {
+	console.log(
+			e.altKey, e.ctrlKey, e.button,
+			e.offsetX, e.offsetY,
+			e.clientX, e.clientY,
+			e.screenX, e.screenY)
+};
+// 어차피 태그 객체를 찾은다음 한번밖에 안쓸거라면 변수를 굳이 만들지 않는다.
+// => document.getElementById("btn1").onclick = function(e) {
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

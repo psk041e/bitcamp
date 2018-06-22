@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex14</title>
+</head>
+<body>
+<h1>함수 - 애로우(arrow) 함수를 리턴하기</h1>
+<script>
+"use strict"
+// arrow function이나 일반 익명 함수나 같다.
+//
+function closureMaker(fnType, count) { // 잊지말라. 파라미터도 로컬 변수이다.
+	switch (fnType) {
+	case "sum":
+	    return () => { 
+	        var sum = 0;    
+	        for (var i = 1; i <= count; i++) {
+	            sum += i;
+	        }
+	        console.log("합계 =", sum);
+	    };
+	case "factorial":
+		return () => {
+        var sum = 1;
+        for (var i = 1; i <= count; i++) {
+            sum *= i;
+        }
+        console.log("팩토리얼 =", sum);
+	};
+	default:
+		return () =>  {
+		  console.log("해당 연산을 지원하지 않습니다.");
+		};
+	}
+}
+
+var fn1 = closureMaker("sum", 10);
+var fn2 = closureMaker("sum", 100);
+
+fn1();
+fn2();
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex07</title>
+</head>
+<body>
+<h1>AJAX - POST 요청</h1>
+<button id="btn1" >요청</button><br>;
+<textarea id="ta" cols="80" rows="10"></textarea>
+
+
+<script>
+"use strict"
+
+var ta = document.querySelector("#ta");
+
+document.querySelector("#btn1").onclick = () => {
+	var xhr = new XMLHttpRequest(); 
+	
+	// POST요청은 데이터를 send()를 호출할 때 넘긴다.
+	xhr.open("POST", "../../jsp/test2.jsp", false);
+
+	// 주의!
+	// 서버에 POST 요청으로 데이터를 보낼 때는 반드시 Content-Type 헤더를 설정하여 
+	// 어떤 타입의 데이터를 보내는지 서버에 알려줘야 한다.
+	// => 일반적인 form 데이터의 형식(이름=값&이름=값&...)은 다음과 같이 MIME 타입을 선언해야 한다.
+	//    "application/x-www-form-urlencoded"
+	//    (이것을 붙여주지 않으면 서버에서 데이터가 이름=값&이름=값...인지 모른다.)
+	//
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // form 기본값
+	
+	xhr.send("name=홍길동&age=20");
+	ta.value = xhr.responseText; 
+	
+	
+	// jsp는 POST,GET요청 모두 처리하기 때문에 따로 만들 필요가 없다.
+	
+	// 서버쪽에서 값을 못받았기 때문에 요청시 값이 나오지 않는다.
+	// => POST방식으로 데이터를 서버에 보낼때는 항상 그 서버에게 보내는 데이터가 무엇인지(어떤 타입인지) 알려주어야 한다.
+	// => contentType
+	
+	// 서버 요청에서 GET요청은 상관없지만 POST로 전송된 데이터는 한글이 깨지기 때문에 어떤 데이터인지 알려주어야 한다.
+	// => request.setCharacterEncoding("UTF-8");
+};
+
+
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
