@@ -33,6 +33,8 @@
     <!-- 모든 요청에 대해 인터셉터를 적용한다. -->
     <!-- <bean class="bitcamp.mvc.web.Exam09_1_interceptor"/>  -->
     
+    
+    
     <!-- 특정 URL에 대해서만 인터셉터 적용하기 -->
     <mvc:interceptor>
         <mvc:mapping path="/exam09_1/**"/>

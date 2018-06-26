@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>게시물 보기</title>
+</head>
+<body>
+<div id='header'></div>
+
+<h1 class="detail-view">게시물 보기</h1>
+<h1 class="input-view">새 게시글</h1>
+<form>
+<table border='1'>
+<tbody>
+<tr class="detail-view"><th>번호</th><td>
+    <input id="fNo" type='text' readonly></td></tr>
+<tr><th>제목</th>
+    <td><input id="fTitle" type='text'></td></tr>
+<tr><th>내용</th>
+    <td><textarea id='fContent' rows='10' cols='60'></textarea></td></tr>
+<tr class="detail-view"><th>등록일</th>
+    <td><input id="fCreatedDate" type='text' readonly></td></tr>
+</tbody>
+</table>
+<p>
+<a href='list.html'>목록</a>
+<button id="addBtn" type="button" class="input-view">등록</button>
+<button id="resetBtn" type="reset" class="input-view">초기화</button>
+<button id="updBtn" type="button" class="detail-view">변경</button>
+<button id="delBtn" type="button" class="detail-view">삭제</button>
+</p>
+</form>
+
+<script src="../js/bitcamp.js"></script>
+<!--  <script src="../header.js"></script>-->
+<script>
+
+if (location.href.split("?").length > 1) {
+	var tags = $(".input-view");
+    tags.css("display", "none");
+    
+    var no = location.href.split("?")[1].split("=")[1];
+	
+    $.getJSON("../../json/board/" + no, function(data) {
+    	// jquery 함수가 리턴한 객체가 아니기 때문에 jquery에 넣어서 다시 리턴받도록 한다.
+    	// 가공된 객체를 리턴하는 셈이다.
+    	// 순수 태그 객체는 이런 함수가 붙지 않는다.
+        $(fNo).val(data.no); 
+        $(fTitle).val(data.title);
+        $(fContent).val(data.content);
+        $(fCreatedDate).val(data.createdDate);
+    });
+
+    
+	$("#updBtn").click(() => { // 태그를 찾고 그 찾은 태그에 대해서 click 메서드를 실행한다.
+		$.post("../../json/board/update", {
+			title: $(fTitle).val(), // fTitle은 오리지날 태그이기 때문에 jquery함수를 통해서 가공한 다음 리턴한다.
+		    content: $(fContent).val(),
+		    no: $(fNo).val()
+		}, () => {
+			location.href = "list.html";
+		}); // 업데이트할 때 아무것도 리턴하지 않기때문에 json으로 바꿀 수 없으므로 세번째 파라미터를 없앤다.
+	});      // arrow function은 argument가 없다.
+	
+    $("#delBtn").click(() => {
+        if (window.confirm("삭제하시겠습니까?") == false) 
+        	return;
+        
+        // "no"라는 이름으로 no값을 저장
+        $.get("../../json/board/delete", {"no": no}, () => {
+        	location.href = "list.html";
+        });
+	});
+	
+} else { // 새 글 등록
+    var tags = $(".detail-view");
+    tags.css("display", "none");
+    
+    $("#addBtn").click(() => {
+    	$.post("../../json/board/add", {
+	    	title: $(fTitle).val(),
+	        content: $(fContent).val()
+    	}, () => {
+    		location.href = "list.html";
+    	});
+    });
+}
+
+</script>
+
+</body>
+</html>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

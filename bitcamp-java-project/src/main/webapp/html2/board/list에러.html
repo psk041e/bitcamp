@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>게시물 목록</title>
+</head>
+<body>
+<div id='header'></div>
+<h1>게시물 목록</h1>
+<p><a href='form.html'>새 글</a></p>
+<table border='1'>
+<thead>
+    <tr><th>번호</th><th>제목</th><th>등록일</th></tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+<script src="../js/bitcamp.js"></script>
+<!-- <script src="../header.js"></script> -->
+<script>
+
+// 오류에 대한 작업은 하지 못한다. 에러에 관심이 없다면 이것을 사용해라
+$.getJSON("../../json/board/list", (data) => {
+	for (var item of data) {
+        $("<tr>") // 쓸데없이 변수를 만들지 않는다.
+            .html("<td>" + item.no + "</td>" + 
+	            "<td><a href='form.html?no=" + item.no + "'>" + item.title + "</a></td>" + 
+	            "<td>" + item.createdDate + "</td>")
+            .appendTo(tableBody); 
+    }
+});
+
+/* 
+ 
+ 
+//bitcamp에 있는 ajax 메서드를 호출하는데 파라미터를 다음과 같이 준다.
+$.ajax("../../json/board/list", { // 보통 객체를 만들때 값을 따로 따로 넣지 않고 이와 같이 만든다.
+    //데이터 타입을 지정하지 않으면 넘어오는 값이 기본적으로 텍스트이다.
+    // json으로 받는 순간 객체로 parsing된다.
+    dataType = "json";
+    success(data) {
+        //console.log(data); // 서버에서 받은 데이터를 출력해본다.
+        for (var item of list) {
+                var tr = document.createElement("tr");
+                tr.innerHTML = "<td>" + item.no + "</td>" + 
+                    "<td><a href='form.html?no=" + item.no + "'>" + item.title + "</a></td>" + 
+                    "<td>" + item.createdDate + "</td>";
+                tableBody.appendChild(tr); // id는 window객체로 바로 등록되기 때문에 그냥 사용이 가능하다.
+        }
+    },
+    error() {
+        window.alert("실행 오류!");
+    }
+}); 
+
+ */
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+

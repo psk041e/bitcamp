@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    
+    <context:component-scan base-package="bitcamp.java106.pms.web">
+        <context:exclude-filter type="aspectj" 
+            expression="bitcamp.java106.pms.web.*Controller"/>
+    </context:component-scan>
+    <!-- 와일드 카드가 정규표현식에서는  -->
+    
+    <mvc:annotation-driven enable-matrix-variables="true"/>
+    
+    <!-- 스프링 버전에 따라 추가해야 하는것이 달라진다. 저번 기수(4점대 버전)와 비교해볼것. -->
+    
+    <!-- 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/auth/**"/>
+            <bean class="bitcamp.java106.pms.web.interceptor.AuthCheckInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+     -->
+</beans>
+
+
+
+
+
+

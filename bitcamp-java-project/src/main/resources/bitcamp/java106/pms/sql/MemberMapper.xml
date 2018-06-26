@@ -36,6 +36,12 @@
     where mid=#{id} and pwd=sha2(#{password},224)
   </select>
   
+  <select id="count" parameterType="map" resultType="int">
+    select count(*) 
+    from pms2_member 
+    where mid=#{id} and pwd=sha2(#{password},224)
+  </select>
+  
   <update id="update" parameterType="Member">
     update pms2_member set 
         email=#{email}, 

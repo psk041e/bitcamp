@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>게시물 보기</title>
+<!-- 웹브라우저에서 게시물 상세보기 실행한후 페이지소스보기로 복사해온다. -->
+</head>
+<body>
+<div id='header'></div>
+
+<h1 class="detail-view">게시물 보기</h1>
+<h1 class="input-view">새 게시글</h1>
+<form> <!-- AJAX로 요청할것이기 때문에 action 속성은 더이상 필요가 없다. -->
+<table border='1'> <!-- 자바스크립트에 AJAX로 보낼 때는 name속성이 필요 없다. name은 데이터를 보낼때나 사용한다. -->
+<tbody>
+<tr class="detail-view"><th>번호</th>
+    <td
+    ><input id="fNo" type='text' readonly></td></tr>
+<tr><th>제목</th>
+    <td><input id="fTitle" type='text' ></td></tr>
+<tr><th>내용</th>
+    <td><textarea id="fContent" rows='10' cols='60'></textarea></td></tr>
+<tr class="detail-view"><th>등록일</th>
+    <td><input id="fCreatedDate" type='text' readonly></td></tr>
+</tbody>
+</table>
+<p>
+<a href='list.html'>목록</a>
+<!-- 버튼이 form 안에 있으면 타입을 지정하지 않으면 default값이 submit이기 때문에 반드시 type을 명시해주어야 한다. -->
+<!-- 태그id명을 줄때 btn을 앞에 놓는 개발자도 있고 뒤에 놓는 개발자도 있다. -->
+<button id="addBtn" type="button" class="input-view">등록</button> 
+<button id="resetBtn" type="reset" class="input-view">초기화</button>
+<button id="updBtn" type="button" class="detail-view">변경</button>
+<button id="delBtn" type="button" class="detail-view">삭제</button>
+</p>
+</form>
+
+
+<script src="../header.js"></script>
+<script>
+
+// 태그에 id를 지정하면 window 객체에 자동 등록된다.
+// 따라서 다음과 같이 태그를 찾는 코드를 작성하지 않아도 된다.
+// 그래서 원래 window에 등록된 이름과 충돌이 일어나지 않도록 해야 한다.
+
+/* 
+// 사용할 태그 객체를 미리 찾아놓는다.
+var fNo = document.querySelector("#fNo"),
+    fTitle = document.querySelector("#fTitle"),
+    fContent = document.querySelector("#fContent"),
+    fCreatedDate = document.querySelector("#fCreatedDate");
+*/
+
+//console.log(fTitle); // 태그에 id를 주게 되면 window객체의 글로벌  변수가 되어버린다.
+//console.log(window.fTitle);
+    
+if (location.href.split("?").length > 1) { // 물음표로 나눠서 값이 있을 때만 채운다.
+	var tags = document.querySelectorAll(".input-view"); // 배열
+    for (var tag of tags) {
+        tag.style.display = "none";
+    }
+	
+	var no = location.href.split("?")[1].split("=")[1];
+	// location: 웹브라우저가 제공해주는 자바스크립트 객체
+	// href는 문자열이다. 자바스크립트에도 split이라는 메서드가 있다.
+	// 리턴한 값중 1번방에 있는 값만 원한다.
+	
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = () => {
+	    if (xhr.readyState == 4) {
+	        if (xhr.status == 200) {
+	        	var data = JSON.parse(xhr.responseText);
+	        	// console.log(data); // 값이 출력되는지 확인해본다.
+	        	// > http://localhost:8888/bitcamp-java-project/html/board/view.html?no=2
+	        			
+	        	fNo.value = data.no;
+	        	fTitle.value = data.title;
+	        	fContent.value = data.content;
+	        	fCreatedDate.value = data.createdDate;
+	        	
+	        }
+	    }
+	};
+	xhr.open("GET", "../../json/board/" + no, true);
+	xhr.send();
+	
+	document.querySelector("#updBtn").onclick = () => {
+	    var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    location.href = "list.html";
+                } else {
+                    window.alert("변경 실패!")
+                }
+            }
+        };
+        xhr.open("POST", "../../json/board/update", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        //주의!
+        //=> 자바스크립트의 AJAX를 사용하여 직접 서버에 한글을 포함하는 데이터를 보낼 때는
+        //   개발자가 URL 인코딩 해서 보내야 한다.
+        xhr.send("title=" + encodeURIComponent(fTitle.value) + 
+                "&content=" + encodeURIComponent(fContent.value) + 
+                "&no=" + fNo.value);
+    };
+    
+    document.querySelector("#delBtn").onclick = () => {
+    	if(window.confirm("삭제하시겠습니까?") == false) // yes/no 창을 띄운다. => Web API 참고
+    		return;
+    	
+    	var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                	// 상대 주소를 넣게 되면 html/board/ 까지는 똑같고 그 뒤에만 바뀐다.
+                	// 실무에서는 거의 window를 생략한다.
+                	/* window. */location.href = "list.html"; 
+                } else {
+                	window.alert("삭제 실패!")
+                }
+            }
+        };
+        xhr.open("GET", "../../json/board/delete?no=" + no, true);
+        xhr.send();
+    };
+	
+} else { // 새 글 등록
+	var tags = document.querySelectorAll(".detail-view"); // 배열
+	for (var tag of tags) {
+		tag.style.display = "none"; // <h1 style="display: none;">...</h1>
+		// 자바스크립트에서 CSS를 제어할 때는 다음과 같은 방법으로 한다. => 태그명.style.속성
+		// 속성에 - 이 들어갈때는 대괄호[]로 묶어준다.
+	}
+	
+	document.querySelector("#addBtn").onclick = () => { // addBtn을 클릭했을 때 함수 등록
+		var xhr = new XMLHttpRequest();
+	    xhr.onreadystatechange = () => {
+	        if (xhr.readyState == 4) {
+	            if (xhr.status == 201) {
+	            	location.href = "list.html";
+	            } else {
+	            	window.alert("등록 실패!");
+	            }
+	        }
+	    };
+	    xhr.open("POST", "../../json/board/add", true);
+	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    // 주의!
+	    // => 자바스크립트  AJAX로 직접 서버에 한글을 포함하는 데이터를 보낼 때는
+	    //    개발자가 URL 인코딩 해서 보내야 한다.
+	    xhr.send("title=" + encodeURIComponent(fTitle.value) + 
+                "&content=" + encodeURIComponent(fContent.value));
+	    // post방식으로 데이터를 보낼때는 send에 파라미터값을 보내야 한다. 이 때 이름=값&이름=값&... 형식으로 넣어야 한다.
+	    // 웹 브라우저는 입력폼에 있는 데이터를 submit으로 자동으로 보낼때는 알아서 인코딩해서 보낸다.
+	    // 그러나 자바스크립트에서 value안에 있는 값은 직접 인코딩해서 보내야 한다.
+	};
+}
+
+// 
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
