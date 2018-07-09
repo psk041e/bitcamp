@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>게시물 목록</title>
+<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<div class="container">
+<nav id="header" class="navbar navbar-expand-lg navbar-light bg-light">
+<h1>게시물 목록</h1>
+<p><a href='form.html' class="btn btn-primary btn-sm">새 글</a></p>
+<table class="table table-hover">
+<thead>
+    <tr><th>번호</th><th>제목</th><th>등록일</th></tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+</nav>
+</div><!-- .container -->
+
+<script id="tr-template" type="text/x-handlebars-template">
+// 템플릿 데이터
+// 스크립트에 집어넣어야 웹브라우저가 이것을 무시한다. 
+// 문제는 스크립트의 기본 타입이 자바스크립트이다. 화면에는 출력이 안되지만 콘솔창에 에러가 뜬다.
+// 존재하지 않는 타입을 집어넣으면 자바스크립트가 아니기 때문에 출력되 되지 않고, 에러도 나지 않는다.
+// 그러나 이렇게 하지 말아라!
+// 이왕이면 handlebarsjs.com 의 만들어진 타입을 사용해라.
+	<td>{{no}}</td>
+	<td><a href='form.html?no={{no}}'>{{title}}</a></td>
+	<td>{{createdDate}}</td>
+</script>
+
+<!-- distribution: 배포파일 -->
+<!-- 내부적으로 jquery를 가지고 작업을 하는 경우가 있다. 
+           이런 경우에는 jquery밑에 라이브러리를 정의해야 한다.순서가 중요하다.
+     handlebars는 상관 없으므로 위에 썼다. -->
+<script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../header.js"></script>
+<script>
+
+// 템플릿 엔진이 사용할 템플릿 데이터 가져오기
+var trTemplateSrc = $("#tr-template").html();
+console.log(trTemplateSrc);
+
+// 위에서 준비한 템플릿 데이터를 가지고 HTML을 생성할 템플릿 엔진 준비
+var templateFn = Handlebars.compile(trTemplateSrc);
+
+$.getJSON("../../json/board/list", (data) => {
+    for (var item of data) {
+    	// 위에서 준비한 템플릿 엔진과 데이터를 가지고 tr HTML을 생성한다.
+    	var trHTML = templateFn(item); // item에 들어있는 객체: no, title, createdDate
+        $(trHTML).appendTo(tableBody);
+    }
+});
+/*
+$.ajax("../../json/board/list", {
+    dataType: "json",
+    success(data) {
+        for (var item of data) {
+            var tr = document.createElement("tr");
+            tr.innerHTML = "<td>" + item.no + "</td>" + 
+                "<td><a href='form.html?no=" + item.no + "'>" + item.title + "</a></td>" + 
+                "<td>" + item.createdDate + "</td>";
+            tableBody.appendChild(tr);
+        }
+    },
+    error() {
+        window.alert("실행 오류!");
+    }
+});
+*/
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
