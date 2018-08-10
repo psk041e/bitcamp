@@ -24,13 +24,25 @@
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
 const 
+  https = require('https'),
+  fs = fdquire('fs'),
   request = require('request'),
   express = require('express'),
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 
 // Sets server port and logs message on success
-app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+//app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+
+var opstions = {
+	key: fs.readFileSync('/home/ec2-user/custom.key'),
+	cert: fs.readFileSync('/home/ec2-user/www_parkseogyeong_com.crt')
+}
+
+https.createServer(options,app).listen(1337, () => {
+	console.log('webhook is listening')); // 페이스북 페이지로 갈 메시지를 가로채겠다.
+}); 
+// 서버를 만든 다음 리턴된 서버를 바로 listen한다. 번호는 상관없지만 바꾼다면 아마존에서도 설정한값을 바꿔주어야 한다.
 
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {  
@@ -105,12 +117,40 @@ function handleMessage(sender_psid, received_message) {
   let response;
   
   // Checks if the message contains text
-  if (received_message.text) {    
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
+  if (received_message.text == 'hello') {    
     response = {
-      "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+      "text": `나도 반가워요~~~ ㅋㅋ`
     }
+  } else if (received_message.text == 'menu') {
+	  response = {
+	      "attachment": {
+	        "type": "template",
+	        "payload": {
+	          "template_type": "generic",
+	          "elements": [{
+	            "title": "어떤 메뉴를 원하시나요?",
+	            "subtitle": "아래에 원하는 메뉴를 선택해 주세요!",
+	            "buttons": [
+	              {
+	                "type": "postback", // 라벨명
+	                "title": "치맥", // 버튼을 누르면 서버에 전달되는 값
+	                "payload": "menu01", // 버튼을 누르면 서버에 전달되는 값
+	              },
+	              {
+	                "type": "postback",
+	                "title": "불소",
+	                "payload": "menu02",
+	              },
+	              {
+	                "type": "postback",
+	                "title": "부막",
+	                "payload": "menu03",
+	              },
+	            ],
+	          }]
+	        }
+	      }
+	    }
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;

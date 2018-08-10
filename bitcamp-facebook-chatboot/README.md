@@ -16,8 +16,15 @@
   - '~/bash_prifile' 파일에 설정한다.
   - 보통 환경 변수 'VERIFY_TOKEN'으로 지정한다.
   
-##
-  
+## node.js 설치
+- nodejs.org 사이트에서 안내하는 대로 설치하라!
+
+## linux 서버에서 페이지북 메신저 챗봇 실행
+-nodejs를 사용하여 챗봇을 실행한다.
+  - ~/git/bitcamp/bitcamp-faceboot-chatbot/ 로 이동한다.
+  - 'npm install' 실행하여 노드 모듈을 설치한다.
+  - 'nodejs.
+
 ## 페이스북 페이지를 생성한다.
 가상의 대화 상대 역할을 할 페이지를 생성한다.
 
