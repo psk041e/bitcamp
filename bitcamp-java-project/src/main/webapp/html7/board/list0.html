@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-<nav id="header" class="navbar navbar-expand-lg navbar-light bg-light">
+<nav id="header" class="navbar navbar-expand-lg navbar-light bg-light"></nav>
 <h1>게시물 목록</h1>
 <p><a href='form.html' class="btn btn-primary btn-sm">새 글</a></p>
 <table class="table table-hover">
@@ -17,19 +17,20 @@
 </thead>
 <tbody id="tableBody"></tbody>
 </table>
-</nav>
 </div><!-- .container -->
 
+<!-- 템플릿 데이터
+스크립트에 집어넣어야 웹브라우저가 이것을 무시한다. 
+문제는 스크립트의 기본 타입이 자바스크립트이다. 화면에는 출력이 안되지만 콘솔창에 에러가 뜬다.
+존재하지 않는 타입을 집어넣으면 자바스크립트가 아니기 때문에 출력되 되지 않고, 에러도 나지 않는다.
+그러나 이렇게 하지 말아라!
+이왕이면 handlebarsjs.com 의 만들어진 타입을 사용해라. -->
 <script id="tr-template" type="text/x-handlebars-template">
-// 템플릿 데이터
-// 스크립트에 집어넣어야 웹브라우저가 이것을 무시한다. 
-// 문제는 스크립트의 기본 타입이 자바스크립트이다. 화면에는 출력이 안되지만 콘솔창에 에러가 뜬다.
-// 존재하지 않는 타입을 집어넣으면 자바스크립트가 아니기 때문에 출력되 되지 않고, 에러도 나지 않는다.
-// 그러나 이렇게 하지 말아라!
-// 이왕이면 handlebarsjs.com 의 만들어진 타입을 사용해라.
-	<td>{{no}}</td>
-	<td><a href='form.html?no={{no}}'>{{title}}</a></td>
-	<td>{{createdDate}}</td>
+<tr>
+    <td>{{no}}</td>
+    <td><a href='form.html?no={{no}}'>{{title}}</a></td>
+    <td>{{createdDate}}</td>
+</tr>
 </script>
 
 <!-- distribution: 배포파일 -->
@@ -43,7 +44,7 @@
 
 // 템플릿 엔진이 사용할 템플릿 데이터 가져오기
 var trTemplateSrc = $("#tr-template").html();
-console.log(trTemplateSrc);
+//console.log(trTemplateSrc);
 
 // 위에서 준비한 템플릿 데이터를 가지고 HTML을 생성할 템플릿 엔진 준비
 var templateFn = Handlebars.compile(trTemplateSrc);

@@ -9,7 +9,7 @@ function loadLoginUser() {
 		$("#username").text(data.id);
 		$("#logoutBtn").click((e) => {
 			e.preventDefault(); // 클릭했을 때 원래 하던 일이 있는데 그것을 하지 말라!
-			$.get("/java106-java-project/json/auth/logout", () => {
+			$.get("/bitcamp-java-project/json/auth/logout", () => {
 				location.href = "/bitcamp-java-project/html3/auth/login.html";
 			});
 		});

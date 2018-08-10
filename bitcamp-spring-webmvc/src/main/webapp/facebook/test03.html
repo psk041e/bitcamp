@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>페이스북 로그인</h1>
+
+<script type="text/javascript">
+// 페이스북 자바스크립트 SDK 파일을 가져온 후에 호출될 함수를 등록한다.
+// => 즉 sdk.js 파일을 실행할 때 이 함수를 찾아 호출한다.
+// => 이 함수는 페이스북 API를 사용하기 전에 준비하는 작업을 수행한다.
+window.fbAsyncInit = function() { // 이런 일을 할 함수를 윈도우 객체에 등록해놓는다. 지금 수행하는 수행하는 것이 아니다.
+  console.log("window.fbAsyncInit() 호출됨!");
+  FB.init({
+    appId      : '214049849444423', // 개발자가 등록한 앱 ID
+    cookie     : true,  
+    xfbml      : true,  // facebook 관련 markup language를 쓰겠다.
+    version    : 'v3.0'  // 버전을 3.0으로 바꿔주었다.
+  });
+  FB.AppEvents.logPageView();  
+};
+
+//스크립트 태그를 생성하고 스크립트 태그가 생성되는 순간 실행한다. 그 실행하는 중간에 fbAsyncInit 를 실행하는 코드가 들어간다.
+// 자바스크립트는 위에서 아래로 실행하기 때문에 위의 코드가 먼저 와야 한다.
+(function(d, s, id) {   
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

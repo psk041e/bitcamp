@@ -1,5 +1,5 @@
-#DDL(Data Definition Langauge)
-SQL 문에서 DB객체(테이블, 뷰, 함수, 트리거 등)를 생성, 변경, 삭제하는 명령이다. 
+# DDL(Data Definition Language)
+DB객체(테이블, 뷰, 함수, 트리거 등)를 생성, 변경, 삭제하는 SQL 명령이다. 
 
 
 - 데이터베이스(database) = 스키마(schema)
@@ -7,28 +7,26 @@ SQL 문에서 DB객체(테이블, 뷰, 함수, 트리거 등)를 생성, 변경,
 - 뷰(view)
 - 트리거(trigger)
   - 특정 조건에서 자동으로 호출되는 함수
-  - 특정 조건? SQL 실행 전후 등
+  - 특정 조건? SQL 실행 전/후 등
 - 함수(function)
 - 프로시저(procedure)
 - 인덱스(index)
 
-## 데이터 베이스
+## 데이터베이스
 데이터베이스 생성
-> create database 데이터베이스명
-  옵션들...;
+> create database 데이터베이스명 옵션들...;
 
 데이터베이스 삭제
 > drop database 데이터베이스명;
 
 데이터베이스 변경
-> alter database 데이터베이스명 
-  옵션들...;
+> alter database 데이터베이스명 옵션들...; 
   
 ## 테이블
 테이블 생성
 > create table 테이블명 (
   컬럼명 타입 NULL여부 옵션,
-  컬럼명 타입 NULL여부 옵션 ,
+  컬럼명 타입 NULL여부 옵션,
   ...
   컬럼명 타입 NULL여부 옵션
   );
@@ -46,12 +44,12 @@ SQL 문에서 DB객체(테이블, 뷰, 함수, 트리거 등)를 생성, 변경,
 테이블 정보 보기
 > describe 테이블명;
 > desc 테이블명;
-예) describe score;
-예) desc score; 
+예) describe test01;
+예) desc test01; 
 
 테이블 삭제하기
 > drop table 테이블명;
-예) drop table score;
+예) drop table test01;
 
 ### 테이블 컬럼 옵션 
 
@@ -115,12 +113,13 @@ SQL 문에서 DB객체(테이블, 뷰, 함수, 트리거 등)를 생성, 변경,
   c1 int, 
   c2 float, 
   c3 numeric(6,2), /* 소수점 자릿수를 지정하면 부동소수점으로 사용 */
-  c4 numeric /* int와 같다.*/
+  c4 numeric /* int와 같다. */
   );
   
 > insert into test1(c1) values(100);
-> insert into test1(c1) values(3.14); /* 소수점 짤림 에러가 뜨지 않는다.*/
+> insert into test1(c1) values(3.14); /* 소수점 이하 반올림 하고 짜름*/
 > insert into test1(c1) values(100.98); /* 소수점 이하 반올림 하고 짜름 */
+> insert into test1(c2) values(100);
 > insert into test1(c2) values(3.14);
 > insert into test1(c2) values(3.14159); /* 잘리지 않고 다 들어간다.*/
 > insert into test1(c3) values(100);
@@ -128,12 +127,12 @@ SQL 문에서 DB객체(테이블, 뷰, 함수, 트리거 등)를 생성, 변경,
 > insert into test1(c3) values(12345); /* 입력 오류. 1자리 초과 */
 > insert into test1(c3) values(1234);
 > insert into test1(c3) values(3.14);
-> insert into test1(c3) values(3.14159); /* 2자리를 초과한 값은 반올림.소수점 아래의 값은 개수를 초과해도 들어간다.*/
+> insert into test1(c3) values(3.14159); /* 2자리를 초과한 값은 반올림. */
 > insert into test1(c3) values(3.14551); /* 2자리를 초과한 값은 반올림. */
 > insert into test1(c4) values(1234567890); 
 > insert into test1(c4) values(12.34567890); /* 소수점은 반올림 처리됨 */
 > insert into test1(c4) values(12345678.90); /* 소수점은 반올림 처리됨 */
-/* numeric을 쓸 때 소수점 이하를 지정해 주지 않으면 int 처럼 값이 들어가게 된다. */
+
 #### char(n)
 - 최대 n개의 문자를 저장.
 - 0 <= n <= 255 
@@ -161,9 +160,9 @@ SQL 문에서 DB객체(테이블, 뷰, 함수, 트리거 등)를 생성, 변경,
 입력 테스트:
 > insert into test1(c1) values(''); /* 값을 주지 않아도 무조건 메모리에서 5칸을 차지한다.*/
 > insert into test1(c1) values('abcde');
-> insert into test1(c1) values('가나다라마');
+> insert into test1(c1) values('가나다라마'); /* 한글 영어 상관없이 5자 */
 > insert into test1(c1) values('abcdefghi'); /* 입력 크기 초과 오류! */
-> insert into test1(c1) values('가나다라마바'); /* 한글 영어 상관없이 5자 but, DBMS마다 달라서 한글은 bit로 계산하는 경우 달라질수 있다.*/
+> insert into test1(c1) values('가나다라마바'); /* 입력 크기 초과 오류! 한글 영어 상관없이 5자 but, DBMS마다 달라서 한글은 bit로 계산하는 경우 달라질수 있다.*/
 > insert into test1(c2) values('');
 > insert into test1(c2) values('abcde');
 > insert into test1(c2) values('abcdefghi'); /* 입력 크기 초과 오류! */
@@ -173,7 +172,7 @@ SQL 문에서 DB객체(테이블, 뷰, 함수, 트리거 등)를 생성, 변경,
 > insert into test1(c2) values('abc');
 > select * from test1 where c1='abc'; 
 DBMS 중에는 고정 크기인 컬럼의 값을 비교할 때 빈자리까지 검사하는 경우도 있다.
-즉, c1='abc'에서는 데이터를 찾지 못하고 c1='abc  '여야만 데이터를 찾는 경우가 있다.
+즉, c1='abc'에서는 데이터를 찾지 못하고, c1='abc  '여야만 데이터를 찾는 경우가 있다.
 그러나 mysql은 고정크기 컬럼이더라도 빈자리를 무시하고 데이터를 찾는다.
 
 #### text(65535), mediumtext(약 1.6MB), longtext(약 2GB)
@@ -183,7 +182,7 @@ DBMS 중에는 고정 크기인 컬럼의 값을 비교할 때 빈자리까지 �
 #### date
 - 날짜 정보를 저장할 때 사용한다.
 - 년,월,일 정보를 저장한다.
-- 오라클의 경우 날짜뿐만 아니라 시간 정보도 저장한다.
+- 오라클의 경우 날짜 뿐만 아니라 시간 정보도 저장한다.
 
 #### time
 - 시간 정보를 저장할 때 사용한다.
@@ -256,7 +255,7 @@ DBMS 중에는 고정 크기인 컬럼의 값을 비교할 때 빈자리까지 �
 - 입력 테스트:
 > insert into test1(name,kor,eng,math) values('aaa', 100, 100, 100);
 > insert into test1(name,kor,eng,math) values('bbb', 90, 90, 90);
-> insert into test1(name,kor,eng,math) values('aaa', 100, 100, 100); /* 중복 오류*/
+> insert into test1(name,kor,eng,math) values('aaa', 100, 100, 100); /* 중복 오류! */
 
 
 - 한 개 이상의 컬럼을 PK로 지정하기
@@ -295,7 +294,7 @@ DBMS 중에는 고정 크기인 컬럼의 값을 비교할 때 빈자리까지 �
   즉, 데이터를 찾을 때 마다 name과 age 값을 지정해야 한다.
 - 그래서 실무에서는 이런 경우 '학번'처럼 임의의 값을 저장하는 컬럼을 만들어 PK로 사용한다.
 > create table test1(
-  no int primary key,
+  no int primary key, /* 학번 */
   name varchar(20),
   age int,
   kor int,
@@ -356,8 +355,8 @@ create table test1(
   math int,
   constraint test1_uk unique (name, age),
   fulltext index test1_name_idx (name)
-); /* 인덱스 명을 줄수 있다. 보통 테이블명_컬럼명_idx 로 이름을 준다.*/
-/* 데이터를 입력, 변경, 삭제할 때마다 name값에 따라 색인표대로 나열한다. */
+); 
+
 
 insert into test1(no,name,age,kor,eng,math) values(1,'aaa',20,80,80,80);
 insert into test1(no,name,age,kor,eng,math) values(2,'bbb',21,90,80,80);
@@ -407,9 +406,9 @@ alter table test1
 - PK 컬럼 지정, UNIQUE 컬럼 지정, INDEX 컬럼 지정
 ```
 alter table test1
-  add constraint primary key (no),
-  add constraint unique (name, age),
-  add fulltext index test1_name_idx(name);
+  add constraint test1_pk primary key (no),
+  add constraint test1_uk unique (name, age),
+  add fulltext index test1_name_idx (name);
 ```
 /* primary key는 지정하지 않아도 default가 not null 이다.*/
 - 컬럼에 옵션 추가
@@ -433,8 +432,9 @@ insert into test1(no,name,age,kor,eng,math,sum,aver)
   values(2,'bbb',21,100,100,100,300,100);
 
 /* 다음은 name과 age의 값이 중복되기 때문에 입력 거절된다.*/  
-insert into test14(no,name,age,kor,eng,math,sum,aver)
-  values(3,'bbb',21,100,100,100,300,100);  
+insert into test1(no,name,age,kor,eng,math,sum,aver)
+  values(3,'bbb',21,100,100,100,300,100);
+
 ```
 
 ### 컬럼 값 자동 증가
@@ -461,8 +461,9 @@ alter table test1
  add constraint primary key (no); /* 일단 no를 pk로 지정한다.*/
 
  alter table test1
-  modify column no int not null auto_increment; /* 그런 후 auto_increment로 지정한다.*/
+  modify column no int not null auto_increment; /* 그런 후 auto_increment를 지정한다.*/
 
+- 입력 테스트
 ```
 insert into test1(name) values('aaa');
 insert into test1(name) values('bbb');

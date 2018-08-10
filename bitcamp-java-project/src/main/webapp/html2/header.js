@@ -11,7 +11,7 @@ function loadLoginUser() {
 		else {
 			$("#username").text(data.id);
 			$("#logoutBtn").click((e) => { // 
-				window.alert("okok");
+				//window.alert("okok");
 				e.preventDefualt(); // 클릭했을 때 원래 하던 일이 있는데 그것을 하지 말라!
 				// a태그는 주어진 링크를 서버에 보내게 되어있다. 이것을 하지 말라.
 				e.get("/bitcamp-java-project/html2/auth/logout", () => {

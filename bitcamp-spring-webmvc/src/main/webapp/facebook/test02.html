@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>페이스북 로그인</h1>
+<script id="s1" type="text/javascript"></script>
+<script id="s2" type="text/javascript"></script>
+<script id="s3" type="text/javascript"></script>
+<script id="s4" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+// 페이스북 SDK 라이브러리파일 로드
+// - 동적으로 script 태그를 만든다.
+// - 웹브라우저는 당연히 동적으로 생성된 script 태그를 실행할 것이다.
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0]; // 스크립트 태그를 찾아서 그 중 첫번째 태그를 알려준다.
+  if (d.getElementById(id)) return; // id가 facebook-jssdk인 것이 있는가? 
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs); // 아까 찾은 스크립트 태그보다 제일 먼저 올려라
+}(document, 'script', 'facebook-jssdk'));
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
