@@ -40,7 +40,7 @@ var opstions = {
 }
 
 https.createServer(options,app).listen(1337, () => {
-	console.log('webhook is listening')); // 페이스북 페이지로 갈 메시지를 가로채겠다.
+	console.log('webhook is listening'); // 페이스북 페이지로 갈 메시지를 가로채겠다.
 }); 
 // 서버를 만든 다음 리턴된 서버를 바로 listen한다. 번호는 상관없지만 바꾼다면 아마존에서도 설정한값을 바꿔주어야 한다.
 
