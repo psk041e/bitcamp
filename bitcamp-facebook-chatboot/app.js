@@ -25,7 +25,7 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
 const 
   https = require('https'),
-  fs = fdquire('fs'),
+  fs = require('fs'),
   request = require('request'),
   express = require('express'),
   body_parser = require('body-parser'),
@@ -34,7 +34,7 @@ const
 // Sets server port and logs message on success
 //app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
-var opstions = {
+var options = {
 	key: fs.readFileSync('/home/ec2-user/custom.key'),
 	cert: fs.readFileSync('/home/ec2-user/www_parkseogyeong_com.crt')
 }
